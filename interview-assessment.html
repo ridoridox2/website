@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interview and Assessment — SwissPeak Partners</title>
+<meta name="description" content="We run structured interviews and technical assessments on your behalf. Scored reports on every candidate.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1b2530;
+  --graphite:#343f4b;
+  --granite:#69737e;
+  --mist:#9ba5af;
+  --fog:#dde2e8;
+  --snow:#eef1f5;
+  --paper:#ffffff;
+  --swiss:#4f6d86;       /* muted steel blue — primary accent */
+  --swiss-deep:#3c5469;
+  --flag:#c0392b;        /* muted red — Swiss flag only */
+  --alpine:#202935;      /* dark blue-grey sections */
+  --alpine-2:#29333f;
+  --maxw:1240px;
+  --serif:"IBM Plex Serif",Georgia,serif;
+  --sans:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);
+  color:var(--ink);
+  background:var(--snow);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+::selection{background:var(--swiss);color:#fff}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px}
+
+.label{
+  font-family:var(--mono);
+  font-size:.7rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--granite);display:inline-flex;align-items:center;gap:.7em;
+}
+.label::before{content:"";width:26px;height:1px;background:var(--swiss);display:inline-block}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.04;letter-spacing:-.01em}
+.display{font-size:clamp(2.7rem,6.6vw,5.6rem)}
+.em{font-style:italic;color:var(--swiss)}
+
+/* ---------- HEADER ---------- */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  transition:background .4s ease, box-shadow .4s ease, padding .4s ease;
+  padding:22px 0;
+}
+header.scrolled{
+  background:rgba(22,30,40,.92);backdrop-filter:blur(14px);
+  box-shadow:0 1px 0 rgba(255,255,255,.08);padding:12px 0;
+}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:32px}
+.brand{display:flex;align-items:center;gap:14px}
+.brand-svg{color:#ffffff;transition:height .4s ease}
+header.scrolled .brand-svg{color:#fff;height:36px !important}
+
+.brand .flag{
+  width:30px;height:30px;border-radius:6px;flex:0 0 auto;position:relative;
+  background:var(--flag);box-shadow:0 3px 10px rgba(192,57,43,.35);
+}
+.brand .flag::before,.brand .flag::after{content:"";position:absolute;background:#fff;border-radius:1px}
+.brand .flag::before{width:14px;height:4px;top:13px;left:8px}
+.brand .flag::after{width:4px;height:14px;top:8px;left:13px}
+.menu{display:flex;align-items:center;gap:34px}
+.menu a{font-size:.92rem;font-weight:500;color:#fff;position:relative;padding:4px 0}
+header.scrolled .menu a{color:rgba(255,255,255,.85)}
+header.scrolled .menu a:hover{color:#fff}
+header.scrolled .has-drop>a::after{border-top-color:rgba(255,255,255,.7)}
+.drop a{color:var(--graphite) !important}
+.drop a:hover{color:var(--ink) !important}
+.menu>a::after,.menu .has-drop>a>span::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:0;background:var(--swiss);transition:width .3s}
+.menu a:hover{color:var(--ink)}
+.menu>a:hover::after{width:100%}
+.btn{
+  display:inline-flex;align-items:center;gap:.6em;font-family:var(--sans);
+  font-weight:600;font-size:.9rem;letter-spacing:.01em;cursor:pointer;
+  padding:13px 24px;border-radius:2px;border:1px solid var(--ink);
+  background:var(--ink);color:#fff;transition:.3s;white-space:nowrap;
+}
+.btn:hover{background:transparent;color:var(--ink)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:#fff}
+.btn.red{background:var(--flag);border-color:var(--flag);color:#fff}
+.btn.red:hover{background:#9e2419;border-color:#9e2419;color:#fff}
+.menu a.btn{color:#fff}
+.menu a.btn::after{display:none}
+.menu a.btn.red:hover{color:#fff}
+.btn.light{background:#fff;color:var(--ink);border-color:#fff}
+.btn.light:hover{background:transparent;color:#fff;border-color:#fff}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px}
+.burger span{width:26px;height:2px;background:var(--ink);transition:.3s}
+
+/* ---------- DROPDOWN ---------- */
+.has-drop{position:relative}
+.has-drop>a{display:flex;align-items:center;gap:.35em}
+.has-drop>a::after{content:"";display:inline-block;width:0;height:0;
+  border-left:4px solid transparent;border-right:4px solid transparent;
+  border-top:5px solid currentColor;opacity:.6;transition:transform .25s;margin-top:1px;
+  position:static;background:none;width:auto;height:auto}
+.has-drop:hover>a::after{transform:rotate(180deg)}
+.drop{position:absolute;top:calc(100% + 6px);left:50%;
+  background:#fff;border:1px solid var(--fog);border-radius:6px;
+  box-shadow:0 20px 50px -20px rgba(19,22,26,.35);
+  min-width:240px;padding:8px 0;z-index:200;
+  opacity:0;pointer-events:none;transform:translateX(-50%) translateY(-6px);
+  transition:opacity .22s,transform .22s}
+.has-drop::before{content:"";position:absolute;top:100%;left:0;right:0;height:12px}
+.has-drop:hover .drop{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0)}
+.drop a{display:block;padding:11px 20px;font-size:.9rem;font-weight:500;
+  color:var(--graphite);white-space:nowrap;transition:.18s;position:relative}
+.drop a::after{display:none}
+.drop a:hover{color:var(--ink);background:var(--snow);padding-left:26px}
+.drop-divider{height:1px;background:var(--fog);margin:6px 0}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;
+  color:#fff;overflow:hidden;padding-bottom:clamp(140px,16vh,220px)}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(120deg,#202935,#2f3e4b);background-size:cover;background-position:center 35%;z-index:0}
+.hero-bg::after{content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(180deg,rgba(10,15,20,.55) 0%,rgba(10,15,20,.35) 30%,rgba(10,15,20,.75) 65%,rgba(10,15,20,.97) 100%)}
+.hero-bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:.75}
+.hero .wrap{position:relative;z-index:2;width:100%;padding:60px}
+.hero .label{color:rgba(255,255,255,.82)}
+.hero .label::before{background:var(--swiss)}
+.hero h1{margin:.35em 0 .5em;max-width:16ch;text-shadow:0 2px 30px rgba(0,0,0,.45)}
+.hero .em{color:#bcd4e3;text-shadow:0 2px 24px rgba(0,0,0,.5)}
+.hero p.lead{font-size:clamp(1.05rem,1.5vw,1.32rem);max-width:46ch;color:rgba(255,255,255,.9);
+  font-weight:300;margin-bottom:2.2em}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.scroll-hint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);
+  z-index:2;font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;
+  color:rgba(255,255,255,.6);display:flex;flex-direction:column;align-items:center;gap:8px}
+.scroll-hint .line{width:1px;height:42px;background:linear-gradient(rgba(255,255,255,.7),transparent);
+  animation:drop 2s infinite}
+@keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}
+  51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* mountain ridge accent overlapping hero bottom */
+.ridge{position:absolute;left:0;right:0;bottom:-1px;z-index:1;line-height:0}
+.ridge svg{width:100%;height:88px;display:block}
+
+/* ---------- TRUST STRIP ---------- */
+.trust{background:var(--snow);padding:54px 0;border-bottom:1px solid var(--fog)}
+.trust .wrap{display:grid;grid-template-columns:1.5fr repeat(2,1fr);gap:40px;align-items:center}
+.trust .intro{font-family:var(--serif);font-size:1.5rem;line-height:1.25;color:var(--graphite)}
+.stat .n{font-family:var(--serif);font-size:3rem;line-height:1;color:var(--ink)}
+.stat .n .u{color:var(--swiss)}
+.stat .t{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--granite);margin-top:10px}
+
+/* ---------- SECTION SHELL ---------- */
+section.block{padding:120px 0}
+.sec-head{max-width:760px;margin-bottom:64px}
+.sec-head h2{font-size:clamp(2rem,4vw,3.4rem);margin:.3em 0 .4em}
+.sec-head p{font-size:1.12rem;color:var(--granite);max-width:60ch}
+
+/* ---------- SERVICES ---------- */
+.services{background:var(--paper)}
+.svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:26px}
+.svc{position:relative;border:1px solid var(--fog);border-radius:4px;overflow:hidden;
+  background:var(--paper);transition:.45s;display:flex;flex-direction:column}
+.svc:hover{transform:translateY(-6px);box-shadow:0 30px 60px -30px rgba(19,22,26,.35);
+  border-color:transparent}
+.svc-img{height:230px;overflow:hidden;position:relative;background:var(--alpine)}
+.svc-img img{width:100%;height:100%;object-fit:cover;transition:transform .9s ease;opacity:.96}
+.svc:hover .svc-img img{transform:scale(1.07)}
+.svc-img::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 40%,rgba(19,22,26,.5))}
+.svc-num{position:absolute;top:16px;left:18px;z-index:2;font-family:var(--serif);
+  font-size:1rem;color:#fff;letter-spacing:.1em}
+.svc-body{padding:30px 30px 34px;flex:1;display:flex;flex-direction:column}
+.svc-body h3{font-size:1.7rem;margin-bottom:.4em}
+.svc-body p{color:var(--granite);font-size:.98rem;margin-bottom:1.4em;flex:1}
+.svc-link{font-weight:600;font-size:.86rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink);display:inline-flex;align-items:center;gap:.6em;transition:gap .3s}
+.svc-link::after{content:"→";color:var(--swiss);font-size:1.1em}
+.svc:hover .svc-link{gap:1.1em}
+
+/* ---------- SECURITY / SWISS ---------- */
+.swiss-sec{position:relative;color:#fff;overflow:hidden;
+  background:linear-gradient(rgba(22,30,38,.93),rgba(22,30,38,.96)),
+  url('https://images.unsplash.com/photo-1438201743149-3cc16cd4cddd?auto=format&fit=crop&w=2200&q=80') center/cover}
+.swiss-sec .wrap{position:relative;z-index:2;display:grid;grid-template-columns:1.05fr .95fr;
+  gap:80px;align-items:center}
+.swiss-sec .label{color:rgba(255,255,255,.7)}
+.swiss-sec h2{font-size:clamp(2rem,4vw,3.4rem);margin:.3em 0 .6em}
+.swiss-sec p{color:rgba(255,255,255,.78);font-size:1.08rem;margin-bottom:1.6em;max-width:52ch}
+.pillars{display:grid;gap:2px;background:rgba(255,255,255,.08);border-radius:4px;overflow:hidden}
+.pillar{background:var(--alpine-2);padding:26px 28px;display:flex;gap:20px;align-items:flex-start}
+.pillar .ic{flex:0 0 auto;width:44px;height:44px;border:1px solid rgba(255,255,255,.18);
+  border-radius:50%;display:grid;place-items:center;color:var(--swiss)}
+.pillar h4{font-family:var(--sans);font-weight:600;font-size:1.05rem;margin-bottom:.25em}
+.pillar p{font-size:.92rem;color:rgba(255,255,255,.66);margin:0}
+.swiss-watermark{position:absolute;right:-60px;top:50%;transform:translateY(-50%);
+  z-index:0;opacity:.06;width:620px}
+.bigflag{display:inline-flex;align-items:center;gap:16px;margin-bottom:30px}
+.bigflag .fl{width:52px;height:52px;border-radius:10px;background:var(--flag);position:relative;
+  box-shadow:0 10px 30px rgba(192,57,43,.4)}
+.bigflag .fl::before,.bigflag .fl::after{content:"";position:absolute;background:#fff;border-radius:2px}
+.bigflag .fl::before{width:26px;height:7px;top:22.5px;left:13px}
+.bigflag .fl::after{width:7px;height:26px;top:13px;left:22.5px}
+.bigflag span{font-family:var(--serif);font-size:1.25rem;font-style:italic}
+
+/* ---------- ABOUT / SPLIT ---------- */
+.about{background:var(--snow)}
+.about .wrap{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+.about-figure{position:relative}
+.about-figure img{border-radius:4px;width:100%;height:560px;object-fit:cover}
+.about-figure .badge{position:absolute;bottom:-26px;left:-26px;background:var(--paper);
+  border:1px solid var(--fog);border-radius:4px;padding:24px 30px;
+  box-shadow:0 30px 60px -35px rgba(19,22,26,.4)}
+.about-figure .badge .n{font-family:var(--serif);font-size:2.4rem;color:var(--ink);line-height:1}
+.about-figure .badge .t{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--granite);margin-top:6px}
+.about h2{font-size:clamp(2rem,4vw,3.2rem);margin:.3em 0 .5em}
+.about p{color:var(--granite);font-size:1.06rem;margin-bottom:1.3em}
+.ticks{list-style:none;margin:1em 0 2em}
+.ticks li{display:flex;gap:14px;align-items:flex-start;margin-bottom:14px;font-size:1rem;color:var(--graphite)}
+.ticks li .c{flex:0 0 auto;width:24px;height:24px;border-radius:50%;background:var(--swiss);
+  color:#fff;display:grid;place-items:center;font-size:.7rem;margin-top:2px}
+
+/* ---------- TEAM ---------- */
+.team{background:var(--paper)}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;max-width:1240px}
+.lang-flags{display:flex;gap:6px;margin-top:10px;align-items:center}
+.lang-flag{display:inline-flex;align-items:center;gap:5px;font-size:.72rem;letter-spacing:.06em;color:var(--granite);background:var(--snow);border:1px solid var(--fog);border-radius:3px;padding:3px 8px;font-family:var(--mono)}
+.lang-flag .fi{font-size:.9rem}
+.member{border:1px solid var(--fog);border-radius:4px;overflow:hidden;background:var(--snow);transition:.4s}
+.member:hover{box-shadow:0 30px 60px -35px rgba(19,22,26,.35);transform:translateY(-5px)}
+.member-img{height:340px;overflow:hidden;background:var(--alpine)}
+.member-img img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.02);transition:.6s}
+.member:hover .member-img img{filter:grayscale(0)}
+.member-info{padding:24px 26px}
+.member-info h4{font-family:var(--serif);font-size:1.45rem;font-weight:400}
+.member-info .role{font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--swiss);margin:6px 0 14px}
+.member-info a{font-size:.88rem;color:var(--granite);display:inline-flex;gap:.5em;margin-right:18px}
+.member-info a:hover{color:var(--ink)}
+
+/* ---------- PRICING ---------- */
+.pricing{background:var(--snow)}
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:start}
+.plan{background:var(--paper);border:1px solid var(--fog);border-radius:4px;padding:38px 32px;
+  display:flex;flex-direction:column;transition:.4s;position:relative}
+.plan:hover{transform:translateY(-6px);box-shadow:0 36px 70px -40px rgba(19,22,26,.4)}
+.plan.feat{background:var(--alpine);color:#fff;border-color:var(--alpine)}
+.plan.feat .plan-sub,.plan.feat li{color:rgba(255,255,255,.72)}
+.plan .tag{position:absolute;top:-12px;right:26px;background:var(--swiss);color:#fff;
+  font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;padding:6px 14px;border-radius:2px}
+.plan-name{font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--granite);font-weight:600}
+.plan.feat .plan-name{color:var(--swiss)}
+.plan .amt{font-family:var(--serif);font-size:2.9rem;margin:.25em 0 .05em;line-height:1}
+.plan .amt small{font-size:1rem;color:var(--granite);font-family:var(--sans)}
+.plan-sub{font-size:.92rem;color:var(--granite);margin-bottom:24px;min-height:42px}
+.plan ul{list-style:none;margin:0 0 30px;flex:1}
+.plan li{font-size:.92rem;color:var(--graphite);padding:11px 0 11px 26px;position:relative;
+  border-top:1px solid var(--fog)}
+.plan.feat li{border-color:rgba(255,255,255,.12)}
+.plan li::before{content:"";position:absolute;left:0;top:17px;width:11px;height:6px;
+  border-left:2px solid var(--swiss);border-bottom:2px solid var(--swiss);transform:rotate(-45deg)}
+
+/* ---------- CONTACT ---------- */
+.contact{position:relative;background:var(--alpine);color:#fff;overflow:hidden}
+.contact .ridge svg path{fill:var(--snow)}
+.contact .wrap{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:70px}
+.contact .label{color:rgba(255,255,255,.7)}
+.contact h2{font-size:clamp(2rem,4vw,3.3rem);margin:.3em 0 .5em}
+.contact .intro p{color:rgba(255,255,255,.78);font-size:1.08rem;margin-bottom:2em;max-width:42ch}
+.cinfo{display:grid;gap:26px;margin-top:10px}
+.cinfo .row{display:flex;gap:18px;align-items:flex-start}
+.cinfo .ic{flex:0 0 auto;width:46px;height:46px;border:1px solid rgba(255,255,255,.16);
+  border-radius:50%;display:grid;place-items:center;color:var(--swiss)}
+.cinfo .lab{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+.cinfo .val{font-size:1.04rem;margin-top:3px}
+.cinfo a:hover{color:var(--swiss)}
+form{display:grid;gap:16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);
+  padding:36px;border-radius:6px;backdrop-filter:blur(4px)}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+label{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.6);
+  display:block;margin-bottom:7px}
+input,textarea{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);
+  border-radius:3px;padding:13px 15px;color:#fff;font-family:var(--sans);font-size:.95rem;transition:.3s}
+input:focus,textarea:focus{outline:none;border-color:var(--swiss);background:rgba(255,255,255,.08)}
+textarea{resize:vertical;min-height:110px}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:.82rem;color:rgba(255,255,255,.6);text-transform:none;letter-spacing:0}
+.consent input{width:auto}
+
+/* ---------- FOOTER ---------- */
+footer{background:#0e1216;color:rgba(255,255,255,.6);padding:70px 0 32px}
+.foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;
+  padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,.08)}
+.foot-brand img{height:54px;margin-bottom:18px}
+.foot-brand p{font-size:.92rem;max-width:30ch;line-height:1.7}
+.foot-col h5{font-family:var(--sans);font-weight:600;color:#fff;font-size:.78rem;
+  letter-spacing:.18em;text-transform:uppercase;margin-bottom:18px}
+.foot-col a,.foot-col p{display:block;font-size:.92rem;color:rgba(255,255,255,.6);margin-bottom:11px;line-height:1.5}
+.foot-col a:hover{color:var(--swiss)}
+.foot-bot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;
+  gap:16px;padding-top:26px;font-size:.82rem}
+.foot-bot .links a{margin-left:22px}
+.foot-bot .swiss-made{display:inline-flex;align-items:center;gap:9px}
+.foot-bot .swiss-made .fl{width:18px;height:18px;border-radius:3px;background:var(--flag);position:relative}
+.foot-bot .swiss-made .fl::before,.foot-bot .swiss-made .fl::after{content:"";position:absolute;background:#fff}
+.foot-bot .swiss-made .fl::before{width:9px;height:2.6px;top:7.7px;left:4.5px}
+.foot-bot .swiss-made .fl::after{width:2.6px;height:9px;top:4.5px;left:7.7px}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- CONFIGURATOR (WhatsApp) ---------- */
+.config{background:var(--snow)}
+.cfg-card{max-width:880px;margin:0 auto;background:var(--paper);border:1px solid var(--fog);
+  border-radius:8px;box-shadow:0 50px 100px -55px rgba(27,37,48,.45);overflow:hidden}
+.cfg-top{padding:26px 38px 0}
+.cfg-bar{height:4px;background:var(--fog);border-radius:99px;overflow:hidden}
+.cfg-bar i{display:block;height:100%;width:25%;background:var(--swiss);
+  transition:width .55s cubic-bezier(.2,.7,.2,1)}
+.cfg-step-n{font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--granite);margin-top:12px}
+.cfg-body{padding:26px 38px 36px}
+.cfg-q{font-family:var(--serif);font-size:1.65rem;line-height:1.15;color:var(--ink)}
+.cfg-sub{color:var(--granite);font-size:.96rem;margin:6px 0 24px}
+.cfg-opts{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}
+.opt{border:1px solid var(--fog);border-radius:6px;padding:18px 20px;cursor:pointer;background:var(--paper);
+  text-align:left;font-family:var(--sans);transition:.22s;display:block;width:100%}
+.opt:hover{border-color:var(--granite);transform:translateY(-2px)}
+.opt.sel{border-color:var(--swiss);box-shadow:inset 0 0 0 1px var(--swiss);background:rgba(79,109,134,.06)}
+.opt .ot{font-weight:600;font-size:1rem;color:var(--ink);display:flex;align-items:center;
+  justify-content:space-between;gap:12px}
+.opt .od{font-size:.84rem;color:var(--granite);margin-top:3px}
+.opt .chk{width:18px;height:18px;border:1.5px solid var(--mist);border-radius:50%;flex:0 0 auto;
+  display:grid;place-items:center;transition:.2s}
+.opt.sel .chk{background:var(--swiss);border-color:var(--swiss)}
+.opt.sel .chk::after{content:"";width:7px;height:7px;border-radius:50%;background:#fff}
+.cfg-fields{display:grid;gap:15px}
+.cfg-fields label{font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--granite);display:block;margin-bottom:7px}
+.cfg-fields input,.cfg-fields textarea{width:100%;background:var(--snow);border:1px solid var(--fog);
+  border-radius:5px;padding:13px 15px;font-family:var(--sans);font-size:.96rem;color:var(--ink);transition:.25s}
+.cfg-fields input:focus,.cfg-fields textarea:focus{outline:none;border-color:var(--swiss);background:#fff}
+.cfg-fields textarea{resize:vertical;min-height:84px}
+.cfg-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;background:var(--snow);
+  border:1px solid var(--fog);border-radius:6px;padding:18px 20px;margin-bottom:22px}
+.cfg-summary b{display:block;font-family:var(--mono);font-weight:500;color:var(--swiss);
+  text-transform:uppercase;font-size:.64rem;letter-spacing:.1em;margin-bottom:5px}
+.cfg-summary span{font-size:.92rem;color:var(--ink)}
+.cfg-nav{display:flex;justify-content:space-between;align-items:center;margin-top:26px;gap:14px}
+.cfg-back{background:none;border:none;color:var(--granite);font-family:var(--sans);font-weight:500;
+  cursor:pointer;font-size:.92rem;padding:6px 2px;transition:.2s}
+.cfg-back:hover{color:var(--ink)}
+.cfg-back[disabled]{opacity:0;pointer-events:none}
+.cfg-ok{width:64px;height:64px;border-radius:50%;background:#25d366;color:#fff;font-size:1.8rem;
+  display:grid;place-items:center;margin:0 auto;box-shadow:0 14px 30px -8px rgba(37,211,102,.55)}
+.wa-btn{background:#25d366;border-color:#25d366;color:#fff}
+.wa-btn:hover{background:#1ebe5a;border-color:#1ebe5a;color:#fff}
+.wa-btn svg{width:18px;height:18px;fill:#fff}
+/* floating WhatsApp button */
+.wa-fab{position:fixed;right:22px;bottom:22px;z-index:90;width:58px;height:58px;border-radius:50%;
+  background:#25d366;display:grid;place-items:center;box-shadow:0 14px 32px -8px rgba(37,211,102,.6);transition:.3s}
+.wa-fab:hover{transform:translateY(-3px) scale(1.05)}
+.wa-fab svg{width:30px;height:30px;fill:#fff}
+.wa-fab::after{content:"Chat with us on WhatsApp";position:absolute;right:70px;top:50%;
+  transform:translateY(-50%);background:var(--ink);color:#fff;font-size:.78rem;padding:8px 12px;
+  border-radius:5px;white-space:nowrap;opacity:0;pointer-events:none;transition:.3s;font-family:var(--sans)}
+.wa-fab:hover::after{opacity:1}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:980px){
+  .menu{display:none}
+  .burger{display:flex}
+  .trust .wrap{grid-template-columns:1fr 1fr;gap:32px}
+  .trust .intro{grid-column:1/-1}
+  .svc-grid{grid-template-columns:1fr}
+  .team-grid{grid-template-columns:1fr}
+  .swiss-sec .wrap,.about .wrap,.contact .wrap{grid-template-columns:1fr;gap:46px}
+  .price-grid{grid-template-columns:1fr;max-width:460px;margin:0 auto}
+  .foot-top{grid-template-columns:1fr 1fr;gap:34px}
+  .about-figure img{height:420px}
+  .swiss-watermark{display:none}
+}
+@media(max-width:560px){
+  .cfg-opts{grid-template-columns:1fr}
+  .cfg-summary{grid-template-columns:1fr;gap:10px}
+  .cfg-body,.cfg-top{padding-left:22px;padding-right:22px}
+  .wrap{padding:0 20px}
+  .brand img{height:48px}
+  .trust .wrap{grid-template-columns:1fr}
+  .f-row{grid-template-columns:1fr}
+  .foot-top{grid-template-columns:1fr}
+  section.block{padding:84px 0}
+  .about-figure .badge{left:0}
+}
+
+/* ---- subpage hero: compact, not full-viewport ---- */
+.hero{min-height:72vh;align-items:flex-end;padding-bottom:clamp(80px,10vh,130px)}
+.pillar{transition:.25s;}
+.pillar:hover{background:rgba(192,57,43,0.15);cursor:default;}
+.pillar:hover .ic{background:#c0392b;border-color:#c0392b;}
+.pillar:hover .ic svg{display:none;}
+.pillar:hover .ic::before{content:"";position:absolute;width:44%;height:14%;background:#fff;border-radius:1px;}
+.pillar:hover .ic::after{content:"";position:absolute;width:14%;height:44%;background:#fff;border-radius:1px;}
+.pillar .ic{position:relative;display:grid;place-items:center;transition:.25s;}
+</style>
+</head>
+<div id="cursor"></div>
+<style>
+  #cursor{position:fixed;width:24px;height:24px;border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);z-index:9999;background:#c0392b;}
+  #cursor::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:10px;height:2.5px;background:#fff;border-radius:1px;}
+  #cursor::after{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:2.5px;height:10px;background:#fff;border-radius:1px;}
+  #cursor.big{width:32px;height:32px;}
+  *{cursor:none;}
+</style>
+<script>
+  const cur = document.getElementById('cursor');
+  let mx=0, my=0, cx=0, cy=0;
+  document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+  (function loop(){
+   cx = mx;
+cy = my;
+    cur.style.left = cx+'px';
+    cur.style.top = cy+'px';
+    requestAnimationFrame(loop);
+  })();
+  document.querySelectorAll('a,button').forEach(el => {
+    el.addEventListener('mouseenter', () => cur.classList.add('big'));
+    el.addEventListener('mouseleave', () => cur.classList.remove('big'));
+  });
+</script>
+<body>
+<!-- ============ HEADER ============ -->
+<header id="hdr">
+  <div class="wrap nav">
+    <a href="index.html" class="brand" aria-label="SwissPeak Partners">
+      <svg viewBox="0 0 134.48162 75.431028" xmlns="http://www.w3.org/2000/svg" style="height:48px;width:auto;transition:height .4s ease" class="brand-svg" aria-label="SwissPeak Partners">
+  <path d="m 45.61081,48.15 c 0,0 -0.08,-0.02 -0.11,-0.05 -0.05,-0.06 -0.04,-0.14 0,-0.19 l 4.67,-4.74 -0.4,-0.85 c 0,0 -5.06,0.69 -5.06,0.69 -0.06,0 -0.12,-0.04 -0.13,-0.1 -0.02,-0.07 0,-0.14 0.07,-0.17 l 7.09,-3.76 3.12,-1.48 c 0.15,-0.07 3.6,-1.71 4.23,-1.97 0.3,-0.12 0.95,-0.35 1.63,-0.58 0.76,-0.26 1.55,-0.53 1.92,-0.68 0.69,-0.29 2.85,-1.57 2.87,-1.58 l 1.33,-1.74 1.96,-3.26 0.34,-2.64 -0.49,-1.25 -0.68,-0.18 -1.26,-0.16 c 0,0 -0.59,0.06 -0.68,0.06 -0.07,0 -0.71,0.13 -1.27,0.25 0,0 -0.81,0.56 -0.92,0.64 -0.11,0.08 -1.35,1.13 -1.35,1.13 l -1.02,1.1 -3.56,2.25 -1.52,1.86 -1.93,1.97 -0.89,0.85 c 0,0 -0.06,0.04 -0.1,0.04 -0.04,0 -0.07,-0.01 -0.1,-0.04 -0.06,-0.05 -0.06,-0.14 0,-0.2 l 13.77,-15.81 2.85,-2.8 0.18,-1 -0.07,-0.73 -0.45,-0.22 -0.91,-0.02 -0.7,0.18 -0.96,0.58 -11.15,12.12 c 0,0 -0.07,0.05 -0.1,0.05 -0.03,0 -0.07,-0.01 -0.09,-0.03 -0.06,-0.05 -0.06,-0.14 -0.02,-0.2 l 11.59,-14.07 0.71,-2.29 -0.04,-2.03 -0.37,-1.49 -1.09,-0.77 h -1.1 c 0,0 -1,0.53 -1,0.53 l -19.79,24.87 -2.14,3.76 -0.96,2.14 -0.89,1.78 c 0,0 -0.05,0.07 -0.1,0.08 l -0.85,0.19 c 0,0 -0.02,0 -0.03,0 -0.02,0 -0.05,0 -0.07,-0.02 l -0.57,-0.32 c -0.05,-0.05 -0.22,-0.28 -0.25,-0.6 -0.03,-0.29 0,-0.76 0,-0.76 0,-0.04 0.18,-0.51 0.29,-0.75 0.11,-0.24 0.51,-0.88 0.51,-0.88 l 1.2,-3.6 -0.16,-1.13 -0.86,-0.31 -1.03,0.61 -1.74,2.19 -10,7.58 c 0,0 -0.06,0.03 -0.09,0.03 -0.04,0 -0.08,-0.02 -0.1,-0.05 -0.05,-0.05 -0.05,-0.14 0,-0.19 l 12.19,-13.22 4.44,-5.11 c 0,0 2.84,-2.57 3.01,-2.73 0.13,-0.13 0.92,-1.07 1.33,-1.55 l 0.05,-1.06 -0.26,-0.94 -0.65,-0.3 c 0,0 -0.62,0.19 -1.11,0.44 -0.23,0.12 -0.64,0.42 -1.19,0.86 l -4.87,5.53 c 0,0 -0.07,0.05 -0.11,0.05 -0.03,0 -0.07,-0.01 -0.09,-0.03 -0.06,-0.05 -0.07,-0.14 -0.02,-0.2 l 4.3,-5.06 c 0,0 0.26,-0.23 0.59,-0.49 l 1.98,-2.26 -0.25,-2.01 -0.61,-0.54 -1.2,0.11 -18.19,17.09 -0.91,3.1 c -0.68,0.7 -1.4,1.5 -1.44,1.65 -0.06,0.28 -0.56,2.28 -0.56,2.28 l 0.06,2.69 0.22,2.21 c 0,0.08 -0.05,0.14 -0.12,0.15 0,0 -0.01,0 -0.02,0 -0.07,0 -0.13,-0.05 -0.14,-0.11 l -1.06,-5.48 -0.97,-0.71 -1.78,0.22 -2.01,0.99 -17.18999963,10.26 c 0,0 -0.05,0.02 -0.07,0.02 -0.05,0 -0.09,-0.02 -0.12,-0.07 -0.04,-0.06 -0.0200000029,-0.15 0.04,-0.19 L 16.06081,34.91 l 7.77,-6.21 13.11,-11.55 7.99,-7.99 c 0,0 0.06,-0.04 0.1,-0.04 0.04,0 0.07,0.01 0.1,0.04 l 8.13,8.13 3.23,-2.8 3.31,-5.3 6.22,-9.13 c 0,0 0.06,-0.06 0.1,-0.06 0,0 0,0 0.01,0 0.04,0 0.07,0.02 0.1,0.04 l 8.67,8.89 8.67,9.34 4.12,3.25 4.58,-3.05 5.32,-4.44 c 0,0 0.06,-0.03 0.09,-0.03 0.03,0 0.06,0.01 0.09,0.03 l 8.44,6.89 9.11,7.56 8,7.34 11.1,7.99 c 0.06,0.04 0.08,0.12 0.04,0.18 -0.03,0.05 -0.07,0.08 -0.13,0.08 -0.02,0 -0.03,0 -0.05,0 l -4.76,-1.63 -0.79,0.3 -0.24,1.11 -0.83,0.67 c 0,0 -0.05,0.03 -0.09,0.03 0,0 -0.68,-0.07 -0.68,-0.07 l -11.38,-11.71 -2.52,-1.31 -0.6,0.02 -0.66,0.04 c -0.29,0.03 -0.6,0.11 -0.65,0.18 0,0.21 -0.16,1.06 -0.18,1.16 v 0.9 c 0,0 0.88,2.21 0.88,2.21 l 3.77,6.91 c 0.04,0.06 0.02,0.14 -0.04,0.19 -0.02,0.02 -0.05,0.02 -0.08,0.02 -0.04,0 -0.08,-0.02 -0.11,-0.05 l -10.22,-12.56 -2.64,-4.76 -2.18,-3.59 -0.19,-0.35 -0.06,3.06 0.04,2.22 c 0,0 0.4,1.48 0.58,1.91 0.19,0.45 0.9,3.05 0.93,3.17 l 5.69,9.6 c 0.04,0.06 0.02,0.15 -0.04,0.19 -0.02,0.02 -0.05,0.02 -0.08,0.02 -0.04,0 -0.09,-0.02 -0.11,-0.06 l -6.18,-8.3 -1.63,-2.21 -1.33,-0.13 -4.29,6.42 -2.29,2.44 -2.73,2.48 c 0,0 -0.06,0.04 -0.1,0.04 -0.03,0 -0.06,0 -0.08,-0.03 -0.05,-0.04 -0.07,-0.11 -0.04,-0.18 l 3.2,-6.56 2.01,-2.69 c 0,0 0.56,-1.36 0.64,-1.83 0.25,-1.39 0.11,-5.7 0.11,-5.75 l -0.19,-1.35 -2.22,1.5 -0.5,0.66 -3.31,5.77 c 0,0 -0.07,0.07 -0.12,0.07 -0.02,0 -0.04,0 -0.06,-0.01 -0.07,-0.03 -0.1,-0.11 -0.07,-0.18 l 0.59,-1.67 0.94,-1.51 c 0.04,-0.07 1,-1.6 1.12,-1.75 0.06,-0.08 0.38,-0.5 0.68,-0.89 l 1.58,-2.76 0.21,-1.49 -1.71,0.18 -1.84,1.58 -2.16,2 -11.66,9.15 -1.19,2.14 -0.02,1.9 v 1.89 l 0.15,2.36 0.07,0.96 c 0,0.07 -0.04,0.14 -0.12,0.15 0,0 -0.02,0 -0.03,0 -0.06,0 -0.12,-0.04 -0.14,-0.1 l -1.02,-3.31 -1.55,0.88 -1.83,1.68 -1.93,1.6 c 0,0 -0.06,0.03 -0.09,0.03 -0.04,0 -0.07,-0.01 -0.1,-0.04 -0.05,-0.05 -0.05,-0.14 0,-0.19 l 4.33,-4.78 0.71,-3.38 14.2,-11.94 -0.93,-0.78 -0.87,-0.34 c 0,0 -0.36,0 -0.54,0 -0.18,0 -0.23,0 -0.24,0 -0.11,0.04 -1.21,0.75 -1.87,1.18 l -1.83,1.25 -9.85,6.35 -2.5,1.96 -2.02,1.56 -0.72,1.1 -0.3,1.02 1.28,2.48 c 0.03,0.06 0.01,0.14 -0.04,0.18 -0.03,0.02 -0.05,0.03 -0.08,0.03 -0.04,0 -0.07,-0.01 -0.1,-0.04 l -2.81,-2.79 -2.04,0.32 -2.19,0.99 -2.15,1.41 -4.38,1.56 -1.89,1.28 -2.35,2.37 c -0.74,0.61 -1.85,1.53 -1.93,1.61 -0.12,0.12 -0.87,0.62 -1.02,0.72 -0.02,0.02 -0.05,0.02 -0.08,0.02 z" fill="currentColor"/>
+  <path d="m 12.743686,50.151573 c -2.453329,0 -4.2666591,1.621331 -4.2666591,3.754661 0,1.962663 0.853332,3.114662 3.1146611,4.373326 1.407998,0.789332 2.623996,1.173332 2.623996,2.32533 0,0.874665 -0.789332,1.493331 -1.919997,1.493331 -0.917332,0 -2.13333,-0.618666 -2.8799949,-1.514664 l -1.7493306,2.00533 c 1.3226646,1.407998 3.0293285,2.175996 4.8426585,2.175996 2.687996,0 4.650659,-1.770664 4.650659,-4.20266 0,-1.919997 -0.959998,-3.007995 -3.455994,-4.33066 -1.343998,-0.725332 -2.410663,-1.194664 -2.410663,-2.197329 0,-0.725333 0.639999,-1.237332 1.450664,-1.237332 0.959999,0 1.983997,0.426666 2.773329,1.215998 l 1.535998,-2.06933 c -1.173331,-1.130665 -2.794662,-1.791997 -4.309327,-1.791997 z m 7.50466,0.213333 3.733328,14.207978 h 2.965328 l 3.157329,-9.834652 3.157328,9.834652 h 2.965329 l 3.733327,-14.207978 h -3.114662 l -2.325329,9.877318 -3.050662,-9.877318 H 28.739 l -3.050662,9.877318 -2.32533,-9.877318 z m 23.355316,0 v 14.207978 h 2.901329 V 50.364906 Z m 11.70732,-0.213333 c -2.45333,0 -4.26666,1.621331 -4.26666,3.754661 0,1.962663 0.853332,3.114662 3.114661,4.373326 1.407998,0.789332 2.623996,1.173332 2.623996,2.32533 0,0.874665 -0.789332,1.493331 -1.919997,1.493331 -0.917332,0 -2.13333,-0.618666 -2.879995,-1.514664 l -1.749331,2.00533 c 1.322665,1.407998 3.029329,2.175996 4.842659,2.175996 2.687996,0 4.65066,-1.770664 4.65066,-4.20266 0,-1.919997 -0.959999,-3.007995 -3.455995,-4.33066 -1.343998,-0.725332 -2.410663,-1.194664 -2.410663,-2.197329 0,-0.725333 0.639999,-1.237332 1.450665,-1.237332 0.959998,0 1.983996,0.426666 2.773328,1.215998 l 1.535998,-2.06933 c -1.173331,-1.130665 -2.794662,-1.791997 -4.309326,-1.791997 z m 12.667316,0 c -2.453329,0 -4.26666,1.621331 -4.26666,3.754661 0,1.962663 0.853332,3.114662 3.114662,4.373326 1.407998,0.789332 2.623996,1.173332 2.623996,2.32533 0,0.874665 -0.789332,1.493331 -1.919997,1.493331 -0.917332,0 -2.13333,-0.618666 -2.879996,-1.514664 l -1.74933,2.00533 c 1.322664,1.407998 3.029328,2.175996 4.842659,2.175996 2.687995,0 4.650659,-1.770664 4.650659,-4.20266 0,-1.919997 -0.959998,-3.007995 -3.455995,-4.33066 -1.343997,-0.725332 -2.410662,-1.194664 -2.410662,-2.197329 0,-0.725333 0.639999,-1.237332 1.450664,-1.237332 0.959998,0 1.983997,0.426666 2.773329,1.215998 l 1.535998,-2.06933 c -1.173332,-1.130665 -2.794663,-1.791997 -4.309327,-1.791997 z m 8.443327,0.213333 v 14.207978 h 2.901329 v -5.546658 h 2.453329 c 2.346663,0 4.13866,-1.855997 4.13866,-4.33066 0,-2.474663 -1.81333,-4.33066 -4.159993,-4.33066 z m 2.901329,2.602663 h 2.06933 c 1.002665,0 1.727997,0.703998 1.727997,1.727997 0,1.023998 -0.725332,1.727997 -1.727997,1.727997 h -2.06933 z m 10.619339,-2.602663 v 14.207978 h 8.66132 v -2.730663 h -5.759991 v -3.029328 h 5.525324 v -2.687996 h -5.525324 v -3.029329 h 5.759991 v -2.730662 z m 17.168637,0 -5.24799,14.207978 h 3.26399 l 1.06667,-3.093329 h 4.90665 l 1.06667,3.093329 h 3.26399 l -5.24799,-14.207978 z m 1.536,3.989327 1.57866,4.607993 h -3.17866 z m 10.2353,-3.989327 v 14.207978 h 2.90133 v -6.805323 l 5.01332,6.805323 h 3.41333 l -5.58933,-7.295989 5.312,-6.911989 h -3.34933 l -4.79999,6.421323 v -6.421323 z" fill="currentColor"/>
+  <path d="m 39.045049,68.231007 v 7.104023 h 1.450672 v -2.773342 h 1.22667 c 1.173337,0 2.06934,-0.928003 2.06934,-2.165341 0,-1.237337 -0.90667,-2.16534 -2.080007,-2.16534 z m 1.450672,1.301338 h 1.034669 c 0.501335,0 0.864003,0.352001 0.864003,0.864002 0,0.512002 -0.362668,0.864003 -0.864003,0.864003 h -1.034669 z m 7.536703,-1.301338 -2.624008,7.104023 h 1.632005 l 0.533335,-1.546672 h 2.453341 l 0.533335,1.546672 h 1.632005 l -2.624008,-7.104023 z m 0.768003,1.994673 0.789336,2.304007 h -1.589339 z m 6.19267,-1.994673 v 7.104023 h 1.450671 v -2.773342 h 0.629335 l 1.514672,2.773342 h 1.642672 l -1.696006,-2.933343 c 0.757336,-0.309334 1.269338,-1.06667 1.269338,-2.00534 0,-1.237337 -0.90667,-2.16534 -2.080007,-2.16534 z m 1.450671,1.301338 h 1.09867 c 0.501335,0 0.864003,0.352001 0.864003,0.864002 0,0.512002 -0.362668,0.864003 -0.864003,0.864003 h -1.09867 z m 6.160677,-1.301338 v 1.365338 h 1.792005 v 5.738685 h 1.450672 v -5.738685 h 1.792005 v -1.365338 z m 7.931342,0 v 7.104023 h 1.450671 v -4.586682 l 3.10401,4.586682 h 1.344004 v -7.104023 h -1.450671 v 4.565348 l -3.093343,-4.565348 z m 9.264687,0 v 7.104023 h 4.33068 v -1.365338 h -2.880009 v -1.514671 h 2.762675 v -1.344005 h -2.762675 v -1.514671 h 2.880009 v -1.365338 z m 7.600681,0 v 7.104023 h 1.450671 v -2.773342 h 0.629336 l 1.514671,2.773342 h 1.642672 L 90.9425,72.401687 c 0.757335,-0.309334 1.269337,-1.06667 1.269337,-2.00534 0,-1.237337 -0.90667,-2.16534 -2.080007,-2.16534 z m 1.450671,1.301338 h 1.09867 c 0.501335,0 0.864003,0.352001 0.864003,0.864002 0,0.512002 -0.362668,0.864003 -0.864003,0.864003 h -1.09867 z m 8.74202,-1.408005 c -1.22667,0 -2.13334,0.810669 -2.13334,1.877339 0,0.981337 0.426668,1.557339 1.557339,2.186674 0.704002,0.394668 1.312004,0.586669 1.312004,1.16267 0,0.437335 -0.394668,0.746669 -0.960003,0.746669 -0.458668,0 -1.06667,-0.309334 -1.440005,-0.757335 l -0.874669,1.002669 c 0.661335,0.704003 1.514671,1.088004 2.421341,1.088004 1.344004,0 2.32534,-0.885336 2.32534,-2.10134 0,-0.960003 -0.480001,-1.504005 -1.728005,-2.16534 -0.672002,-0.362668 -1.205337,-0.597335 -1.205337,-1.09867 0,-0.362668 0.320001,-0.618669 0.725335,-0.618669 0.480002,0 0.992004,0.213334 1.386671,0.608002 l 0.768003,-1.03467 C 99.161851,68.455008 98.351182,68.12434 97.593846,68.12434 Z" fill="currentColor"/>
+</svg>
+    </a>
+    <nav class="menu">
+      <div class="has-drop">
+        <a href="index.html#services">Services</a>
+        <div class="drop">
+          <a href="permanent-placement.html">Permanent Hiring</a>
+          <a href="project-staffing.html">Project Solutions</a>
+          <a href="nearshoring.html">Nearshoring &amp; Outsourcing</a>
+          <a href="interview-assessment.html">Interview &amp; Assessment</a>
+          <div class="drop-divider"></div>
+          <a href="career-consulting.html">Career Consulting</a>
+        </div>
+      </div>
+      <div class="has-drop">
+        <a href="about.html">Company</a>
+        <div class="drop">
+          <a href="about.html">About Us</a>
+          <a href="index.html#security">Why Switzerland</a>
+          <a href="team.html">Partners</a>
+        </div>
+      </div>
+      <a href="career-consulting.html">Career</a>
+      <a href="index.html#configurator" class="btn red">Get a Quote</a>
+    </nav>
+    <div class="burger" id="burger"><span></span><span></span><span></span></div>
+  </div>
+</header>
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1400&q=80" alt="">
+  </div>
+  <div class="wrap">
+    
+    <h1 class="display reveal">Structured interviews and assessments, <span class="em">run on your behalf</span>.</h1>
+    <p class="lead reveal">We conduct first-round, technical and competency interviews for companies that do not have the time or internal capacity to do it themselves. You define the brief. We run the process.</p>
+    <div class="hero-cta reveal">
+      <a href="mailto:hello@swisspeak-partners.ch" class="btn light">Get in touch</a>
+      <a href="#services" class="btn ghost" style="color:#fff;border-color:rgba(255,255,255,.6)">What we run</a>
+    </div>
+  </div>
+  <div class="ridge" aria-hidden="true">
+    <svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path fill="#ffffff" d="M0,120 L0,78 L180,40 L320,84 L470,18 L620,70 L760,30 L880,72 L1010,22 L1160,66 L1300,36 L1440,74 L1440,120 Z"></path></svg>
+  </div>
+</section>
+
+<!-- ============ WHAT WE RUN ============ -->
+<section class="block services" id="services">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="label">What we run</span>
+      <h2>Three types of <span class="em">interview and assessment</span>.</h2>
+      <p>We run every format to the same standard: structured questions, defined scoring and a written report delivered to your team.</p>
+    </div>
+    <div class="svc-grid">
+      <article class="svc reveal">
+        <div class="svc-img">
+          <img src="interview.jpg" alt="First-round interviews">
+        </div>
+        <div class="svc-body">
+          <h3>First-Round Interviews</h3>
+          <p>Structured initial screens covering motivation, expectations and baseline fit. Your team only steps in when it matters.</p>
+          <a class="svc-link" href="mailto:hello@swisspeak-partners.ch">Get in touch</a>
+        </div>
+      </article>
+      <article class="svc reveal">
+        <div class="svc-img">
+          <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1400&q=80" alt="Technical assessments">
+        </div>
+        <div class="svc-body">
+          <h3>Technical Assessments</h3>
+          <p>Domain-specific questions or coding tests built around your requirements or using your own question bank. Every response is scored against a defined rubric and documented.</p>
+          <a class="svc-link" href="mailto:hello@swisspeak-partners.ch">Get in touch</a>
+        </div>
+      </article>
+      <article class="svc reveal">
+        <div class="svc-img">
+          <img src="cultural.jpg" alt="Competency and cultural fit">
+        </div>
+        <div class="svc-body">
+          <h3>Competency and Cultural Fit</h3>
+          <p>Behavioural and situational rounds mapped to your framework. Consistent, auditable and free of interviewer bias.</p>
+          <a class="svc-link" href="mailto:hello@swisspeak-partners.ch">Get in touch</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RPO ============ -->
+<section class="block swiss-sec">
+  <svg class="swiss-watermark" viewBox="0 0 200 200" aria-hidden="true"><rect width="200" height="200" rx="24" fill="#c0392b"/><rect x="82" y="44" width="36" height="112" rx="4" fill="#fff"/><rect x="44" y="82" width="112" height="36" rx="4" fill="#fff"/></svg>
+  <div class="wrap">
+    <div>
+      <span class="label reveal">Recruitment Process Outsourcing</span>
+      <h2 class="reveal">Need us to run the <span class="em">whole pipeline</span>?</h2>
+      <p class="reveal">For companies with sustained or high-volume hiring needs, we embed into your recruitment process end to end. Pipeline management, structured assessments and programme-level reporting. Partial or full outsourcing, priced by retainer or programme scope.</p>
+    </div>
+    <div>
+    <div class="pillars reveal">
+      <div class="pillar"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2 4 6v6c0 5 3.4 8.5 8 10 4.6-1.5 8-5 8-10V6l-8-4Z"/><path d="m9 12 2 2 4-4"/></svg></div><div><h4>End-to-end pipeline management</h4></div></div>
+      <div class="pillar"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m3 17 6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></div><div><h4>Structured assessment at every stage</h4></div></div>
+      <div class="pillar"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v4M12 2 8 6M12 2l4 4"/><path d="M5 21V11l7-5 7 5v10"/><path d="M9 21v-6h6v6"/></svg></div><div><h4>Flexible: partial or full outsourcing</h4></div></div>
+      <div class="pillar"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg></div><div><h4>Pricing by volume retainer or programme scope</h4></div></div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section class="block pricing" id="pricing">
+  <div class="wrap">
+    <div class="sec-head reveal" style="margin-left:auto;margin-right:auto;text-align:center">
+      <span class="label" style="justify-content:center">How pricing works</span>
+      <h2>Flexible pricing that <span class="em">scales with you</span>.</h2>
+    </div>
+    <div class="price-grid">
+      <div class="plan reveal">
+        <div class="plan-name">Per Interview</div>
+        <div class="plan-sub">Fixed fee per completed interview with report. Suited to ad-hoc or lower-volume needs.</div>
+        <ul>
+          <li>Structured interview with defined rubric</li>
+          <li>Written fit report on every candidate</li>
+          <li>No retainer required</li>
+        </ul>
+        <a href="mailto:hello@swisspeak-partners.ch" class="btn ghost">Get in touch</a>
+      </div>
+      <div class="plan feat reveal">
+        <span class="tag">Most popular</span>
+        <div class="plan-name">Volume Retainer</div>
+        <div class="plan-sub">Monthly or quarterly retainer for an agreed number of slots. Lower per-unit cost for consistent programmes.</div>
+        <ul>
+          <li>Reserved interview capacity each month</li>
+          <li>Lower per-unit cost than ad-hoc</li>
+          <li>Full reporting included</li>
+          <li>Priority scheduling</li>
+        </ul>
+        <a href="mailto:hello@swisspeak-partners.ch" class="btn light">Get in touch</a>
+      </div>
+      <div class="plan reveal">
+        <div class="plan-name">Programme-Based</div>
+        <div class="plan-sub">Custom pricing for multi-role, multi-round programmes with ongoing reporting.</div>
+        <ul>
+          <li>Multi-role and multi-round coverage</li>
+          <li>Programme-level reporting</li>
+          <li>Fully customised to your process</li>
+        </ul>
+        <a href="mailto:hello@swisspeak-partners.ch" class="btn ghost">Get in touch</a>
+      </div>
+    </div>
+    <div class="sec-head reveal" style="margin-top:48px">
+      <ul class="ticks">
+        <li class="reveal"><span class="c">&#10003;</span> No hidden fees.</li>
+        <li class="reveal"><span class="c">&#10003;</span> Pricing agreed before engagement starts.</li>
+        <li class="reveal"><span class="c">&#10003;</span> No charge for cancellations more than 48 hours in advance.</li>
+      </ul>
+      <a href="mailto:hello@swisspeak-partners.ch" class="btn" style="margin-top:16px">Get in touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="block swiss-sec">
+  <svg class="swiss-watermark" viewBox="0 0 200 200" aria-hidden="true"><rect width="200" height="200" rx="24" fill="#c0392b"/><rect x="82" y="44" width="36" height="112" rx="4" fill="#fff"/><rect x="44" y="82" width="112" height="36" rx="4" fill="#fff"/></svg>
+  <div class="wrap">
+    <div>
+      <h2 class="reveal">Ready to hand over the interviews?</h2>
+      <p class="reveal">We can start with a single role or a full programme. Let us know what you need and we will build a structure around it.</p>
+      <div class="hero-cta reveal" style="margin-top:32px">
+        <a href="mailto:hello@swisspeak-partners.ch" class="btn light">Send us an email</a>
+        <a href="https://wa.me/41764691295" target="_blank" rel="noopener" class="btn ghost" style="color:#fff;border-color:rgba(255,255,255,.6)">Chat on WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <svg viewBox="0 0 134.48162 75.431028" xmlns="http://www.w3.org/2000/svg" style="height:48px;width:auto;margin-bottom:18px;display:block" aria-label="SwissPeak Partners">
+  <path d="m 45.61081,48.15 c 0,0 -0.08,-0.02 -0.11,-0.05 -0.05,-0.06 -0.04,-0.14 0,-0.19 l 4.67,-4.74 -0.4,-0.85 c 0,0 -5.06,0.69 -5.06,0.69 -0.06,0 -0.12,-0.04 -0.13,-0.1 -0.02,-0.07 0,-0.14 0.07,-0.17 l 7.09,-3.76 3.12,-1.48 c 0.15,-0.07 3.6,-1.71 4.23,-1.97 0.3,-0.12 0.95,-0.35 1.63,-0.58 0.76,-0.26 1.55,-0.53 1.92,-0.68 0.69,-0.29 2.85,-1.57 2.87,-1.58 l 1.33,-1.74 1.96,-3.26 0.34,-2.64 -0.49,-1.25 -0.68,-0.18 -1.26,-0.16 c 0,0 -0.59,0.06 -0.68,0.06 -0.07,0 -0.71,0.13 -1.27,0.25 0,0 -0.81,0.56 -0.92,0.64 -0.11,0.08 -1.35,1.13 -1.35,1.13 l -1.02,1.1 -3.56,2.25 -1.52,1.86 -1.93,1.97 -0.89,0.85 c 0,0 -0.06,0.04 -0.1,0.04 -0.04,0 -0.07,-0.01 -0.1,-0.04 -0.06,-0.05 -0.06,-0.14 0,-0.2 l 13.77,-15.81 2.85,-2.8 0.18,-1 -0.07,-0.73 -0.45,-0.22 -0.91,-0.02 -0.7,0.18 -0.96,0.58 -11.15,12.12 c 0,0 -0.07,0.05 -0.1,0.05 -0.03,0 -0.07,-0.01 -0.09,-0.03 -0.06,-0.05 -0.06,-0.14 -0.02,-0.2 l 11.59,-14.07 0.71,-2.29 -0.04,-2.03 -0.37,-1.49 -1.09,-0.77 h -1.1 c 0,0 -1,0.53 -1,0.53 l -19.79,24.87 -2.14,3.76 -0.96,2.14 -0.89,1.78 c 0,0 -0.05,0.07 -0.1,0.08 l -0.85,0.19 c 0,0 -0.02,0 -0.03,0 -0.02,0 -0.05,0 -0.07,-0.02 l -0.57,-0.32 c -0.05,-0.05 -0.22,-0.28 -0.25,-0.6 -0.03,-0.29 0,-0.76 0,-0.76 0,-0.04 0.18,-0.51 0.29,-0.75 0.11,-0.24 0.51,-0.88 0.51,-0.88 l 1.2,-3.6 -0.16,-1.13 -0.86,-0.31 -1.03,0.61 -1.74,2.19 -10,7.58 c 0,0 -0.06,0.03 -0.09,0.03 -0.04,0 -0.08,-0.02 -0.1,-0.05 -0.05,-0.05 -0.05,-0.14 0,-0.19 l 12.19,-13.22 4.44,-5.11 c 0,0 2.84,-2.57 3.01,-2.73 0.13,-0.13 0.92,-1.07 1.33,-1.55 l 0.05,-1.06 -0.26,-0.94 -0.65,-0.3 c 0,0 -0.62,0.19 -1.11,0.44 -0.23,0.12 -0.64,0.42 -1.19,0.86 l -4.87,5.53 c 0,0 -0.07,0.05 -0.11,0.05 -0.03,0 -0.07,-0.01 -0.09,-0.03 -0.06,-0.05 -0.07,-0.14 -0.02,-0.2 l 4.3,-5.06 c 0,0 0.26,-0.23 0.59,-0.49 l 1.98,-2.26 -0.25,-2.01 -0.61,-0.54 -1.2,0.11 -18.19,17.09 -0.91,3.1 c -0.68,0.7 -1.4,1.5 -1.44,1.65 -0.06,0.28 -0.56,2.28 -0.56,2.28 l 0.06,2.69 0.22,2.21 c 0,0.08 -0.05,0.14 -0.12,0.15 0,0 -0.01,0 -0.02,0 -0.07,0 -0.13,-0.05 -0.14,-0.11 l -1.06,-5.48 -0.97,-0.71 -1.78,0.22 -2.01,0.99 -17.18999963,10.26 c 0,0 -0.05,0.02 -0.07,0.02 -0.05,0 -0.09,-0.02 -0.12,-0.07 -0.04,-0.06 -0.0200000029,-0.15 0.04,-0.19 L 16.06081,34.91 l 7.77,-6.21 13.11,-11.55 7.99,-7.99 c 0,0 0.06,-0.04 0.1,-0.04 0.04,0 0.07,0.01 0.1,0.04 l 8.13,8.13 3.23,-2.8 3.31,-5.3 6.22,-9.13 c 0,0 0.06,-0.06 0.1,-0.06 0,0 0,0 0.01,0 0.04,0 0.07,0.02 0.1,0.04 l 8.67,8.89 8.67,9.34 4.12,3.25 4.58,-3.05 5.32,-4.44 c 0,0 0.06,-0.03 0.09,-0.03 0.03,0 0.06,0.01 0.09,0.03 l 8.44,6.89 9.11,7.56 8,7.34 11.1,7.99 c 0.06,0.04 0.08,0.12 0.04,0.18 -0.03,0.05 -0.07,0.08 -0.13,0.08 -0.02,0 -0.03,0 -0.05,0 l -4.76,-1.63 -0.79,0.3 -0.24,1.11 -0.83,0.67 c 0,0 -0.05,0.03 -0.09,0.03 0,0 -0.68,-0.07 -0.68,-0.07 l -11.38,-11.71 -2.52,-1.31 -0.6,0.02 -0.66,0.04 c -0.29,0.03 -0.6,0.11 -0.65,0.18 0,0.21 -0.16,1.06 -0.18,1.16 v 0.9 c 0,0 0.88,2.21 0.88,2.21 l 3.77,6.91 c 0.04,0.06 0.02,0.14 -0.04,0.19 -0.02,0.02 -0.05,0.02 -0.08,0.02 -0.04,0 -0.08,-0.02 -0.11,-0.05 l -10.22,-12.56 -2.64,-4.76 -2.18,-3.59 -0.19,-0.35 -0.06,3.06 0.04,2.22 c 0,0 0.4,1.48 0.58,1.91 0.19,0.45 0.9,3.05 0.93,3.17 l 5.69,9.6 c 0.04,0.06 0.02,0.15 -0.04,0.19 -0.02,0.02 -0.05,0.02 -0.08,0.02 -0.04,0 -0.09,-0.02 -0.11,-0.06 l -6.18,-8.3 -1.63,-2.21 -1.33,-0.13 -4.29,6.42 -2.29,2.44 -2.73,2.48 c 0,0 -0.06,0.04 -0.1,0.04 -0.03,0 -0.06,0 -0.08,-0.03 -0.05,-0.04 -0.07,-0.11 -0.04,-0.18 l 3.2,-6.56 2.01,-2.69 c 0,0 0.56,-1.36 0.64,-1.83 0.25,-1.39 0.11,-5.7 0.11,-5.75 l -0.19,-1.35 -2.22,1.5 -0.5,0.66 -3.31,5.77 c 0,0 -0.07,0.07 -0.12,0.07 -0.02,0 -0.04,0 -0.06,-0.01 -0.07,-0.03 -0.1,-0.11 -0.07,-0.18 l 0.59,-1.67 0.94,-1.51 c 0.04,-0.07 1,-1.6 1.12,-1.75 0.06,-0.08 0.38,-0.5 0.68,-0.89 l 1.58,-2.76 0.21,-1.49 -1.71,0.18 -1.84,1.58 -2.16,2 -11.66,9.15 -1.19,2.14 -0.02,1.9 v 1.89 l 0.15,2.36 0.07,0.96 c 0,0.07 -0.04,0.14 -0.12,0.15 0,0 -0.02,0 -0.03,0 -0.06,0 -0.12,-0.04 -0.14,-0.1 l -1.02,-3.31 -1.55,0.88 -1.83,1.68 -1.93,1.6 c 0,0 -0.06,0.03 -0.09,0.03 -0.04,0 -0.07,-0.01 -0.1,-0.04 -0.05,-0.05 -0.05,-0.14 0,-0.19 l 4.33,-4.78 0.71,-3.38 14.2,-11.94 -0.93,-0.78 -0.87,-0.34 c 0,0 -0.36,0 -0.54,0 -0.18,0 -0.23,0 -0.24,0 -0.11,0.04 -1.21,0.75 -1.87,1.18 l -1.83,1.25 -9.85,6.35 -2.5,1.96 -2.02,1.56 -0.72,1.1 -0.3,1.02 1.28,2.48 c 0.03,0.06 0.01,0.14 -0.04,0.18 -0.03,0.02 -0.05,0.03 -0.08,0.03 -0.04,0 -0.07,-0.01 -0.1,-0.04 l -2.81,-2.79 -2.04,0.32 -2.19,0.99 -2.15,1.41 -4.38,1.56 -1.89,1.28 -2.35,2.37 c -0.74,0.61 -1.85,1.53 -1.93,1.61 -0.12,0.12 -0.87,0.62 -1.02,0.72 -0.02,0.02 -0.05,0.02 -0.08,0.02 z" fill="rgba(255,255,255,0.6)"/>
+  <path d="m 12.743686,50.151573 c -2.453329,0 -4.2666591,1.621331 -4.2666591,3.754661 0,1.962663 0.853332,3.114662 3.1146611,4.373326 1.407998,0.789332 2.623996,1.173332 2.623996,2.32533 0,0.874665 -0.789332,1.493331 -1.919997,1.493331 -0.917332,0 -2.13333,-0.618666 -2.8799949,-1.514664 l -1.7493306,2.00533 c 1.3226646,1.407998 3.0293285,2.175996 4.8426585,2.175996 2.687996,0 4.650659,-1.770664 4.650659,-4.20266 0,-1.919997 -0.959998,-3.007995 -3.455994,-4.33066 -1.343998,-0.725332 -2.410663,-1.194664 -2.410663,-2.197329 0,-0.725333 0.639999,-1.237332 1.450664,-1.237332 0.959999,0 1.983997,0.426666 2.773329,1.215998 l 1.535998,-2.06933 c -1.173331,-1.130665 -2.794662,-1.791997 -4.309327,-1.791997 z m 7.50466,0.213333 3.733328,14.207978 h 2.965328 l 3.157329,-9.834652 3.157328,9.834652 h 2.965329 l 3.733327,-14.207978 h -3.114662 l -2.325329,9.877318 -3.050662,-9.877318 H 28.739 l -3.050662,9.877318 -2.32533,-9.877318 z m 23.355316,0 v 14.207978 h 2.901329 V 50.364906 Z m 11.70732,-0.213333 c -2.45333,0 -4.26666,1.621331 -4.26666,3.754661 0,1.962663 0.853332,3.114662 3.114661,4.373326 1.407998,0.789332 2.623996,1.173332 2.623996,2.32533 0,0.874665 -0.789332,1.493331 -1.919997,1.493331 -0.917332,0 -2.13333,-0.618666 -2.879995,-1.514664 l -1.749331,2.00533 c 1.322665,1.407998 3.029329,2.175996 4.842659,2.175996 2.687996,0 4.65066,-1.770664 4.65066,-4.20266 0,-1.919997 -0.959999,-3.007995 -3.455995,-4.33066 -1.343998,-0.725332 -2.410663,-1.194664 -2.410663,-2.197329 0,-0.725333 0.639999,-1.237332 1.450665,-1.237332 0.959998,0 1.983996,0.426666 2.773328,1.215998 l 1.535998,-2.06933 c -1.173331,-1.130665 -2.794662,-1.791997 -4.309326,-1.791997 z m 12.667316,0 c -2.453329,0 -4.26666,1.621331 -4.26666,3.754661 0,1.962663 0.853332,3.114662 3.114662,4.373326 1.407998,0.789332 2.623996,1.173332 2.623996,2.32533 0,0.874665 -0.789332,1.493331 -1.919997,1.493331 -0.917332,0 -2.13333,-0.618666 -2.879996,-1.514664 l -1.74933,2.00533 c 1.322664,1.407998 3.029328,2.175996 4.842659,2.175996 2.687995,0 4.650659,-1.770664 4.650659,-4.20266 0,-1.919997 -0.959998,-3.007995 -3.455995,-4.33066 -1.343997,-0.725332 -2.410662,-1.194664 -2.410662,-2.197329 0,-0.725333 0.639999,-1.237332 1.450664,-1.237332 0.959998,0 1.983997,0.426666 2.773329,1.215998 l 1.535998,-2.06933 c -1.173332,-1.130665 -2.794663,-1.791997 -4.309327,-1.791997 z m 8.443327,0.213333 v 14.207978 h 2.901329 v -5.546658 h 2.453329 c 2.346663,0 4.13866,-1.855997 4.13866,-4.33066 0,-2.474663 -1.81333,-4.33066 -4.159993,-4.33066 z m 2.901329,2.602663 h 2.06933 c 1.002665,0 1.727997,0.703998 1.727997,1.727997 0,1.023998 -0.725332,1.727997 -1.727997,1.727997 h -2.06933 z m 10.619339,-2.602663 v 14.207978 h 8.66132 v -2.730663 h -5.759991 v -3.029328 h 5.525324 v -2.687996 h -5.525324 v -3.029329 h 5.759991 v -2.730662 z m 17.168637,0 -5.24799,14.207978 h 3.26399 l 1.06667,-3.093329 h 4.90665 l 1.06667,3.093329 h 3.26399 l -5.24799,-14.207978 z m 1.536,3.989327 1.57866,4.607993 h -3.17866 z m 10.2353,-3.989327 v 14.207978 h 2.90133 v -6.805323 l 5.01332,6.805323 h 3.41333 l -5.58933,-7.295989 5.312,-6.911989 h -3.34933 l -4.79999,6.421323 v -6.421323 z" fill="rgba(255,255,255,0.6)"/>
+  <path d="m 39.045049,68.231007 v 7.104023 h 1.450672 v -2.773342 h 1.22667 c 1.173337,0 2.06934,-0.928003 2.06934,-2.165341 0,-1.237337 -0.90667,-2.16534 -2.080007,-2.16534 z m 1.450672,1.301338 h 1.034669 c 0.501335,0 0.864003,0.352001 0.864003,0.864002 0,0.512002 -0.362668,0.864003 -0.864003,0.864003 h -1.034669 z m 7.536703,-1.301338 -2.624008,7.104023 h 1.632005 l 0.533335,-1.546672 h 2.453341 l 0.533335,1.546672 h 1.632005 l -2.624008,-7.104023 z m 0.768003,1.994673 0.789336,2.304007 h -1.589339 z m 6.19267,-1.994673 v 7.104023 h 1.450671 v -2.773342 h 0.629335 l 1.514672,2.773342 h 1.642672 l -1.696006,-2.933343 c 0.757336,-0.309334 1.269338,-1.06667 1.269338,-2.00534 0,-1.237337 -0.90667,-2.16534 -2.080007,-2.16534 z m 1.450671,1.301338 h 1.09867 c 0.501335,0 0.864003,0.352001 0.864003,0.864002 0,0.512002 -0.362668,0.864003 -0.864003,0.864003 h -1.09867 z m 6.160677,-1.301338 v 1.365338 h 1.792005 v 5.738685 h 1.450672 v -5.738685 h 1.792005 v -1.365338 z m 7.931342,0 v 7.104023 h 1.450671 v -4.586682 l 3.10401,4.586682 h 1.344004 v -7.104023 h -1.450671 v 4.565348 l -3.093343,-4.565348 z m 9.264687,0 v 7.104023 h 4.33068 v -1.365338 h -2.880009 v -1.514671 h 2.762675 v -1.344005 h -2.762675 v -1.514671 h 2.880009 v -1.365338 z m 7.600681,0 v 7.104023 h 1.450671 v -2.773342 h 0.629336 l 1.514671,2.773342 h 1.642672 L 90.9425,72.401687 c 0.757335,-0.309334 1.269337,-1.06667 1.269337,-2.00534 0,-1.237337 -0.90667,-2.16534 -2.080007,-2.16534 z m 1.450671,1.301338 h 1.09867 c 0.501335,0 0.864003,0.352001 0.864003,0.864002 0,0.512002 -0.362668,0.864003 -0.864003,0.864003 h -1.09867 z m 8.74202,-1.408005 c -1.22667,0 -2.13334,0.810669 -2.13334,1.877339 0,0.981337 0.426668,1.557339 1.557339,2.186674 0.704002,0.394668 1.312004,0.586669 1.312004,1.16267 0,0.437335 -0.394668,0.746669 -0.960003,0.746669 -0.458668,0 -1.06667,-0.309334 -1.440005,-0.757335 l -0.874669,1.002669 c 0.661335,0.704003 1.514671,1.088004 2.421341,1.088004 1.344004,0 2.32534,-0.885336 2.32534,-2.10134 0,-0.960003 -0.480001,-1.504005 -1.728005,-2.16534 -0.672002,-0.362668 -1.205337,-0.597335 -1.205337,-1.09867 0,-0.362668 0.320001,-0.618669 0.725335,-0.618669 0.480002,0 0.992004,0.213334 1.386671,0.608002 l 0.768003,-1.03467 C 99.161851,68.455008 98.351182,68.12434 97.593846,68.12434 Z" fill="rgba(255,255,255,0.6)"/>
+</svg>
+        <p>Smarter, simpler staffing from Zug. Built for companies that need to grow.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Services</h5>
+        <a href="permanent-placement.html">Permanent Hiring</a>
+        <a href="project-staffing.html">Project Solutions</a>
+        <a href="nearshoring.html">Nearshoring &amp; Outsourcing</a>
+        <a href="interview-assessment.html">Interview &amp; Assessment</a>
+        <a href="career-consulting.html">Career Consulting</a>
+      </div>
+      <div class="foot-col">
+        <h5>Company</h5>
+        <a href="about.html">About us</a>
+        <a href="team.html">Our partners</a>
+        <a href="index.html#security">Why Switzerland</a>
+        <a href="https://www.linkedin.com/company/swisspeak-partners/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+      <div class="foot-col">
+        <h5>Zug Office</h5>
+        <p>Sinserstrasse 67<br>6330 Cham, Switzerland</p>
+        <a href="tel:+41415623380">+41 (0)41 562 33 80</a>
+        <a href="mailto:hello@swisspeak-partners.ch">hello@swisspeak-partners.ch</a>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span class="swiss-made"><span class="fl" aria-hidden="true"></span> SwissPeak Partners&#174; &middot; Made in Switzerland</span>
+      <div class="links">
+        <a href="#">Imprint</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms &amp; Conditions</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- Floating WhatsApp button -->
+<a class="wa-fab" id="waFab" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.004c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 18.15h-.003a8.23 8.23 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.24 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.12-.14.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28z"/></svg>
+</a>
+<script>
+const hdr=document.getElementById('hdr');
+addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>40));
+document.getElementById('burger').addEventListener('click',()=>{
+  const m=document.querySelector('.menu');
+  const open=m.style.display==='flex';
+  Object.assign(m.style,open?{display:''}:{display:'flex',position:'absolute',top:'100%',right:'24px',
+    flexDirection:'column',background:'#fff',padding:'22px 26px',borderRadius:'6px',
+    boxShadow:'0 30px 60px -25px rgba(0,0,0,.3)',gap:'18px',alignItems:'flex-start'});
+  m.querySelectorAll('a:not(.btn)').forEach(a=>a.style.color=open?'':' #343f4b');
+});
+const io=new IntersectionObserver((es)=>{
+  es.forEach((e,i)=>{if(e.isIntersecting){
+    const sibs=[...e.target.parentElement.querySelectorAll('.reveal')];
+    e.target.style.transitionDelay=(Math.max(0,sibs.indexOf(e.target))*60)+'ms';
+    e.target.classList.add('in');io.unobserve(e.target);}});
+},{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+addEventListener('load',()=>document.querySelectorAll('.hero .reveal').forEach((el,i)=>{
+  el.style.transitionDelay=(i*120)+'ms';el.classList.add('in');}));
+const WA_NUMBER    = "41764691295";
+const EMAIL_HIRING = "hello@swisspeak-partners.ch";
+const EMAIL_JOBS   = "jobs@swisspeak-partners.ch";
+document.getElementById('waFab').href =
+  "https://wa.me/"+WA_NUMBER+"?text="+encodeURIComponent("Hello SwissPeak Partners \ud83d\udc4b  I'd like some information.");
+</script>
+</body>
+</html>
