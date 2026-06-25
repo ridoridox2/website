@@ -656,7 +656,7 @@ function countUp(el, target, suffix){
   const duration=1800;
   const step = timestamp => {
     if(!start) start=timestamp;
-    const progress=Math.min((timestamp-start)/duration,1);
+    const progress=Math.min((timestamp-start)/duration,5);
     el.textContent=Math.floor(progress*target)+suffix;
     if(progress<1) requestAnimationFrame(step);
   };
@@ -711,8 +711,8 @@ document.getElementById('waFab').href="https://wa.me/"+WA_NUMBER+"?text="+encode
     ],
     job:[
       { id:'sector', q:'Which sector are you in?', sub:'Select the field you work in.',
-        opts:[['IT & Software',''],['Engineering & Technical',''],['Finance & Accounting',''],['Sales & Marketing',''],
-              ['Healthcare & Life Sciences',''],['Construction & Trades',''],['Hospitality & Retail',''],['Other / Not listed','']] },
+        opts:[['Software Development',''],['DevOps & Cloud',''],['System & Network Engineering',''],['SAP & Other ERPs',''],
+              ['IT Architecture',''],['Data Science',''],['Cybersecurity',''],['Other / Not listed','']] },
       { id:'level', q:'Your experience level?', sub:'So we can match the right opportunities.',
         opts:[['Entry level',''],['Mid level',''],['Senior',''],['Leadership / Executive','']] },
       { id:'want', q:'What are you looking for?', sub:'Tell us your goal.',
