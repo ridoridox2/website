@@ -424,10 +424,8 @@ footer{background:#0e1216;color:rgba(255,255,255,.6);padding:70px 0 32px}
 .stat:hover .u{color:#ffffff;}
 .stat:hover .t{color:#ffffff;}
 @keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
-@keyframes tickerScroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
-.ticker-inner{display:inline-flex;gap:0;}
-.ticker-item{font-family:var(--serif);font-size:clamp(1.2rem,2vw,1.6rem);color:var(--graphite);padding:0 24px;font-weight:400;}
-.ticker-item span{color:var(--swiss);}</style>
+
+</style>
 </head>
 <div id="cursor"></div>
 <style>
@@ -512,12 +510,7 @@ footer{background:#0e1216;color:rgba(255,255,255,.6);padding:70px 0 32px}
   </div>
   <div class="ridge" aria-hidden="true"><svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path fill="#eef1f5" d="M0,120 L0,78 L180,40 L320,84 L470,18 L620,70 L760,30 L880,72 L1010,22 L1160,66 L1300,36 L1440,74 L1440,120 Z"></path></svg></div>
 </section>
-<div style="background:var(--snow);padding:28px 0;overflow:hidden;white-space:nowrap;border-top:1px solid var(--fog);border-bottom:1px solid var(--fog);">
-  <div id="ticker-track" style="display:inline-flex;gap:0;animation:tickerScroll 60s linear infinite;">
-    <span class="ticker-inner"></span>
-    <span class="ticker-inner"></span>
-  </div>
-</div>
+
 <div class="trust">
   <div class="wrap">
     <p class="intro reveal">Chosen by leading companies across Switzerland and Europe for teams that perform, stay and grow.</p>
@@ -532,6 +525,7 @@ footer{background:#0e1216;color:rgba(255,255,255,.6);padding:70px 0 32px}
     <div class="sec-head reveal">
       <span class="label">What we do</span>
       <h2>Hiring rarely fits <span class="em">one shape</span></span>.</h2>
+      <p style="font-family:var(--serif);font-size:clamp(1.4rem,2.5vw,2rem);font-weight:400;color:var((--ink));margin:.4em 0 .8em;"><span style="color:var(--ink);">We place </span><span id="ticker-text" style="font-style:italic;transition:opacity 0.4s ease;"></span></p>
       <p>Whether your team is dealing with a permanent role, a contract engagement, a nearshore team or an RPO programme, we adjust the approach to your business. Never the other way around.</p>
     </div>
     <div class="svc-grid">
@@ -709,11 +703,20 @@ footer{background:#0e1216;color:rgba(255,255,255,.6);padding:70px 0 32px}
 function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
 requestAnimationFrame(raf);
 const tickerPhrases = ['engineers','architects','leaders','specialists','project managers','system engineers','consultants','software developers','software testers','visionaries','innovators','data scientists','technical leads','solution architects','programme managers','devops engineers','cybersecurity experts','product managers','scrum masters','business analysts'];
-document.querySelectorAll('.ticker-inner').forEach(inner => {
-  inner.innerHTML = tickerPhrases.map(p =>
-    `<span class="ticker-item">We place <span>${p}</span></span>`
-  ).join('');
-});
+let tickerIndex = 0;
+const tickerEl = document.getElementById('ticker-text');
+function runTicker(){
+  if(!tickerEl) return;
+  tickerEl.style.opacity = '0';
+  setTimeout(()=>{
+    tickerEl.textContent = tickerPhrases[tickerIndex] + '.';
+    tickerEl.style.opacity = '1';
+    tickerIndex = (tickerIndex + 1) % tickerPhrases.length;
+  }, 400);
+}
+runTicker();
+setInterval(runTicker, 1750);
+
 const hdr=document.getElementById('hdr');
 
 addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>40));
