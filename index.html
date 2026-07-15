@@ -170,26 +170,31 @@ section.block{padding:60px 0}
 .sec-head p{font-size:1.12rem;color:var(--granite);max-width:60ch}
 
 /* ---------- SERVICES ---------- */
-.services{background:var(--paper)}
+.services{background:var(--paper);position:relative;overflow:hidden;}
 .svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:26px}
-.svc{position:relative;border:1px solid var(--fog);border-radius:4px;overflow:hidden;
-  background:var(--paper);transition:.45s;display:flex;flex-direction:column}
-.svc:hover{transform:translateY(-6px);box-shadow:0 30px 60px -30px rgba(19,22,26,.35);
-  border-color:transparent}
+.svc{position:relative;border:1px solid var(--fog);border-radius:4px;background:var(--paper);perspective:1000px;}
+.svc-inner{position:relative;width:100%;height:420px;transition:transform 0.7s cubic-bezier(.4,0,.2,1);transform-style:preserve-3d;}
+.svc:hover .svc-inner{transform:rotateY(180deg);}
+.svc-front,.svc-back{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:4px;}
+.svc-front{background:var(--paper);display:flex;flex-direction:column;}
+.svc-back{background:var(--alpine);color:#fff;transform:rotateY(180deg);padding:36px 30px;display:flex;flex-direction:column;justify-content:center;}
+.svc-back h3{font-family:var(--serif);font-size:1.5rem;font-weight:400;margin-bottom:24px;color:#fff;}
+.svc-back ul{list-style:none;margin:0 0 30px;}
+.svc-back ul li{font-size:.95rem;color:rgba(255,255,255,.85);padding:10px 0;border-bottom:1px solid rgba(255,255,255,.1);display:flex;align-items:center;gap:12px;transition:transform .2s ease;}
+.svc-back ul li:hover{transform:translateY(-3px);}
+.svc-back ul li span.flag{display:inline-block;transition:transform .2s cubic-bezier(.2,.7,.2,1);}
+.svc-back ul li:hover span.flag{transform:translateY(-5px);}
+.svc-back .svc-link{color:#fff;border:1px solid rgba(255,255,255,.3);padding:12px 20px;border-radius:2px;text-align:center;margin-top:auto;}
+.svc-back .svc-link:hover{background:rgba(255,255,255,.1);}
 .svc-img{height:230px;overflow:hidden;position:relative;background:var(--alpine)}
 .svc-img img{width:100%;height:100%;object-fit:cover;transition:transform .9s ease;opacity:.96}
-.svc:hover .svc-img img{transform:scale(1.07)}
-.svc-img::after{content:"";position:absolute;inset:0;
-  background:linear-gradient(180deg,transparent 40%,rgba(19,22,26,.5))}
-.svc-num{position:absolute;top:16px;left:18px;z-index:2;font-family:var(--serif);
-  font-size:1rem;color:#fff;letter-spacing:.1em}
+.svc-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(19,22,26,.5))}
+.svc-num{position:absolute;top:16px;left:18px;z-index:2;font-family:var(--serif);font-size:1rem;color:#fff;letter-spacing:.1em}
 .svc-body{padding:30px 30px 34px;flex:1;display:flex;flex-direction:column}
 .svc-body h3{font-size:1.7rem;margin-bottom:.4em}
 .svc-body p{color:var(--granite);font-size:.98rem;margin-bottom:1.4em;flex:1}
-.svc-link{font-weight:600;font-size:.86rem;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--ink);display:inline-flex;align-items:center;gap:.6em;transition:gap .3s}
+.svc-link{font-weight:600;font-size:.86rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);display:inline-flex;align-items:center;gap:.6em;transition:gap .3s}
 .svc-link::after{content:"→";color:var(--swiss);font-size:1.1em}
-.svc:hover .svc-link{gap:1.1em}
 
 /* ---------- SECURITY / SWISS ---------- */
 .swiss-sec{position:relative;color:#fff;overflow:hidden;
@@ -418,20 +423,7 @@ footer{background:#0e1216;color:rgba(255,255,255,.6);padding:70px 0 32px}
 .stat:hover .n{color:#ffffff;}
 .stat:hover .u{color:#ffffff;}
 .stat:hover .t{color:#ffffff;}
-.svc{perspective:1000px;}
-.svc-inner{position:relative;width:100%;height:480px;transition:transform 0.7s cubic-bezier(.4,0,.2,1);transform-style:preserve-3d;}
-.svc:hover .svc-inner{transform:rotateY(180deg);}
-.svc-front,.svc-back{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;}
-.svc-front{background:var(--paper);}
-.svc-back{background:var(--alpine);color:#fff;transform:rotateY(180deg);padding:36px 30px;display:flex;flex-direction:column;justify-content:center;}
-.svc-back h3{font-family:var(--serif);font-size:1.5rem;font-weight:400;margin-bottom:24px;color:#fff;}
-.svc-back ul{list-style:none;margin:0 0 30px;}
-.svc-back ul li{font-size:.95rem;color:rgba(255,255,255,.85);padding:10px 0;border-bottom:1px solid rgba(255,255,255,.1);display:flex;align-items:center;gap:12px;transition:transform .2s ease;}
-.svc-back ul li:hover{transform:translateY(-3px);}
-.svc-back ul li span.flag{display:inline-block;transition:transform .2s cubic-bezier(.2,.7,.2,1);}
-.svc-back ul li:hover span.flag{transform:translateY(-5px);}
-.svc-back .svc-link{color:#fff;border:1px solid rgba(255,255,255,.3);padding:12px 20px;border-radius:2px;text-align:center;margin-top:auto;}
-.svc-back .svc-link:hover{background:rgba(255,255,255,.1);}
+
 </style>
 </head>
 <div id="cursor"></div>
@@ -602,7 +594,7 @@ footer{background:#0e1216;color:rgba(255,255,255,.6);padding:70px 0 32px}
           </div>
         </div>
       </article>
-      <article class="svc reveal" style="grid-column:1/-1;max-width:50%;margin:0 auto;">
+      <article class="svc reveal" style="grid-column:1/-1;width:50%;margin:0 auto;">
         <div class="svc-inner">
           <div class="svc-front">
             <div class="svc-img"><span class="svc-num">05</span><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1400&q=80" alt="Career consulting"></div>
