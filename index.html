@@ -418,6 +418,20 @@ footer{background:#0e1216;color:rgba(255,255,255,.6);padding:70px 0 32px}
 .stat:hover .n{color:#ffffff;}
 .stat:hover .u{color:#ffffff;}
 .stat:hover .t{color:#ffffff;}
+.svc{perspective:1000px;}
+.svc-inner{position:relative;width:100%;height:480px;transition:transform 0.7s cubic-bezier(.4,0,.2,1);transform-style:preserve-3d;}
+.svc:hover .svc-inner{transform:rotateY(180deg);}
+.svc-front,.svc-back{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;}
+.svc-front{background:var(--paper);}
+.svc-back{background:var(--alpine);color:#fff;transform:rotateY(180deg);padding:36px 30px;display:flex;flex-direction:column;justify-content:center;}
+.svc-back h3{font-family:var(--serif);font-size:1.5rem;font-weight:400;margin-bottom:24px;color:#fff;}
+.svc-back ul{list-style:none;margin:0 0 30px;}
+.svc-back ul li{font-size:.95rem;color:rgba(255,255,255,.85);padding:10px 0;border-bottom:1px solid rgba(255,255,255,.1);display:flex;align-items:center;gap:12px;transition:transform .2s ease;}
+.svc-back ul li:hover{transform:translateY(-3px);}
+.svc-back ul li span.flag{display:inline-block;transition:transform .2s cubic-bezier(.2,.7,.2,1);}
+.svc-back ul li:hover span.flag{transform:translateY(-5px);}
+.svc-back .svc-link{color:#fff;border:1px solid rgba(255,255,255,.3);padding:12px 20px;border-radius:2px;text-align:center;margin-top:auto;}
+.svc-back .svc-link:hover{background:rgba(255,255,255,.1);}
 </style>
 </head>
 <div id="cursor"></div>
@@ -521,44 +535,90 @@ footer{background:#0e1216;color:rgba(255,255,255,.6);padding:70px 0 32px}
     </div>
     <div class="svc-grid">
       <article class="svc reveal">
-        <div class="svc-img"><span class="svc-num">01</span><img src="deal.avif" alt="Permanent hiring"></div>
-        <div class="svc-body"><h3>Permanent Hiring</h3><p>Focused search, no shortcuts. We find people who fit the role and the culture, run the process end to end, and offer both contingent and retained mandates.</p><a class="svc-link" href="permanent-placement.html">Find lasting talent</a></div>
+        <div class="svc-inner">
+          <div class="svc-front">
+            <div class="svc-img"><span class="svc-num">01</span><img src="deal.avif" alt="Permanent hiring"></div>
+            <div class="svc-body"><h3>Permanent Hiring</h3><p>Focused search, no shortcuts. We find people who fit the role and the culture, run the process end to end, and offer both contingent and retained mandates.</p><a class="svc-link" href="permanent-placement.html">Find lasting talent</a></div>
+          </div>
+          <div class="svc-back">
+            <h3>Permanent Hiring</h3>
+            <ul>
+              <li><span class="flag">🇨🇭</span> Deep brief before any sourcing begins</li>
+              <li><span class="flag">🇨🇭</span> First shortlist delivered within 72 hours</li>
+              <li><span class="flag">🇨🇭</span> Fee on successful placement only</li>
+            </ul>
+            <a class="svc-link" href="permanent-placement.html">Find lasting talent</a>
+          </div>
+        </div>
       </article>
       <article class="svc reveal">
-        <div class="svc-img"><span class="svc-num">02</span><img src="handshake.avif" alt="Project solutions"></div>
-        <div class="svc-body"><h3>Project Solutions</h3><p>Contractors and project teams that deliver from day one. We take care of the setup, the contracts and the coordination. You focus on the project.</p><a class="svc-link" href="project-staffing.html">Deliver on time</a></div>
+        <div class="svc-inner">
+          <div class="svc-front">
+            <div class="svc-img"><span class="svc-num">02</span><img src="handshake.avif" alt="Project solutions"></div>
+            <div class="svc-body"><h3>Project Solutions</h3><p>Contractors and project teams that deliver from day one. We take care of the setup, the contracts and the coordination. You focus on the project.</p><a class="svc-link" href="project-staffing.html">Deliver on time</a></div>
+          </div>
+          <div class="svc-back">
+            <h3>Project Solutions</h3>
+            <ul>
+              <li><span class="flag">🇨🇭</span> Right skills, right structure, delivered fast</li>
+              <li><span class="flag">🇨🇭</span> Active and passive candidate sourcing</li>
+              <li><span class="flag">🇨🇭</span> Contracts and coordination handled by us</li>
+            </ul>
+            <a class="svc-link" href="project-staffing.html">Deliver on time</a>
+          </div>
+        </div>
       </article>
       <article class="svc reveal">
-        <div class="svc-img"><span class="svc-num">03</span><img src="nearshoring.avif" alt="Nearshoring"></div>
-        <div class="svc-body"><h3>Nearshoring &amp; Outsourcing</h3><p>Nearshore setups, fully handled. Location, partners, compliance, cost model, go-live. Run on Swiss quality standards, from start to steady state.</p><a class="svc-link" href="nearshoring.html">Scale securely</a></div>
+        <div class="svc-inner">
+          <div class="svc-front">
+            <div class="svc-img"><span class="svc-num">03</span><img src="nearshoring.avif" alt="Nearshoring"></div>
+            <div class="svc-body"><h3>Nearshoring &amp; Outsourcing</h3><p>Nearshore setups, fully handled. Location, partners, compliance, cost model, go-live. Run on Swiss quality standards, from start to steady state.</p><a class="svc-link" href="nearshoring.html">Scale securely</a></div>
+          </div>
+          <div class="svc-back">
+            <h3>Nearshoring &amp; Outsourcing</h3>
+            <ul>
+              <li><span class="flag">🇨🇭</span> Partner selection and due diligence</li>
+              <li><span class="flag">🇨🇭</span> Compliance and cost modelling included</li>
+              <li><span class="flag">🇨🇭</span> Active support after go-live</li>
+            </ul>
+            <a class="svc-link" href="nearshoring.html">Scale securely</a>
+          </div>
+        </div>
       </article>
       <article class="svc reveal">
-        <div class="svc-img"><span class="svc-num">04</span><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1400&q=80" alt="Interview and Assessment"></div>
-        <div class="svc-body"><h3>Interview &amp; Assessment</h3><p>We run first-round, technical and competency interviews for you. Your team steps in when it counts, not before.</p><a class="svc-link" href="interview-assessment.html">Outsource your interviews</a></div>
+        <div class="svc-inner">
+          <div class="svc-front">
+            <div class="svc-img"><span class="svc-num">04</span><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1400&q=80" alt="Interview and Assessment"></div>
+            <div class="svc-body"><h3>Interview &amp; Assessment</h3><p>We run first-round, technical and competency interviews for you. Your team steps in when it counts, not before.</p><a class="svc-link" href="interview-assessment.html">Outsource your interviews</a></div>
+          </div>
+          <div class="svc-back">
+            <h3>Interview &amp; Assessment</h3>
+            <ul>
+              <li><span class="flag">🇨🇭</span> Candidates fully assessed before submission</li>
+              <li><span class="flag">🇨🇭</span> Structured fit report on every candidate</li>
+              <li><span class="flag">🇨🇭</span> Your team steps in when it counts</li>
+            </ul>
+            <a class="svc-link" href="interview-assessment.html">Outsource your interviews</a>
+          </div>
+        </div>
       </article>
       <article class="svc reveal" style="grid-column:1/-1;max-width:50%;margin:0 auto;">
-        <div class="svc-img"><span class="svc-num">05</span><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1400&q=80" alt="Career consulting"></div>
-        <div class="svc-body"><h3>Career Consulting</h3><p>Career strategy for professionals in Switzerland ready for the next step. CV, salary benchmarking, interview preparation and clear positioning in the Swiss market. Sessions in German, English and Italian.</p><a class="svc-link" href="career-consulting.html">Advance your career</a></div>
+        <div class="svc-inner">
+          <div class="svc-front">
+            <div class="svc-img"><span class="svc-num">05</span><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1400&q=80" alt="Career consulting"></div>
+            <div class="svc-body"><h3>Career Consulting</h3><p>Career strategy for professionals in Switzerland ready for the next step. CV, salary benchmarking, interview preparation and clear positioning in the Swiss market.</p><a class="svc-link" href="career-consulting.html">Advance your career</a></div>
+          </div>
+          <div class="svc-back">
+            <h3>Career Consulting</h3>
+            <ul>
+              <li><span class="flag">🇨🇭</span> CV, salary benchmarking and interview prep</li>
+              <li><span class="flag">🇨🇭</span> Sessions in German, English and Italian</li>
+              <li><span class="flag">🇨🇭</span> Focused on the Swiss job market</li>
+            </ul>
+            <a class="svc-link" href="career-consulting.html">Advance your career</a>
+          </div>
+        </div>
       </article>
-      
-    </div>
-  </div>
-</section>
-
-
-<section class="block config" id="configurator">
-  <div class="wrap">
-    <div class="sec-head reveal" style="margin:0 auto 50px;text-align:center;max-width:680px">
-      <span class="label" style="justify-content:center">Get in touch</span>
-      <h2>How can we help you <span class="em">today</span>?</h2>
-      <p style="margin:0 auto">Hiring or looking for your next move? A few quick questions, and we will take it from there.</p>
-    </div>
-    <div class="cfg-card reveal">
-      <div class="cfg-top">
-        <div class="cfg-bar"><i id="cfgBar"></i></div>
-        <div class="cfg-step-n" id="cfgStepN">Step 1 of 4</div>
-      </div>
-      <div class="cfg-body" id="cfgBody"></div>
     </div>
   </div>
 </section>
