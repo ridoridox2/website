@@ -10,6 +10,7 @@
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
   
@@ -635,23 +636,15 @@ cy = my;
 </a>
 
 <script>
+  const lenis = new Lenis({
+  duration: 1.4,
+  easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  smooth: true,
+});
+function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
+requestAnimationFrame(raf);
 const hdr=document.getElementById('hdr');
-let currentY = 0;
-let targetY = 0;
-let rafId = null;
 
-function smoothScroll(){
-  currentY += (targetY - currentY) * 0.08;
-  if(Math.abs(targetY - currentY) < 0.5) currentY = targetY;
-  document.documentElement.style.transform = 'translateY('+ (-currentY) +'px)';
-  rafId = requestAnimationFrame(smoothScroll);
-}
-
-window.addEventListener('wheel', e => {
-  e.preventDefault();
-  targetY = Math.max(0, Math.min(targetY + e.deltaY, document.body.scrollHeight - window.innerHeight));
-  if(!rafId) smoothScroll();
-}, {passive:false});
 addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>40));
 const heroBg = document.querySelector('.hero-bg img');
 addEventListener('scroll',()=>{ if(heroBg) heroBg.style.transform='translateY('+(scrollY*0.3)+'px)'; });
