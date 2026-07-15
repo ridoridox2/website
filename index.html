@@ -422,21 +422,25 @@ footer{background:#0e1216;color:rgba(255,255,255,.6);padding:70px 0 32px}
 </head>
 <div id="cursor"></div>
 <style>
-  #cursor{position:fixed;width:24px;height:24px;border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);z-index:9999;background:#c0392b;}
+  #cursor{position:fixed;width:24px;height:24px;border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);z-index:9999;background:#c0392b;opacity:0;transition:opacity .15s ease;}
   #cursor::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:10px;height:2.5px;background:#fff;border-radius:1px;}
   #cursor::after{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:2.5px;height:10px;background:#fff;border-radius:1px;}
   #cursor.big{width:32px;height:32px;}
+  #cursor.visible{opacity:1;}
   *{cursor:none;}
 </style>
 <script>
   const cur = document.getElementById('cursor');
-  let mx=0, my=0, cx=0, cy=0;
-  document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+  let mx=0, my=0;
+  document.addEventListener('mousemove', e => {
+    mx=e.clientX; my=e.clientY;
+    cur.classList.add('visible');
+  });
+  document.documentElement.addEventListener('mouseleave', () => cur.classList.remove('visible'));
+  addEventListener('blur', () => cur.classList.remove('visible'));
   (function loop(){
-   cx = mx;
-cy = my;
-    cur.style.left = cx+'px';
-    cur.style.top = cy+'px';
+    cur.style.left = mx+'px';
+    cur.style.top = my+'px';
     requestAnimationFrame(loop);
   })();
   document.querySelectorAll('a,button').forEach(el => {
