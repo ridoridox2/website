@@ -451,11 +451,12 @@ footer{background:#0e1216;color:rgba(255,255,255,.6);padding:70px 0 32px}
 .proc-line-fill{position:absolute;top:0;width:5px;height:0;background:linear-gradient(180deg,var(--swiss),var(--flag));border-radius:99px;left:20px;transform:translateX(-50%);z-index:1;transition:height .06s linear}
 .proc-steps-col{padding-bottom:20vh;padding-top:0}
 .proc-step{min-height:80vh;display:flex;align-items:center;gap:60px;padding:40px 0 40px 48px;opacity:.15;transition:opacity .5s ease}
-.proc-step:nth-child(even){background:var(--alpine);margin-left:-64px;padding-left:112px;}
+.proc-step:nth-child(even){background:transparent;margin-left:-64px;padding-left:112px;transition:background .5s ease,opacity .5s ease}
+.proc-step:nth-child(even).active{background:var(--alpine)}
 .proc-step:nth-child(even) .proc-content h3{color:#fff}
 .proc-step:nth-child(even) .proc-content p{color:rgba(255,255,255,.72)}
 .proc-step:nth-child(even) .proc-content .label{color:#bcd4e3}
-.proc-step:nth-child(even) .proc-num{color:rgba(255,255,255,.1)}
+.proc-step:nth-child(even) .proc-num{color:rgba(255,255,255,.15)}
 .proc-step.active{opacity:1}
 .proc-num{font-family:var(--serif);font-size:clamp(5rem,10vw,9rem);font-weight:400;color:var(--fog);line-height:1;flex:0 0 auto;transition:.5s ease;min-width:160px;text-align:right}
 .proc-content .label{color:var(--flag);margin-bottom:10px;display:block}
