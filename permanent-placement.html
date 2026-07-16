@@ -440,34 +440,21 @@ footer{background:#0e1216;color:rgba(255,255,255,.6);padding:70px 0 32px}
 
 /* ---- PROCESS TIMELINE ---- */
 .process-section{background:#fff;position:relative}
-.proc-step{min-height:90vh;display:flex;align-items:center;gap:60px;padding:40px 0 40px 48px;position:relative;max-width:1240px;margin:0 auto;padding:0 32px}
-.proc-header{grid-column:1/-1;padding:120px 0 80px 60px}
+.proc-outer{display:grid;grid-template-columns:64px 1fr;position:relative;max-width:1240px;margin:0 auto;padding:0 32px}
+.proc-header{grid-column:1/-1;padding:40px 0 0 60px}
 .proc-header .label{color:var(--granite)}
 .proc-header h2{font-size:clamp(2rem,4vw,3.2rem);margin:.3em 0 .5em}
 .proc-header .proc-intro{color:var(--granite);font-size:1.08rem;max-width:54ch}
 .proc-sidebar{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;align-items:center;z-index:2}
 .proc-line-bg{position:absolute;top:0;bottom:0;width:5px;background:var(--fog);border-radius:99px;left:20px;transform:translateX(-50%)}
 .proc-line-fill{position:absolute;top:0;width:5px;height:0;background:linear-gradient(180deg,var(--swiss),var(--flag));border-radius:99px;left:20px;transform:translateX(-50%);z-index:1;transition:height .06s linear}
-.proc-steps-col{padding-bottom:20vh;padding-top:0;margin-top:-80vh}
-.proc-step{min-height:90vh;display:flex;align-items:center;gap:60px;padding:40px 0 40px 48px;opacity:.15;transition:opacity .5s ease}
+.proc-steps-col{padding-bottom:20vh;padding-top:0}
+.proc-step{min-height:80vh;display:flex;align-items:center;gap:60px;padding:40px 0 40px 48px;opacity:.15;transition:opacity .5s ease}
 .proc-step.active{opacity:1}
 .proc-num{font-family:var(--serif);font-size:clamp(5rem,10vw,9rem);font-weight:400;color:var(--fog);line-height:1;flex:0 0 auto;transition:.5s ease;min-width:160px;text-align:right}
-.proc-step.active .proc-num{
-  background:linear-gradient(90deg,var(--flag) 0%,var(--fog) 60%);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
-  background-size:200% 100%;
-  background-position:100% 0;
-  animation:numReveal .8s cubic-bezier(.2,.7,.2,1) forwards;
-}
-@keyframes numReveal{
-  from{background-position:100% 0}
-  to{background-position:0% 0}
-}
 .proc-content .label{color:var(--flag);margin-bottom:10px;display:block}
 .proc-content h3{font-family:var(--serif);font-size:clamp(2rem,3.5vw,3.2rem);font-weight:400;color:var(--ink);margin-bottom:.6em;line-height:1.15}
-.proc-content p{font-size:1.7rem;color:var(--granite);line-height:1.8;max-width:46ch;margin:0}
+.proc-content p{font-size:1.18rem;color:var(--granite);line-height:1.8;max-width:46ch;margin:0}
 @media(max-width:760px){
   .proc-outer{grid-template-columns:32px 1fr;padding:0 16px}
   .proc-step{gap:24px;padding-left:20px;min-height:70vh}
@@ -739,22 +726,22 @@ document.getElementById('waFab').href="https://wa.me/"+WA_NUMBER+"?text="+encode
     const pct = Math.max(0, Math.min(1, scrolled / (secH - vh)));
     const sidebar = document.querySelector('.proc-sidebar');
     if(sidebar){ fill.style.height = (pct * sidebar.offsetHeight) + 'px'; }
+
     steps.forEach(step => {
       const rect = step.getBoundingClientRect();
-  const mid = rect.top + rect.height / 2;
-const active = mid < vh * 0.6;
-step.classList.toggle('active', active);
+      const mid = rect.top + rect.height / 2;
+      const active = mid < vh * 0.7;
+      step.classList.toggle('active', active);
 
-// Colour fill based on scroll position within step
-const num = step.querySelector('.proc-num');
-if(num){
-  const progress = Math.max(0, Math.min(1, (vh * 0. - rect.top) / rect.height));
-  const stop = Math.round(progress * 100);
-  num.style.background = `linear-gradient(90deg, var(--flag) ${stop}%, var(--fog) ${stop}%)`;
-  num.style.webkitBackgroundClip = 'text';
-  num.style.webkitTextFillColor = 'transparent';
-  num.style.backgroundClip = 'text';
-}
+      const num = step.querySelector('.proc-num');
+      if(num){
+        const progress = Math.max(0, Math.min(1, (vh * 0.85 - rect.top) / rect.height));
+        const stop = Math.round(progress * 100);
+        num.style.background = 'linear-gradient(90deg, var(--flag) ' + stop + '%, var(--fog) ' + stop + '%)';
+        num.style.webkitBackgroundClip = 'text';
+        num.style.webkitTextFillColor = 'transparent';
+        num.style.backgroundClip = 'text';
+      }
     });
   }
 
