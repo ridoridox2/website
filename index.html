@@ -28,6 +28,7 @@
   --alpine:#202935;      /* dark blue-grey sections */
   --alpine-2:#29333f;
   --maxw:1240px;
+  --hdr-h:96px;
   --serif:"IBM Plex Serif",Georgia,serif;
   --sans:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,monospace;
@@ -132,7 +133,7 @@ header.scrolled .has-drop>a::after{border-top-color:rgba(255,255,255,.7)}
 
 /* ---------- HERO ---------- */
 .hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;
-  color:#fff;overflow:hidden;padding-bottom:clamp(140px,16vh,220px)}
+  color:#fff;overflow:hidden;padding-top:var(--hdr-h);padding-bottom:clamp(140px,16vh,220px)}
 .hero-bg{position:absolute;inset:0;background:linear-gradient(120deg,#202935,#2f3e4b);background-size:cover;background-position:center 35%;z-index:0}
 .hero-bg::after{content:"";position:absolute;inset:0;z-index:1;
   background:linear-gradient(180deg,rgba(10,15,20,.55) 0%,rgba(10,15,20,.35) 30%,rgba(10,15,20,.75) 65%,rgba(10,15,20,.97) 100%)}
