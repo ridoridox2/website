@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Permanent Placement — SwissPeak Partners</title>
-<meta name="description" content="Quality-first permanent hiring across functions and industries. Based in Zug.">
+<title>Permanent Hiring &mdash; SwissPeak Partners</title>
+<meta name="description" content="Quality-first permanent hiring across functions and industries. Based in Zug. Fee on successful placement only.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
@@ -405,46 +405,94 @@ footer{background:#0e1216;color:rgba(255,255,255,.6);padding:70px 0 32px}
 
 /* ---- subpage hero: compact, not full-viewport ---- */
 .hero{min-height:72vh;align-items:flex-end;padding-bottom:clamp(80px,10vh,130px)}
+
+/* ---- SUBPAGE HERO ---- */
+.hero{min-height:72vh;align-items:flex-end;padding-bottom:clamp(80px,10vh,130px)}
+
+/* ---- VALUE CARDS ---- */
+.value-section{background:var(--alpine);padding:120px 0;position:relative;overflow:hidden}
+.value-section::before{content:"";position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 60% at 20% 50%,rgba(79,109,134,.18) 0%,transparent 70%),
+             radial-gradient(ellipse 60% 80% at 80% 30%,rgba(192,57,43,.08) 0%,transparent 60%)}
+.value-section .label{color:rgba(255,255,255,.6)}
+.value-section h2{font-size:clamp(2rem,4vw,3.2rem);margin:.3em 0 .6em;color:#fff}
+.value-section .sec-intro{color:rgba(255,255,255,.65);font-size:1.08rem;max-width:54ch;margin-bottom:56px}
+.value-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.vcard{position:relative;border-radius:12px;overflow:hidden;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  min-height:260px;cursor:default;transition:.4s}
+.vcard:hover{border-color:rgba(255,255,255,.28);background:rgba(255,255,255,.1);
+  transform:translateY(-4px);box-shadow:0 30px 60px -20px rgba(0,0,0,.5)}
+.vcard-front{padding:36px 30px;height:100%;display:flex;flex-direction:column;justify-content:space-between}
+.vcard-front h3{font-family:var(--serif);font-size:1.4rem;font-weight:400;color:#fff;line-height:1.2}
+.vcard-front .vcard-hint{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(255,255,255,.35);font-family:var(--mono);margin-top:auto;padding-top:24px}
+.vcard-overlay{position:absolute;inset:0;background:rgba(22,30,40,.92);
+  display:flex;flex-direction:column;justify-content:flex-end;padding:32px 30px;
+  opacity:0;transform:translateY(20px);transition:opacity .35s ease,transform .35s ease;
+  backdrop-filter:blur(8px)}
+.vcard:hover .vcard-overlay{opacity:1;transform:translateY(0)}
+.vcard-overlay p{font-size:.94rem;color:rgba(255,255,255,.82);line-height:1.75;margin:0}
+.vcard-icon{width:48px;height:48px;border-radius:10px;background:rgba(79,109,134,.3);
+  border:1px solid rgba(79,109,134,.5);display:grid;place-items:center;margin-bottom:20px}
+.vcard-icon svg{width:22px;height:22px;stroke:var(--swiss);fill:none;stroke-width:1.8}
+
+/* ---- PROCESS TIMELINE ---- */
+.process-section{background:#fff;position:relative}
+.proc-outer{display:grid;grid-template-columns:64px 1fr;position:relative;max-width:1240px;margin:0 auto;padding:0 32px}
+.proc-header{grid-column:1/-1;padding:120px 0 80px}
+.proc-header .label{color:var(--granite)}
+.proc-header h2{font-size:clamp(2rem,4vw,3.2rem);margin:.3em 0 .5em}
+.proc-header .proc-intro{color:var(--granite);font-size:1.08rem;max-width:54ch}
+.proc-sidebar{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;align-items:center;z-index:2}
+.proc-line-bg{position:absolute;top:0;bottom:0;width:3px;background:var(--fog);border-radius:99px;left:50%;transform:translateX(-50%)}
+.proc-line-fill{position:absolute;top:0;width:3px;height:0;background:linear-gradient(180deg,var(--swiss),var(--flag));border-radius:99px;left:50%;transform:translateX(-50%);z-index:1;transition:height .06s linear}
+.proc-steps-col{padding-bottom:20vh}
+.proc-step{min-height:90vh;display:flex;align-items:center;gap:60px;padding:40px 0 40px 48px;opacity:.15;transition:opacity .5s ease}
+.proc-step.active{opacity:1}
+.proc-num{font-family:var(--serif);font-size:clamp(5rem,10vw,9rem);font-weight:400;color:var(--fog);line-height:1;flex:0 0 auto;transition:.5s ease;min-width:160px;text-align:right}
+.proc-step.active .proc-num{color:rgba(192,57,43,.12)}
+.proc-content .label{color:var(--flag);margin-bottom:10px;display:block}
+.proc-content h3{font-family:var(--serif);font-size:clamp(2rem,3.5vw,3.2rem);font-weight:400;color:var(--ink);margin-bottom:.6em;line-height:1.15}
+.proc-content p{font-size:1.7rem;color:var(--granite);line-height:1.8;max-width:46ch;margin:0}
+@media(max-width:760px){
+  .proc-outer{grid-template-columns:32px 1fr;padding:0 16px}
+  .proc-step{gap:24px;padding-left:20px;min-height:70vh}
+  .proc-num{font-size:4rem;min-width:80px}
+}
+/* ---- CTA ---- */
+.page-cta{background:var(--alpine);padding:100px 0;text-align:center;position:relative;overflow:hidden}
+.page-cta::before{content:"";position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 80% at 50% 100%,rgba(192,57,43,.12) 0%,transparent 60%)}
+.page-cta h2{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:400;color:#fff;margin-bottom:.5em}
+.page-cta p{font-size:1.08rem;color:rgba(255,255,255,.65);max-width:50ch;margin:0 auto 2.4em}
+.page-cta .hero-cta{justify-content:center}
+
+@media(max-width:760px){
+  .value-grid{grid-template-columns:1fr}
+  .proc-row{grid-template-columns:28px 1fr;gap:16px}
+  .proc-row:nth-child(odd) .proc-card,
+  .proc-row:nth-child(even) .proc-card{grid-column:2;transform:translateX(16px)}
+  .proc-row:nth-child(odd) .proc-pin-col,
+  .proc-row:nth-child(even) .proc-pin-col{grid-column:1;grid-row:1}
+  .proc-row:nth-child(odd) .proc-card,
+  .proc-row:nth-child(even) .proc-card{grid-row:1}
+  .proc-row .proc-spacer{display:none}
+  .timeline::before,.timeline-fill{left:14px}
+}
 </style>
 </head>
-<div id="cursor"></div>
-<style>
-  #cursor{position:fixed;width:24px;height:24px;border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);z-index:9999;background:#c0392b;}
-  #cursor::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:10px;height:2.5px;background:#fff;border-radius:1px;}
-  #cursor::after{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:2.5px;height:10px;background:#fff;border-radius:1px;}
-  #cursor.big{width:32px;height:32px;}
-  *{cursor:none;}
-</style>
-<script>
-  const cur = document.getElementById('cursor');
-  let mx=0, my=0, cx=0, cy=0;
-  document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
-  (function loop(){
-   cx = mx;
-cy = my;
-    cur.style.left = cx+'px';
-    cur.style.top = cy+'px';
-    requestAnimationFrame(loop);
-  })();
-  document.querySelectorAll('a,button').forEach(el => {
-    el.addEventListener('mouseenter', () => cur.classList.add('big'));
-    el.addEventListener('mouseleave', () => cur.classList.remove('big'));
-  });
-</script>
 <body>
-<!-- ============ HEADER ============ -->
 <header id="hdr">
   <div class="wrap nav">
-    <a href="index.html" class="brand" aria-label="SwissPeak Partners">
-      <svg viewBox="0 0 134.48162 75.431028" xmlns="http://www.w3.org/2000/svg" style="height:48px;width:auto;transition:height .4s ease" class="brand-svg" aria-label="SwissPeak Partners">
+    <a href="index.html" class="brand" aria-label="SwissPeak Partners"><svg viewBox="0 0 134.48162 75.431028" xmlns="http://www.w3.org/2000/svg" style="height:48px;width:auto;transition:height .4s ease" class="brand-svg" aria-label="SwissPeak Partners">
   <path d="m 45.61081,48.15 c 0,0 -0.08,-0.02 -0.11,-0.05 -0.05,-0.06 -0.04,-0.14 0,-0.19 l 4.67,-4.74 -0.4,-0.85 c 0,0 -5.06,0.69 -5.06,0.69 -0.06,0 -0.12,-0.04 -0.13,-0.1 -0.02,-0.07 0,-0.14 0.07,-0.17 l 7.09,-3.76 3.12,-1.48 c 0.15,-0.07 3.6,-1.71 4.23,-1.97 0.3,-0.12 0.95,-0.35 1.63,-0.58 0.76,-0.26 1.55,-0.53 1.92,-0.68 0.69,-0.29 2.85,-1.57 2.87,-1.58 l 1.33,-1.74 1.96,-3.26 0.34,-2.64 -0.49,-1.25 -0.68,-0.18 -1.26,-0.16 c 0,0 -0.59,0.06 -0.68,0.06 -0.07,0 -0.71,0.13 -1.27,0.25 0,0 -0.81,0.56 -0.92,0.64 -0.11,0.08 -1.35,1.13 -1.35,1.13 l -1.02,1.1 -3.56,2.25 -1.52,1.86 -1.93,1.97 -0.89,0.85 c 0,0 -0.06,0.04 -0.1,0.04 -0.04,0 -0.07,-0.01 -0.1,-0.04 -0.06,-0.05 -0.06,-0.14 0,-0.2 l 13.77,-15.81 2.85,-2.8 0.18,-1 -0.07,-0.73 -0.45,-0.22 -0.91,-0.02 -0.7,0.18 -0.96,0.58 -11.15,12.12 c 0,0 -0.07,0.05 -0.1,0.05 -0.03,0 -0.07,-0.01 -0.09,-0.03 -0.06,-0.05 -0.06,-0.14 -0.02,-0.2 l 11.59,-14.07 0.71,-2.29 -0.04,-2.03 -0.37,-1.49 -1.09,-0.77 h -1.1 c 0,0 -1,0.53 -1,0.53 l -19.79,24.87 -2.14,3.76 -0.96,2.14 -0.89,1.78 c 0,0 -0.05,0.07 -0.1,0.08 l -0.85,0.19 c 0,0 -0.02,0 -0.03,0 -0.02,0 -0.05,0 -0.07,-0.02 l -0.57,-0.32 c -0.05,-0.05 -0.22,-0.28 -0.25,-0.6 -0.03,-0.29 0,-0.76 0,-0.76 0,-0.04 0.18,-0.51 0.29,-0.75 0.11,-0.24 0.51,-0.88 0.51,-0.88 l 1.2,-3.6 -0.16,-1.13 -0.86,-0.31 -1.03,0.61 -1.74,2.19 -10,7.58 c 0,0 -0.06,0.03 -0.09,0.03 -0.04,0 -0.08,-0.02 -0.1,-0.05 -0.05,-0.05 -0.05,-0.14 0,-0.19 l 12.19,-13.22 4.44,-5.11 c 0,0 2.84,-2.57 3.01,-2.73 0.13,-0.13 0.92,-1.07 1.33,-1.55 l 0.05,-1.06 -0.26,-0.94 -0.65,-0.3 c 0,0 -0.62,0.19 -1.11,0.44 -0.23,0.12 -0.64,0.42 -1.19,0.86 l -4.87,5.53 c 0,0 -0.07,0.05 -0.11,0.05 -0.03,0 -0.07,-0.01 -0.09,-0.03 -0.06,-0.05 -0.07,-0.14 -0.02,-0.2 l 4.3,-5.06 c 0,0 0.26,-0.23 0.59,-0.49 l 1.98,-2.26 -0.25,-2.01 -0.61,-0.54 -1.2,0.11 -18.19,17.09 -0.91,3.1 c -0.68,0.7 -1.4,1.5 -1.44,1.65 -0.06,0.28 -0.56,2.28 -0.56,2.28 l 0.06,2.69 0.22,2.21 c 0,0.08 -0.05,0.14 -0.12,0.15 0,0 -0.01,0 -0.02,0 -0.07,0 -0.13,-0.05 -0.14,-0.11 l -1.06,-5.48 -0.97,-0.71 -1.78,0.22 -2.01,0.99 -17.18999963,10.26 c 0,0 -0.05,0.02 -0.07,0.02 -0.05,0 -0.09,-0.02 -0.12,-0.07 -0.04,-0.06 -0.0200000029,-0.15 0.04,-0.19 L 16.06081,34.91 l 7.77,-6.21 13.11,-11.55 7.99,-7.99 c 0,0 0.06,-0.04 0.1,-0.04 0.04,0 0.07,0.01 0.1,0.04 l 8.13,8.13 3.23,-2.8 3.31,-5.3 6.22,-9.13 c 0,0 0.06,-0.06 0.1,-0.06 0,0 0,0 0.01,0 0.04,0 0.07,0.02 0.1,0.04 l 8.67,8.89 8.67,9.34 4.12,3.25 4.58,-3.05 5.32,-4.44 c 0,0 0.06,-0.03 0.09,-0.03 0.03,0 0.06,0.01 0.09,0.03 l 8.44,6.89 9.11,7.56 8,7.34 11.1,7.99 c 0.06,0.04 0.08,0.12 0.04,0.18 -0.03,0.05 -0.07,0.08 -0.13,0.08 -0.02,0 -0.03,0 -0.05,0 l -4.76,-1.63 -0.79,0.3 -0.24,1.11 -0.83,0.67 c 0,0 -0.05,0.03 -0.09,0.03 0,0 -0.68,-0.07 -0.68,-0.07 l -11.38,-11.71 -2.52,-1.31 -0.6,0.02 -0.66,0.04 c -0.29,0.03 -0.6,0.11 -0.65,0.18 0,0.21 -0.16,1.06 -0.18,1.16 v 0.9 c 0,0 0.88,2.21 0.88,2.21 l 3.77,6.91 c 0.04,0.06 0.02,0.14 -0.04,0.19 -0.02,0.02 -0.05,0.02 -0.08,0.02 -0.04,0 -0.08,-0.02 -0.11,-0.05 l -10.22,-12.56 -2.64,-4.76 -2.18,-3.59 -0.19,-0.35 -0.06,3.06 0.04,2.22 c 0,0 0.4,1.48 0.58,1.91 0.19,0.45 0.9,3.05 0.93,3.17 l 5.69,9.6 c 0.04,0.06 0.02,0.15 -0.04,0.19 -0.02,0.02 -0.05,0.02 -0.08,0.02 -0.04,0 -0.09,-0.02 -0.11,-0.06 l -6.18,-8.3 -1.63,-2.21 -1.33,-0.13 -4.29,6.42 -2.29,2.44 -2.73,2.48 c 0,0 -0.06,0.04 -0.1,0.04 -0.03,0 -0.06,0 -0.08,-0.03 -0.05,-0.04 -0.07,-0.11 -0.04,-0.18 l 3.2,-6.56 2.01,-2.69 c 0,0 0.56,-1.36 0.64,-1.83 0.25,-1.39 0.11,-5.7 0.11,-5.75 l -0.19,-1.35 -2.22,1.5 -0.5,0.66 -3.31,5.77 c 0,0 -0.07,0.07 -0.12,0.07 -0.02,0 -0.04,0 -0.06,-0.01 -0.07,-0.03 -0.1,-0.11 -0.07,-0.18 l 0.59,-1.67 0.94,-1.51 c 0.04,-0.07 1,-1.6 1.12,-1.75 0.06,-0.08 0.38,-0.5 0.68,-0.89 l 1.58,-2.76 0.21,-1.49 -1.71,0.18 -1.84,1.58 -2.16,2 -11.66,9.15 -1.19,2.14 -0.02,1.9 v 1.89 l 0.15,2.36 0.07,0.96 c 0,0.07 -0.04,0.14 -0.12,0.15 0,0 -0.02,0 -0.03,0 -0.06,0 -0.12,-0.04 -0.14,-0.1 l -1.02,-3.31 -1.55,0.88 -1.83,1.68 -1.93,1.6 c 0,0 -0.06,0.03 -0.09,0.03 -0.04,0 -0.07,-0.01 -0.1,-0.04 -0.05,-0.05 -0.05,-0.14 0,-0.19 l 4.33,-4.78 0.71,-3.38 14.2,-11.94 -0.93,-0.78 -0.87,-0.34 c 0,0 -0.36,0 -0.54,0 -0.18,0 -0.23,0 -0.24,0 -0.11,0.04 -1.21,0.75 -1.87,1.18 l -1.83,1.25 -9.85,6.35 -2.5,1.96 -2.02,1.56 -0.72,1.1 -0.3,1.02 1.28,2.48 c 0.03,0.06 0.01,0.14 -0.04,0.18 -0.03,0.02 -0.05,0.03 -0.08,0.03 -0.04,0 -0.07,-0.01 -0.1,-0.04 l -2.81,-2.79 -2.04,0.32 -2.19,0.99 -2.15,1.41 -4.38,1.56 -1.89,1.28 -2.35,2.37 c -0.74,0.61 -1.85,1.53 -1.93,1.61 -0.12,0.12 -0.87,0.62 -1.02,0.72 -0.02,0.02 -0.05,0.02 -0.08,0.02 z" fill="currentColor"/>
   <path d="m 12.743686,50.151573 c -2.453329,0 -4.2666591,1.621331 -4.2666591,3.754661 0,1.962663 0.853332,3.114662 3.1146611,4.373326 1.407998,0.789332 2.623996,1.173332 2.623996,2.32533 0,0.874665 -0.789332,1.493331 -1.919997,1.493331 -0.917332,0 -2.13333,-0.618666 -2.8799949,-1.514664 l -1.7493306,2.00533 c 1.3226646,1.407998 3.0293285,2.175996 4.8426585,2.175996 2.687996,0 4.650659,-1.770664 4.650659,-4.20266 0,-1.919997 -0.959998,-3.007995 -3.455994,-4.33066 -1.343998,-0.725332 -2.410663,-1.194664 -2.410663,-2.197329 0,-0.725333 0.639999,-1.237332 1.450664,-1.237332 0.959999,0 1.983997,0.426666 2.773329,1.215998 l 1.535998,-2.06933 c -1.173331,-1.130665 -2.794662,-1.791997 -4.309327,-1.791997 z m 7.50466,0.213333 3.733328,14.207978 h 2.965328 l 3.157329,-9.834652 3.157328,9.834652 h 2.965329 l 3.733327,-14.207978 h -3.114662 l -2.325329,9.877318 -3.050662,-9.877318 H 28.739 l -3.050662,9.877318 -2.32533,-9.877318 z m 23.355316,0 v 14.207978 h 2.901329 V 50.364906 Z m 11.70732,-0.213333 c -2.45333,0 -4.26666,1.621331 -4.26666,3.754661 0,1.962663 0.853332,3.114662 3.114661,4.373326 1.407998,0.789332 2.623996,1.173332 2.623996,2.32533 0,0.874665 -0.789332,1.493331 -1.919997,1.493331 -0.917332,0 -2.13333,-0.618666 -2.879995,-1.514664 l -1.749331,2.00533 c 1.322665,1.407998 3.029329,2.175996 4.842659,2.175996 2.687996,0 4.65066,-1.770664 4.65066,-4.20266 0,-1.919997 -0.959999,-3.007995 -3.455995,-4.33066 -1.343998,-0.725332 -2.410663,-1.194664 -2.410663,-2.197329 0,-0.725333 0.639999,-1.237332 1.450665,-1.237332 0.959998,0 1.983996,0.426666 2.773328,1.215998 l 1.535998,-2.06933 c -1.173331,-1.130665 -2.794662,-1.791997 -4.309326,-1.791997 z m 12.667316,0 c -2.453329,0 -4.26666,1.621331 -4.26666,3.754661 0,1.962663 0.853332,3.114662 3.114662,4.373326 1.407998,0.789332 2.623996,1.173332 2.623996,2.32533 0,0.874665 -0.789332,1.493331 -1.919997,1.493331 -0.917332,0 -2.13333,-0.618666 -2.879996,-1.514664 l -1.74933,2.00533 c 1.322664,1.407998 3.029328,2.175996 4.842659,2.175996 2.687995,0 4.650659,-1.770664 4.650659,-4.20266 0,-1.919997 -0.959998,-3.007995 -3.455995,-4.33066 -1.343997,-0.725332 -2.410662,-1.194664 -2.410662,-2.197329 0,-0.725333 0.639999,-1.237332 1.450664,-1.237332 0.959998,0 1.983997,0.426666 2.773329,1.215998 l 1.535998,-2.06933 c -1.173332,-1.130665 -2.794663,-1.791997 -4.309327,-1.791997 z m 8.443327,0.213333 v 14.207978 h 2.901329 v -5.546658 h 2.453329 c 2.346663,0 4.13866,-1.855997 4.13866,-4.33066 0,-2.474663 -1.81333,-4.33066 -4.159993,-4.33066 z m 2.901329,2.602663 h 2.06933 c 1.002665,0 1.727997,0.703998 1.727997,1.727997 0,1.023998 -0.725332,1.727997 -1.727997,1.727997 h -2.06933 z m 10.619339,-2.602663 v 14.207978 h 8.66132 v -2.730663 h -5.759991 v -3.029328 h 5.525324 v -2.687996 h -5.525324 v -3.029329 h 5.759991 v -2.730662 z m 17.168637,0 -5.24799,14.207978 h 3.26399 l 1.06667,-3.093329 h 4.90665 l 1.06667,3.093329 h 3.26399 l -5.24799,-14.207978 z m 1.536,3.989327 1.57866,4.607993 h -3.17866 z m 10.2353,-3.989327 v 14.207978 h 2.90133 v -6.805323 l 5.01332,6.805323 h 3.41333 l -5.58933,-7.295989 5.312,-6.911989 h -3.34933 l -4.79999,6.421323 v -6.421323 z" fill="currentColor"/>
   <path d="m 39.045049,68.231007 v 7.104023 h 1.450672 v -2.773342 h 1.22667 c 1.173337,0 2.06934,-0.928003 2.06934,-2.165341 0,-1.237337 -0.90667,-2.16534 -2.080007,-2.16534 z m 1.450672,1.301338 h 1.034669 c 0.501335,0 0.864003,0.352001 0.864003,0.864002 0,0.512002 -0.362668,0.864003 -0.864003,0.864003 h -1.034669 z m 7.536703,-1.301338 -2.624008,7.104023 h 1.632005 l 0.533335,-1.546672 h 2.453341 l 0.533335,1.546672 h 1.632005 l -2.624008,-7.104023 z m 0.768003,1.994673 0.789336,2.304007 h -1.589339 z m 6.19267,-1.994673 v 7.104023 h 1.450671 v -2.773342 h 0.629335 l 1.514672,2.773342 h 1.642672 l -1.696006,-2.933343 c 0.757336,-0.309334 1.269338,-1.06667 1.269338,-2.00534 0,-1.237337 -0.90667,-2.16534 -2.080007,-2.16534 z m 1.450671,1.301338 h 1.09867 c 0.501335,0 0.864003,0.352001 0.864003,0.864002 0,0.512002 -0.362668,0.864003 -0.864003,0.864003 h -1.09867 z m 6.160677,-1.301338 v 1.365338 h 1.792005 v 5.738685 h 1.450672 v -5.738685 h 1.792005 v -1.365338 z m 7.931342,0 v 7.104023 h 1.450671 v -4.586682 l 3.10401,4.586682 h 1.344004 v -7.104023 h -1.450671 v 4.565348 l -3.093343,-4.565348 z m 9.264687,0 v 7.104023 h 4.33068 v -1.365338 h -2.880009 v -1.514671 h 2.762675 v -1.344005 h -2.762675 v -1.514671 h 2.880009 v -1.365338 z m 7.600681,0 v 7.104023 h 1.450671 v -2.773342 h 0.629336 l 1.514671,2.773342 h 1.642672 L 90.9425,72.401687 c 0.757335,-0.309334 1.269337,-1.06667 1.269337,-2.00534 0,-1.237337 -0.90667,-2.16534 -2.080007,-2.16534 z m 1.450671,1.301338 h 1.09867 c 0.501335,0 0.864003,0.352001 0.864003,0.864002 0,0.512002 -0.362668,0.864003 -0.864003,0.864003 h -1.09867 z m 8.74202,-1.408005 c -1.22667,0 -2.13334,0.810669 -2.13334,1.877339 0,0.981337 0.426668,1.557339 1.557339,2.186674 0.704002,0.394668 1.312004,0.586669 1.312004,1.16267 0,0.437335 -0.394668,0.746669 -0.960003,0.746669 -0.458668,0 -1.06667,-0.309334 -1.440005,-0.757335 l -0.874669,1.002669 c 0.661335,0.704003 1.514671,1.088004 2.421341,1.088004 1.344004,0 2.32534,-0.885336 2.32534,-2.10134 0,-0.960003 -0.480001,-1.504005 -1.728005,-2.16534 -0.672002,-0.362668 -1.205337,-0.597335 -1.205337,-1.09867 0,-0.362668 0.320001,-0.618669 0.725335,-0.618669 0.480002,0 0.992004,0.213334 1.386671,0.608002 l 0.768003,-1.03467 C 99.161851,68.455008 98.351182,68.12434 97.593846,68.12434 Z" fill="currentColor"/>
-</svg>
-    </a>
+</svg></a>
     <nav class="menu">
-      <div class="has-drop">
-        <a href="index.html#services">Services</a>
+      <div class="has-drop"><a href="index.html#services">Services</a>
         <div class="drop">
           <a href="permanent-placement.html">Permanent Hiring</a>
           <a href="project-staffing.html">Project Solutions</a>
@@ -454,8 +502,7 @@ cy = my;
           <a href="career-consulting.html">Career Consulting</a>
         </div>
       </div>
-      <div class="has-drop">
-        <a href="about.html">Company</a>
+      <div class="has-drop"><a href="about.html">Company</a>
         <div class="drop">
           <a href="about.html">About Us</a>
           <a href="index.html#security">Why Switzerland</a>
@@ -468,91 +515,166 @@ cy = my;
     <div class="burger" id="burger"><span></span><span></span><span></span></div>
   </div>
 </header>
-<!-- ============ HERO ============ -->
+
 <section class="hero" id="top">
   <div class="hero-bg">
-    <img src="deal2.jpg" alt="Permanent placement">
+    <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=2600&q=80" alt="Permanent hiring">
   </div>
   <div class="wrap">
-  
-    <h1 class="display reveal">The right hire. <span class="em">No noise, no guesswork.</span></h1>
-    <p class="lead reveal">We provide quality-first search across roles and industries. Transparent from brief to placement. With a fully customizable approach.</p>
+    <span class="label reveal">Permanent Hiring</span>
+    <h1 class="display reveal">Built to fit. <span class="em">Not just to fill.</span></h1>
+    <p class="lead reveal">Finding the right people should not be complicated. With structured processes, market expertise, and a quality-first approach, we help you hire professionals who create lasting value.</p>
     <div class="hero-cta reveal">
       <a href="mailto:hello@swisspeak-partners.ch" class="btn light">Open a mandate</a>
-      <a href="#about" class="btn ghost" style="color:#fff;border-color:rgba(255,255,255,.6)">How we work</a>
+      <a href="#process" class="btn ghost" style="color:#fff;border-color:rgba(255,255,255,.6)">See how it works</a>
     </div>
   </div>
   <div class="ridge" aria-hidden="true">
-    <svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path fill="#ffffff" d="M0,120 L0,78 L180,40 L320,84 L470,18 L620,70 L760,30 L880,72 L1010,22 L1160,66 L1300,36 L1440,74 L1440,120 Z"></path></svg>
+    <svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path fill="var(--alpine)" d="M0,120 L0,78 L180,40 L320,84 L470,18 L620,70 L760,30 L880,72 L1010,22 L1160,66 L1300,36 L1440,74 L1440,120 Z"></path></svg>
   </div>
 </section>
 
-<!-- ============ HOW WE WORK ============ -->
-<section class="block about" id="about">
+<section class="value-section" id="value">
   <div class="wrap">
-    <div class="about-figure reveal">
-      <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1400&q=80" alt="Permanent hiring at work">
-      <div class="badge"><div class="n">97%</div><div class="t">Retention rate</div></div>
+    <div class="sec-head reveal">
+      <span class="label">What we bring</span>
+      <h2>Hiring that goes beyond <span class="em">filling vacancies</span>.</h2>
+      <p class="sec-intro">Successful hiring is about identifying professionals who bring the right expertise, fit your company culture, and contribute to your long-term success.</p>
     </div>
-    <div>
-      <span class="label reveal">How we work</span>
-      <h2 class="reveal">One brief. One process. One point of <span class="em">accountability</span>.</h2>
-      <p class="reveal">We start with a thorough brief, map the market including people not actively looking, and approach candidates directly. Every shortlist comes with structured interview notes and a written fit assessment.</p>
-      <ul class="ticks">
-        <li class="reveal"><span class="c">&#10003;</span> Research-led sourcing including passive candidates.</li>
-        <li class="reveal"><span class="c">&#10003;</span> Structured interviews and written fit reports on every candidate.</li>
-        <li class="reveal"><span class="c">&#10003;</span> Fee on successful placement only.</li>
-      </ul>
-      <a href="mailto:hello@swisspeak-partners.ch" class="btn reveal">Open a mandate</a>
-    </div>
-  </div>
-</section>
-
-<!-- ============ CTA ============ -->
-<section class="block swiss-sec">
-  <svg class="swiss-watermark" viewBox="0 0 200 200" aria-hidden="true"><rect width="200" height="200" rx="24" fill="#c0392b"/><rect x="82" y="44" width="36" height="112" rx="4" fill="#fff"/><rect x="44" y="82" width="112" height="36" rx="4" fill="#fff"/></svg>
-  <div class="wrap">
-    <div>
-      <h2 class="reveal">Ready to start the search?</h2>
-      <p class="reveal">Tell us what you need. We respond quickly and keep things simple from the very first conversation.</p>
-      <div class="hero-cta reveal" style="margin-top:32px">
-        <a href="mailto:hello@swisspeak-partners.ch" class="btn light">Send us an email</a>
-        <a href="https://wa.me/41764691295" target="_blank" rel="noopener" class="btn ghost" style="color:#fff;border-color:rgba(255,255,255,.6)">Chat on WhatsApp</a>
+    <div class="value-grid">
+      <div class="vcard reveal">
+        <div class="vcard-front">
+          <div class="vcard-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+          <h3>Fast Access to Top Talent</h3>
+          <span class="vcard-hint">Hover to learn more</span>
+        </div>
+        <div class="vcard-overlay">
+          <p>Our recruiters combine industry expertise, data-driven market insights, and proactive search strategies to identify outstanding professionals quickly. We connect you with both active and passive candidates, ensuring access to talent often unavailable through traditional channels.</p>
+        </div>
+      </div>
+      <div class="vcard reveal">
+        <div class="vcard-front">
+          <div class="vcard-icon"><svg viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 3.4 8.5 8 10 4.6-1.5 8-5 8-10V6l-8-4Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+          <h3>Strategic Hiring Advisory</h3>
+          <span class="vcard-hint">Hover to learn more</span>
+        </div>
+        <div class="vcard-overlay">
+          <p>We work as trusted hiring partners rather than transactional recruiters. From defining role requirements to advising on market conditions, salary expectations, and hiring strategy, we help you make informed decisions that strengthen your organisation.</p>
+        </div>
+      </div>
+      <div class="vcard reveal">
+        <div class="vcard-front">
+          <div class="vcard-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <h3>Long-Term Hiring Success</h3>
+          <span class="vcard-hint">Hover to learn more</span>
+        </div>
+        <div class="vcard-overlay">
+          <p>Every candidate goes through a structured evaluation process including in-depth interviews, technical and professional assessments, and cultural fit discussions. Our objective: candidates who deliver long-term impact from day one.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
+<section class="process-section" id="process">
+  <div class="proc-outer">
+    <div class="proc-header">
+      <span class="label reveal">Our permanent hiring process</span>
+      <h2 class="reveal">From first call to <span class="em">successful placement</span>.</h2>
+      <p class="proc-intro reveal">From the initial consultation to successful onboarding, we manage every stage with professionalism, transparency, and attention to detail.</p>
+    </div>
+    <div class="proc-sidebar">
+      <div class="proc-line-bg"></div>
+      <div class="proc-line-fill" id="proc-fill"></div>
+    </div>
+    <div class="proc-steps-col">
+      <div class="proc-step">
+        <div class="proc-num">01</div>
+        <div class="proc-content">
+          <span class="label">Step 1</span>
+          <h3>Discovery and Alignment</h3>
+          <p>We take the time to understand your organisation, hiring objectives, technical requirements, and team culture. This forms the foundation for a focused and effective search.</p>
+        </div>
+      </div>
+      <div class="proc-step">
+        <div class="proc-num">02</div>
+        <div class="proc-content">
+          <span class="label">Step 2</span>
+          <h3>Market Analysis and Positioning</h3>
+          <p>We analyse talent availability, salary benchmarks, and market trends to position your opportunity competitively and attract the strongest professionals.</p>
+        </div>
+      </div>
+      <div class="proc-step">
+        <div class="proc-num">03</div>
+        <div class="proc-content">
+          <span class="label">Step 3</span>
+          <h3>Targeted Talent Search</h3>
+          <p>Using our established network, direct search methodology, referrals, and AI-supported sourcing, we proactively engage the most suitable candidates across the market.</p>
+        </div>
+      </div>
+      <div class="proc-step">
+        <div class="proc-num">04</div>
+        <div class="proc-content">
+          <span class="label">Step 4</span>
+          <h3>Candidate Assessment</h3>
+          <p>Every shortlisted candidate is carefully evaluated through structured interviews, experience validation, and cultural fit assessments, conducted in person or via video.</p>
+        </div>
+      </div>
+      <div class="proc-step">
+        <div class="proc-num">05</div>
+        <div class="proc-content">
+          <span class="label">Step 5</span>
+          <h3>Interview Management and Decision Support</h3>
+          <p>We coordinate interviews, prepare both clients and candidates, collect structured feedback, and provide objective recommendations that support confident hiring decisions.</p>
+        </div>
+      </div>
+      <div class="proc-step">
+        <div class="proc-num">06</div>
+        <div class="proc-content">
+          <span class="label">Step 6</span>
+          <h3>Offer Management and Onboarding</h3>
+          <p>We support negotiations, facilitate communication between all parties, and assist throughout onboarding. Even after placement, we remain available to support both client and candidate.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<!-- ============ FOOTER ============ -->
+<section class="page-cta">
+  <div class="wrap">
+    <h2 class="reveal">Let's build your team.</h2>
+    <p class="reveal">Whether you are hiring a single specialist or expanding an entire department, we are here to help you attract exceptional talent with confidence.</p>
+    <div class="hero-cta reveal">
+      <a href="mailto:hello@swisspeak-partners.ch" class="btn red">Open a mandate</a>
+      <a href="https://wa.me/41764691295" target="_blank" rel="noopener" class="btn ghost" style="color:#fff;border-color:rgba(255,255,255,.4)">Chat on WhatsApp</a>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="wrap">
     <div class="foot-top">
-      <div class="foot-brand">
-        <svg viewBox="0 0 134.48162 75.431028" xmlns="http://www.w3.org/2000/svg" style="height:48px;width:auto;margin-bottom:18px;display:block" aria-label="SwissPeak Partners">
+      <div class="foot-brand"><svg viewBox="0 0 134.48162 75.431028" xmlns="http://www.w3.org/2000/svg" style="height:48px;width:auto;margin-bottom:18px;display:block" aria-label="SwissPeak Partners">
   <path d="m 45.61081,48.15 c 0,0 -0.08,-0.02 -0.11,-0.05 -0.05,-0.06 -0.04,-0.14 0,-0.19 l 4.67,-4.74 -0.4,-0.85 c 0,0 -5.06,0.69 -5.06,0.69 -0.06,0 -0.12,-0.04 -0.13,-0.1 -0.02,-0.07 0,-0.14 0.07,-0.17 l 7.09,-3.76 3.12,-1.48 c 0.15,-0.07 3.6,-1.71 4.23,-1.97 0.3,-0.12 0.95,-0.35 1.63,-0.58 0.76,-0.26 1.55,-0.53 1.92,-0.68 0.69,-0.29 2.85,-1.57 2.87,-1.58 l 1.33,-1.74 1.96,-3.26 0.34,-2.64 -0.49,-1.25 -0.68,-0.18 -1.26,-0.16 c 0,0 -0.59,0.06 -0.68,0.06 -0.07,0 -0.71,0.13 -1.27,0.25 0,0 -0.81,0.56 -0.92,0.64 -0.11,0.08 -1.35,1.13 -1.35,1.13 l -1.02,1.1 -3.56,2.25 -1.52,1.86 -1.93,1.97 -0.89,0.85 c 0,0 -0.06,0.04 -0.1,0.04 -0.04,0 -0.07,-0.01 -0.1,-0.04 -0.06,-0.05 -0.06,-0.14 0,-0.2 l 13.77,-15.81 2.85,-2.8 0.18,-1 -0.07,-0.73 -0.45,-0.22 -0.91,-0.02 -0.7,0.18 -0.96,0.58 -11.15,12.12 c 0,0 -0.07,0.05 -0.1,0.05 -0.03,0 -0.07,-0.01 -0.09,-0.03 -0.06,-0.05 -0.06,-0.14 -0.02,-0.2 l 11.59,-14.07 0.71,-2.29 -0.04,-2.03 -0.37,-1.49 -1.09,-0.77 h -1.1 c 0,0 -1,0.53 -1,0.53 l -19.79,24.87 -2.14,3.76 -0.96,2.14 -0.89,1.78 c 0,0 -0.05,0.07 -0.1,0.08 l -0.85,0.19 c 0,0 -0.02,0 -0.03,0 -0.02,0 -0.05,0 -0.07,-0.02 l -0.57,-0.32 c -0.05,-0.05 -0.22,-0.28 -0.25,-0.6 -0.03,-0.29 0,-0.76 0,-0.76 0,-0.04 0.18,-0.51 0.29,-0.75 0.11,-0.24 0.51,-0.88 0.51,-0.88 l 1.2,-3.6 -0.16,-1.13 -0.86,-0.31 -1.03,0.61 -1.74,2.19 -10,7.58 c 0,0 -0.06,0.03 -0.09,0.03 -0.04,0 -0.08,-0.02 -0.1,-0.05 -0.05,-0.05 -0.05,-0.14 0,-0.19 l 12.19,-13.22 4.44,-5.11 c 0,0 2.84,-2.57 3.01,-2.73 0.13,-0.13 0.92,-1.07 1.33,-1.55 l 0.05,-1.06 -0.26,-0.94 -0.65,-0.3 c 0,0 -0.62,0.19 -1.11,0.44 -0.23,0.12 -0.64,0.42 -1.19,0.86 l -4.87,5.53 c 0,0 -0.07,0.05 -0.11,0.05 -0.03,0 -0.07,-0.01 -0.09,-0.03 -0.06,-0.05 -0.07,-0.14 -0.02,-0.2 l 4.3,-5.06 c 0,0 0.26,-0.23 0.59,-0.49 l 1.98,-2.26 -0.25,-2.01 -0.61,-0.54 -1.2,0.11 -18.19,17.09 -0.91,3.1 c -0.68,0.7 -1.4,1.5 -1.44,1.65 -0.06,0.28 -0.56,2.28 -0.56,2.28 l 0.06,2.69 0.22,2.21 c 0,0.08 -0.05,0.14 -0.12,0.15 0,0 -0.01,0 -0.02,0 -0.07,0 -0.13,-0.05 -0.14,-0.11 l -1.06,-5.48 -0.97,-0.71 -1.78,0.22 -2.01,0.99 -17.18999963,10.26 c 0,0 -0.05,0.02 -0.07,0.02 -0.05,0 -0.09,-0.02 -0.12,-0.07 -0.04,-0.06 -0.0200000029,-0.15 0.04,-0.19 L 16.06081,34.91 l 7.77,-6.21 13.11,-11.55 7.99,-7.99 c 0,0 0.06,-0.04 0.1,-0.04 0.04,0 0.07,0.01 0.1,0.04 l 8.13,8.13 3.23,-2.8 3.31,-5.3 6.22,-9.13 c 0,0 0.06,-0.06 0.1,-0.06 0,0 0,0 0.01,0 0.04,0 0.07,0.02 0.1,0.04 l 8.67,8.89 8.67,9.34 4.12,3.25 4.58,-3.05 5.32,-4.44 c 0,0 0.06,-0.03 0.09,-0.03 0.03,0 0.06,0.01 0.09,0.03 l 8.44,6.89 9.11,7.56 8,7.34 11.1,7.99 c 0.06,0.04 0.08,0.12 0.04,0.18 -0.03,0.05 -0.07,0.08 -0.13,0.08 -0.02,0 -0.03,0 -0.05,0 l -4.76,-1.63 -0.79,0.3 -0.24,1.11 -0.83,0.67 c 0,0 -0.05,0.03 -0.09,0.03 0,0 -0.68,-0.07 -0.68,-0.07 l -11.38,-11.71 -2.52,-1.31 -0.6,0.02 -0.66,0.04 c -0.29,0.03 -0.6,0.11 -0.65,0.18 0,0.21 -0.16,1.06 -0.18,1.16 v 0.9 c 0,0 0.88,2.21 0.88,2.21 l 3.77,6.91 c 0.04,0.06 0.02,0.14 -0.04,0.19 -0.02,0.02 -0.05,0.02 -0.08,0.02 -0.04,0 -0.08,-0.02 -0.11,-0.05 l -10.22,-12.56 -2.64,-4.76 -2.18,-3.59 -0.19,-0.35 -0.06,3.06 0.04,2.22 c 0,0 0.4,1.48 0.58,1.91 0.19,0.45 0.9,3.05 0.93,3.17 l 5.69,9.6 c 0.04,0.06 0.02,0.15 -0.04,0.19 -0.02,0.02 -0.05,0.02 -0.08,0.02 -0.04,0 -0.09,-0.02 -0.11,-0.06 l -6.18,-8.3 -1.63,-2.21 -1.33,-0.13 -4.29,6.42 -2.29,2.44 -2.73,2.48 c 0,0 -0.06,0.04 -0.1,0.04 -0.03,0 -0.06,0 -0.08,-0.03 -0.05,-0.04 -0.07,-0.11 -0.04,-0.18 l 3.2,-6.56 2.01,-2.69 c 0,0 0.56,-1.36 0.64,-1.83 0.25,-1.39 0.11,-5.7 0.11,-5.75 l -0.19,-1.35 -2.22,1.5 -0.5,0.66 -3.31,5.77 c 0,0 -0.07,0.07 -0.12,0.07 -0.02,0 -0.04,0 -0.06,-0.01 -0.07,-0.03 -0.1,-0.11 -0.07,-0.18 l 0.59,-1.67 0.94,-1.51 c 0.04,-0.07 1,-1.6 1.12,-1.75 0.06,-0.08 0.38,-0.5 0.68,-0.89 l 1.58,-2.76 0.21,-1.49 -1.71,0.18 -1.84,1.58 -2.16,2 -11.66,9.15 -1.19,2.14 -0.02,1.9 v 1.89 l 0.15,2.36 0.07,0.96 c 0,0.07 -0.04,0.14 -0.12,0.15 0,0 -0.02,0 -0.03,0 -0.06,0 -0.12,-0.04 -0.14,-0.1 l -1.02,-3.31 -1.55,0.88 -1.83,1.68 -1.93,1.6 c 0,0 -0.06,0.03 -0.09,0.03 -0.04,0 -0.07,-0.01 -0.1,-0.04 -0.05,-0.05 -0.05,-0.14 0,-0.19 l 4.33,-4.78 0.71,-3.38 14.2,-11.94 -0.93,-0.78 -0.87,-0.34 c 0,0 -0.36,0 -0.54,0 -0.18,0 -0.23,0 -0.24,0 -0.11,0.04 -1.21,0.75 -1.87,1.18 l -1.83,1.25 -9.85,6.35 -2.5,1.96 -2.02,1.56 -0.72,1.1 -0.3,1.02 1.28,2.48 c 0.03,0.06 0.01,0.14 -0.04,0.18 -0.03,0.02 -0.05,0.03 -0.08,0.03 -0.04,0 -0.07,-0.01 -0.1,-0.04 l -2.81,-2.79 -2.04,0.32 -2.19,0.99 -2.15,1.41 -4.38,1.56 -1.89,1.28 -2.35,2.37 c -0.74,0.61 -1.85,1.53 -1.93,1.61 -0.12,0.12 -0.87,0.62 -1.02,0.72 -0.02,0.02 -0.05,0.02 -0.08,0.02 z" fill="rgba(255,255,255,0.6)"/>
   <path d="m 12.743686,50.151573 c -2.453329,0 -4.2666591,1.621331 -4.2666591,3.754661 0,1.962663 0.853332,3.114662 3.1146611,4.373326 1.407998,0.789332 2.623996,1.173332 2.623996,2.32533 0,0.874665 -0.789332,1.493331 -1.919997,1.493331 -0.917332,0 -2.13333,-0.618666 -2.8799949,-1.514664 l -1.7493306,2.00533 c 1.3226646,1.407998 3.0293285,2.175996 4.8426585,2.175996 2.687996,0 4.650659,-1.770664 4.650659,-4.20266 0,-1.919997 -0.959998,-3.007995 -3.455994,-4.33066 -1.343998,-0.725332 -2.410663,-1.194664 -2.410663,-2.197329 0,-0.725333 0.639999,-1.237332 1.450664,-1.237332 0.959999,0 1.983997,0.426666 2.773329,1.215998 l 1.535998,-2.06933 c -1.173331,-1.130665 -2.794662,-1.791997 -4.309327,-1.791997 z m 7.50466,0.213333 3.733328,14.207978 h 2.965328 l 3.157329,-9.834652 3.157328,9.834652 h 2.965329 l 3.733327,-14.207978 h -3.114662 l -2.325329,9.877318 -3.050662,-9.877318 H 28.739 l -3.050662,9.877318 -2.32533,-9.877318 z m 23.355316,0 v 14.207978 h 2.901329 V 50.364906 Z m 11.70732,-0.213333 c -2.45333,0 -4.26666,1.621331 -4.26666,3.754661 0,1.962663 0.853332,3.114662 3.114661,4.373326 1.407998,0.789332 2.623996,1.173332 2.623996,2.32533 0,0.874665 -0.789332,1.493331 -1.919997,1.493331 -0.917332,0 -2.13333,-0.618666 -2.879995,-1.514664 l -1.749331,2.00533 c 1.322665,1.407998 3.029329,2.175996 4.842659,2.175996 2.687996,0 4.65066,-1.770664 4.65066,-4.20266 0,-1.919997 -0.959999,-3.007995 -3.455995,-4.33066 -1.343998,-0.725332 -2.410663,-1.194664 -2.410663,-2.197329 0,-0.725333 0.639999,-1.237332 1.450665,-1.237332 0.959998,0 1.983996,0.426666 2.773328,1.215998 l 1.535998,-2.06933 c -1.173331,-1.130665 -2.794662,-1.791997 -4.309326,-1.791997 z m 12.667316,0 c -2.453329,0 -4.26666,1.621331 -4.26666,3.754661 0,1.962663 0.853332,3.114662 3.114662,4.373326 1.407998,0.789332 2.623996,1.173332 2.623996,2.32533 0,0.874665 -0.789332,1.493331 -1.919997,1.493331 -0.917332,0 -2.13333,-0.618666 -2.879996,-1.514664 l -1.74933,2.00533 c 1.322664,1.407998 3.029328,2.175996 4.842659,2.175996 2.687995,0 4.650659,-1.770664 4.650659,-4.20266 0,-1.919997 -0.959998,-3.007995 -3.455995,-4.33066 -1.343997,-0.725332 -2.410662,-1.194664 -2.410662,-2.197329 0,-0.725333 0.639999,-1.237332 1.450664,-1.237332 0.959998,0 1.983997,0.426666 2.773329,1.215998 l 1.535998,-2.06933 c -1.173332,-1.130665 -2.794663,-1.791997 -4.309327,-1.791997 z m 8.443327,0.213333 v 14.207978 h 2.901329 v -5.546658 h 2.453329 c 2.346663,0 4.13866,-1.855997 4.13866,-4.33066 0,-2.474663 -1.81333,-4.33066 -4.159993,-4.33066 z m 2.901329,2.602663 h 2.06933 c 1.002665,0 1.727997,0.703998 1.727997,1.727997 0,1.023998 -0.725332,1.727997 -1.727997,1.727997 h -2.06933 z m 10.619339,-2.602663 v 14.207978 h 8.66132 v -2.730663 h -5.759991 v -3.029328 h 5.525324 v -2.687996 h -5.525324 v -3.029329 h 5.759991 v -2.730662 z m 17.168637,0 -5.24799,14.207978 h 3.26399 l 1.06667,-3.093329 h 4.90665 l 1.06667,3.093329 h 3.26399 l -5.24799,-14.207978 z m 1.536,3.989327 1.57866,4.607993 h -3.17866 z m 10.2353,-3.989327 v 14.207978 h 2.90133 v -6.805323 l 5.01332,6.805323 h 3.41333 l -5.58933,-7.295989 5.312,-6.911989 h -3.34933 l -4.79999,6.421323 v -6.421323 z" fill="rgba(255,255,255,0.6)"/>
   <path d="m 39.045049,68.231007 v 7.104023 h 1.450672 v -2.773342 h 1.22667 c 1.173337,0 2.06934,-0.928003 2.06934,-2.165341 0,-1.237337 -0.90667,-2.16534 -2.080007,-2.16534 z m 1.450672,1.301338 h 1.034669 c 0.501335,0 0.864003,0.352001 0.864003,0.864002 0,0.512002 -0.362668,0.864003 -0.864003,0.864003 h -1.034669 z m 7.536703,-1.301338 -2.624008,7.104023 h 1.632005 l 0.533335,-1.546672 h 2.453341 l 0.533335,1.546672 h 1.632005 l -2.624008,-7.104023 z m 0.768003,1.994673 0.789336,2.304007 h -1.589339 z m 6.19267,-1.994673 v 7.104023 h 1.450671 v -2.773342 h 0.629335 l 1.514672,2.773342 h 1.642672 l -1.696006,-2.933343 c 0.757336,-0.309334 1.269338,-1.06667 1.269338,-2.00534 0,-1.237337 -0.90667,-2.16534 -2.080007,-2.16534 z m 1.450671,1.301338 h 1.09867 c 0.501335,0 0.864003,0.352001 0.864003,0.864002 0,0.512002 -0.362668,0.864003 -0.864003,0.864003 h -1.09867 z m 6.160677,-1.301338 v 1.365338 h 1.792005 v 5.738685 h 1.450672 v -5.738685 h 1.792005 v -1.365338 z m 7.931342,0 v 7.104023 h 1.450671 v -4.586682 l 3.10401,4.586682 h 1.344004 v -7.104023 h -1.450671 v 4.565348 l -3.093343,-4.565348 z m 9.264687,0 v 7.104023 h 4.33068 v -1.365338 h -2.880009 v -1.514671 h 2.762675 v -1.344005 h -2.762675 v -1.514671 h 2.880009 v -1.365338 z m 7.600681,0 v 7.104023 h 1.450671 v -2.773342 h 0.629336 l 1.514671,2.773342 h 1.642672 L 90.9425,72.401687 c 0.757335,-0.309334 1.269337,-1.06667 1.269337,-2.00534 0,-1.237337 -0.90667,-2.16534 -2.080007,-2.16534 z m 1.450671,1.301338 h 1.09867 c 0.501335,0 0.864003,0.352001 0.864003,0.864002 0,0.512002 -0.362668,0.864003 -0.864003,0.864003 h -1.09867 z m 8.74202,-1.408005 c -1.22667,0 -2.13334,0.810669 -2.13334,1.877339 0,0.981337 0.426668,1.557339 1.557339,2.186674 0.704002,0.394668 1.312004,0.586669 1.312004,1.16267 0,0.437335 -0.394668,0.746669 -0.960003,0.746669 -0.458668,0 -1.06667,-0.309334 -1.440005,-0.757335 l -0.874669,1.002669 c 0.661335,0.704003 1.514671,1.088004 2.421341,1.088004 1.344004,0 2.32534,-0.885336 2.32534,-2.10134 0,-0.960003 -0.480001,-1.504005 -1.728005,-2.16534 -0.672002,-0.362668 -1.205337,-0.597335 -1.205337,-1.09867 0,-0.362668 0.320001,-0.618669 0.725335,-0.618669 0.480002,0 0.992004,0.213334 1.386671,0.608002 l 0.768003,-1.03467 C 99.161851,68.455008 98.351182,68.12434 97.593846,68.12434 Z" fill="rgba(255,255,255,0.6)"/>
 </svg>
         <p>Smarter, simpler staffing from Zug. Built for companies that need to grow.</p>
       </div>
-      <div class="foot-col">
-        <h5>Services</h5>
+      <div class="foot-col"><h5>Services</h5>
         <a href="permanent-placement.html">Permanent Hiring</a>
         <a href="project-staffing.html">Project Solutions</a>
         <a href="nearshoring.html">Nearshoring &amp; Outsourcing</a>
         <a href="interview-assessment.html">Interview &amp; Assessment</a>
         <a href="career-consulting.html">Career Consulting</a>
       </div>
-      <div class="foot-col">
-        <h5>Company</h5>
+      <div class="foot-col"><h5>Company</h5>
         <a href="about.html">About us</a>
         <a href="team.html">Our partners</a>
         <a href="index.html#security">Why Switzerland</a>
         <a href="https://www.linkedin.com/company/swisspeak-partners/" target="_blank" rel="noopener">LinkedIn</a>
       </div>
-      <div class="foot-col">
-        <h5>Zug Office</h5>
+      <div class="foot-col"><h5>Zug Office</h5>
         <p>Sinserstrasse 67<br>6330 Cham, Switzerland</p>
         <a href="tel:+41415623380">+41 (0)41 562 33 80</a>
         <a href="mailto:hello@swisspeak-partners.ch">hello@swisspeak-partners.ch</a>
@@ -560,18 +682,13 @@ cy = my;
     </div>
     <div class="foot-bot">
       <span class="swiss-made"><span class="fl" aria-hidden="true"></span> SwissPeak Partners&#174; &middot; Made in Switzerland</span>
-      <div class="links">
-        <a href="#">Imprint</a>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms &amp; Conditions</a>
-      </div>
+      <div class="links"><a href="#">Imprint</a><a href="#">Privacy Policy</a><a href="#">Terms &amp; Conditions</a></div>
     </div>
   </div>
 </footer>
-<!-- Floating WhatsApp button -->
-<a class="wa-fab" id="waFab" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
-  <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.004c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 18.15h-.003a8.23 8.23 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.24 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.12-.14.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28z"/></svg>
-</a>
+
+<a class="wa-fab" id="waFab" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.004c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 18.15h-.003a8.23 8.23 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.24 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.12-.14.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28z"/></svg></a>
+
 <script>
 const hdr=document.getElementById('hdr');
 addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>40));
@@ -592,11 +709,35 @@ const io=new IntersectionObserver((es)=>{
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 addEventListener('load',()=>document.querySelectorAll('.hero .reveal').forEach((el,i)=>{
   el.style.transitionDelay=(i*120)+'ms';el.classList.add('in');}));
-const WA_NUMBER    = "41764691295";
-const EMAIL_HIRING = "hello@swisspeak-partners.ch";
-const EMAIL_JOBS   = "jobs@swisspeak-partners.ch";
-document.getElementById('waFab').href =
-  "https://wa.me/"+WA_NUMBER+"?text="+encodeURIComponent("Hello SwissPeak Partners \ud83d\udc4b  I'd like some information.");
+const WA_NUMBER="41764691295";
+document.getElementById('waFab').href="https://wa.me/"+WA_NUMBER+"?text="+encodeURIComponent("Hello SwissPeak Partners \ud83d\udc4b  I'd like some information.");
+
+// Timeline scroll animation
+(function(){
+  const fill = document.getElementById('proc-fill');
+  const steps = document.querySelectorAll('.proc-step');
+  const sec = document.getElementById('process');
+  if(!fill || !steps.length || !sec) return;
+
+  function update(){
+    const vh = window.innerHeight;
+    const secRect = sec.getBoundingClientRect();
+    const secH = sec.offsetHeight;
+    const scrolled = -secRect.top;
+    const pct = Math.max(0, Math.min(1, scrolled / (secH - vh)));
+    const sidebar = document.querySelector('.proc-sidebar');
+    if(sidebar){ fill.style.height = (pct * sidebar.offsetHeight) + 'px'; }
+    steps.forEach(step => {
+      const rect = step.getBoundingClientRect();
+      step.classList.toggle('active', rect.top + rect.height / 2 < vh * 0.6);
+    });
+  }
+
+  addEventListener('scroll', update, {passive:true});
+  addEventListener('load', update);
+  update();
+})();
+
 </script>
 </body>
 </html>
