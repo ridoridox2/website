@@ -41,7 +41,7 @@ input,textarea,button{font-family:inherit}
 @media(pointer:fine){*{cursor:none}}
 
 /* ── CURSOR ── */
-#cur{position:fixed;width:22px;height:22px;border-radius:50%;background:var(--flag);pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s}
+#cur{position:fixed;top:0;left:0;width:22px;height:22px;border-radius:50%;background:var(--flag);pointer-events:none;z-index:9999;transform:translate3d(-50%,-50%,0);transition:width .2s,height .2s;will-change:transform}
 #cur::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:9px;height:2px;background:#fff;border-radius:1px}
 #cur::after{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:2px;height:9px;background:#fff;border-radius:1px}
 #cur.big{width:36px;height:36px}
@@ -134,20 +134,17 @@ nav>a:not(.btn-nav):hover{color:#fff}
 .btn-outline-dark:hover{border-color:var(--granite)}
 
 /* ── TRUST / STAT BAR ── */
-.trust-inner{display:grid;grid-template-columns:1fr 1px 2fr;min-height:240px}
-.trust-text-col{padding:64px 56px 64px 0;display:flex;align-items:center}
-.trust-divider{background:var(--fog)}
-.trust-stats{display:grid;grid-template-columns:repeat(3,1fr)}
-.stat-col{padding:64px 40px;border-right:1px solid var(--fog);position:relative;overflow:hidden}
+.trust-strip{text-align:center}
+.trust-swap{font-size:clamp(1.9rem,3.6vw,3.2rem);font-weight:800;letter-spacing:-.01em;color:var(--paper);line-height:1.25;margin:0 0 56px}
+.trust-stats-row{display:flex;justify-content:center;flex-wrap:wrap}
+.stat-col{padding:0 56px;border-right:1px solid rgba(255,255,255,.15);position:relative;overflow:hidden}
 .stat-col:last-child{border-right:none}
-.stat-col::after{content:"";position:absolute;bottom:0;left:0;width:0;height:3px;background:var(--flag);transition:width .8s ease}
+.stat-col::after{content:"";position:absolute;bottom:-16px;left:0;width:0;height:3px;background:var(--flag);transition:width .8s ease}
 .stat-col.counted::after{width:100%}
-.stat-n{font-size:clamp(2.8rem,5vw,4.5rem);font-weight:800;color:var(--ink);line-height:1;letter-spacing:-.03em}
+.stat-n{font-size:clamp(2.8rem,5vw,4.5rem);font-weight:800;color:var(--paper);line-height:1;letter-spacing:-.03em}
 .stat-u{color:var(--flag)}
-.stat-t{font-size:.7rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--granite);margin-top:10px}
-.trust-lead{font-size:clamp(1.05rem,1.6vw,1.35rem);font-weight:700;color:var(--ink);line-height:1.4}
-@media(max-width:900px){.trust-inner{grid-template-columns:1fr}.trust-divider{display:none}.trust-text-col{padding:56px 0 40px}.stat-col{padding:40px 24px}}
-@media(max-width:560px){.trust-stats{grid-template-columns:1fr}}
+.stat-t{font-size:.7rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:10px}
+@media(max-width:560px){.trust-stats-row{flex-direction:column;gap:32px}.stat-col{padding:0;border-right:none}}
 
 /* ── FLIP CARD (process steps / engagement models) ── */
 .flip-card{background:var(--paper);border:1px solid var(--fog);padding:40px 36px;position:relative;overflow:hidden;transition:background .25s ease,border-color .25s ease}
@@ -166,21 +163,31 @@ nav>a:not(.btn-nav):hover{color:#fff}
 .link-row h3{font-size:clamp(1.3rem,2.4vw,1.9rem);font-weight:800;color:var(--ink);margin:0}
 .link-row .arrow{color:var(--flag);font-size:1.5rem;transition:transform .2s ease}
 .link-row:hover .arrow{transform:translateX(6px)}
+.link-row.light{border-top-color:rgba(255,255,255,.15)}
+.link-row.light:last-child{border-bottom-color:rgba(255,255,255,.15)}
+.link-row.light h3{color:var(--paper)}
 
 /* ── DETAIL ROW (hover-reveal) ── */
-.detail-row{display:grid;grid-template-rows:auto 0fr;transition:grid-template-rows .35s ease;padding:22px 0;border-top:1px solid var(--fog)}
-.detail-row:last-child{border-bottom:1px solid var(--fog)}
-.detail-row:hover{grid-template-rows:auto 1fr}
-.detail-head{display:flex;gap:40px;align-items:baseline}
-.detail-head .n{font-family:var(--mono);font-size:20px;color:var(--flag);flex:0 0 auto}
-.detail-head h4{font-size:clamp(1.3rem,2vw,1.7rem);font-weight:800;color:var(--ink);margin:0}
-.detail-body{overflow:hidden;min-height:0}
-.detail-body p{font-size:17px;color:var(--granite);max-width:640px;line-height:1.7;margin:12px 0 0 68px}
+.diff-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(0,0,0,.06);border-radius:8px;overflow:hidden;margin-top:8px}
+.diff-card{background:var(--paper);border:1px solid var(--fog);padding:44px 40px;position:relative;overflow:hidden;transition:background .3s ease,border-color .3s ease}
+.diff-card:hover{background:var(--stone);border-color:var(--stone-2)}
+.diff-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--flag);transform:scaleX(0);transform-origin:left;transition:transform .4s ease}
+.diff-card:hover::before{transform:scaleX(1)}
+.diff-n{font-family:var(--mono);font-size:1rem;color:var(--flag);letter-spacing:.1em;margin-bottom:14px;display:block}
+.diff-card h4{font-size:clamp(1.25rem,2vw,1.55rem);font-weight:800;color:var(--ink);margin:0;line-height:1.3;transition:color .3s ease}
+.diff-card:hover h4{color:#fff}
+.diff-reveal{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s ease}
+.diff-card:hover .diff-reveal{grid-template-rows:1fr}
+.diff-reveal p{overflow:hidden;font-size:.95rem;color:rgba(255,255,255,.65);line-height:1.7;margin:0}
+.diff-card:hover .diff-reveal p{padding-top:14px}
+@media(max-width:760px){.diff-grid{grid-template-columns:1fr}.diff-card{padding:36px 32px}}
 
 /* ── MARQUEE ── */
 @keyframes marqueeScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 .marquee-wrap{overflow:hidden}
 .marquee{white-space:nowrap;font-size:clamp(1.8rem,3.4vw,2.6rem);font-weight:800;color:var(--fog);letter-spacing:-.01em;animation:marqueeScroll 26s linear infinite;width:max-content}
+.disc-item{transition:color .2s ease}
+.disc-item:hover{color:var(--mist)}
 
 /* ── CTA / CONTACT SECTION ── */
 .cta-section{text-align:center}
@@ -265,29 +272,24 @@ html.lenis{height:auto}
 </section>
 
 <!-- ══ 2. TRUST BAR ══ -->
-<section class="sec bg-snow">
-  <div class="dots dots-light" aria-hidden="true"><svg viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice">
+<section class="sec bg-stone">
+  <div class="dots dots-dark" aria-hidden="true"><svg viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice">
     <circle cx="1078" cy="312" r="2.38"/><circle cx="1344" cy="42" r="2.07"/><circle cx="59" cy="350" r="2.00"/><circle cx="1308" cy="281" r="1.77"/><circle cx="581" cy="229" r="1.42"/><circle cx="1399" cy="285" r="2.35"/><circle cx="1243" cy="502" r="2.17"/><circle cx="353" cy="367" r="1.68"/><circle cx="759" cy="43" r="1.25"/><circle cx="224" cy="205" r="1.70"/><circle cx="985" cy="54" r="2.35"/><circle cx="828" cy="14" r="2.45"/><circle cx="350" cy="39" r="1.93"/><circle cx="1211" cy="584" r="1.27"/><circle cx="363" cy="226" r="1.75"/><circle cx="566" cy="210" r="2.35"/><circle cx="395" cy="128" r="2.12"/><circle cx="7" cy="275" r="1.65"/><circle cx="500" cy="591" r="1.75"/><circle cx="502" cy="85" r="2.17"/><circle cx="1030" cy="495" r="2.27"/><circle cx="870" cy="241" r="2.33"/><circle cx="811" cy="387" r="2.40"/><circle cx="153" cy="292" r="2.38"/><circle cx="171" cy="443" r="1.57"/><circle cx="740" cy="79" r="2.03"/><circle cx="555" cy="244" r="2.30"/><circle cx="135" cy="248" r="1.62"/><circle cx="597" cy="456" r="1.60"/><circle cx="1162" cy="65" r="1.77"/><circle cx="780" cy="495" r="1.55"/><circle cx="529" cy="258" r="2.05"/><circle cx="314" cy="596" r="1.62"/><circle cx="194" cy="60" r="2.23"/><circle cx="37" cy="131" r="1.90"/><circle cx="425" cy="440" r="2.07"/><circle cx="1316" cy="71" r="1.33"/><circle cx="1075" cy="128" r="1.85"/><circle cx="54" cy="377" r="1.55"/><circle cx="453" cy="261" r="1.68"/><circle cx="1057" cy="587" r="1.47"/><circle cx="1411" cy="207" r="2.00"/><circle cx="904" cy="338" r="2.00"/><circle cx="1326" cy="420" r="2.12"/><circle cx="1009" cy="435" r="2.40"/><circle cx="317" cy="12" r="2.05"/><circle cx="1257" cy="561" r="2.20"/><circle cx="1344" cy="409" r="2.48"/><circle class="acc" cx="200" cy="150" r="3"/>
   </svg></div>
-  <div class="wrap">
-    <div class="trust-inner">
-      <div class="trust-text-col">
-        <p class="trust-lead reveal">Our best success indicator? The companies we work with keep coming back.</p>
+  <div class="wrap trust-strip">
+    <p class="trust-swap reveal">Our best success indicator? <br>Companies keep coming back.</p>
+    <div class="trust-stats-row">
+      <div class="stat-col reveal">
+        <div class="stat-n">80<span class="stat-u">+</span></div>
+        <div class="stat-t">Clients who trusted us</div>
       </div>
-      <div class="trust-divider"></div>
-      <div class="trust-stats">
-        <div class="stat-col reveal">
-          <div class="stat-n">80<span class="stat-u">+</span></div>
-          <div class="stat-t">Clients who trusted us</div>
-        </div>
-        <div class="stat-col reveal">
-          <div class="stat-n">97<span class="stat-u">%</span></div>
-          <div class="stat-t">Repeat business</div>
-        </div>
-        <div class="stat-col reveal">
-          <div class="stat-n">9</div>
-          <div class="stat-t">Technical fields covered</div>
-        </div>
+      <div class="stat-col reveal">
+        <div class="stat-n">97<span class="stat-u">%</span></div>
+        <div class="stat-t">Repeat business</div>
+      </div>
+      <div class="stat-col reveal">
+        <div class="stat-n">9</div>
+        <div class="stat-t">Technical fields covered</div>
       </div>
     </div>
   </div>
@@ -304,7 +306,7 @@ html.lenis{height:auto}
     <p class="reveal" style="font-family:var(--mono);font-size:clamp(1rem,1.6vw,1.2rem);color:var(--swiss);font-weight:500;margin:0 0 56px">We place <b id="ticker-text" style="color:var(--flag);font-weight:600">software engineers.</b></p>
   </div>
   <div class="marquee-wrap">
-    <div class="marquee">Software Engineering&nbsp;&nbsp;·&nbsp;&nbsp;IT Architecture&nbsp;&nbsp;·&nbsp;&nbsp;ERP &amp; SAP&nbsp;&nbsp;·&nbsp;&nbsp;QA Testing&nbsp;&nbsp;·&nbsp;&nbsp;System &amp; Network Engineering&nbsp;&nbsp;·&nbsp;&nbsp;IT BA &amp; PM&nbsp;&nbsp;·&nbsp;&nbsp;ITSM &amp; ServiceNow&nbsp;&nbsp;·&nbsp;&nbsp;Data Science&nbsp;&nbsp;·&nbsp;&nbsp;Engineering&nbsp;&nbsp;·&nbsp;&nbsp;Software Engineering&nbsp;&nbsp;·&nbsp;&nbsp;IT Architecture&nbsp;&nbsp;·&nbsp;&nbsp;ERP &amp; SAP&nbsp;&nbsp;·&nbsp;&nbsp;QA Testing&nbsp;&nbsp;·&nbsp;&nbsp;System &amp; Network Engineering&nbsp;&nbsp;·&nbsp;&nbsp;IT BA &amp; PM&nbsp;&nbsp;·&nbsp;&nbsp;ITSM &amp; ServiceNow&nbsp;&nbsp;·&nbsp;&nbsp;Data Science&nbsp;&nbsp;·&nbsp;&nbsp;Engineering</div>
+    <div class="marquee"><span class="disc-item">Software Engineering</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">IT Architecture</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">ERP &amp; SAP</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">QA Testing</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">System &amp; Network Engineering</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">IT BA &amp; PM</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">ITSM &amp; ServiceNow</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">Data Science</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">Engineering</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">Software Engineering</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">IT Architecture</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">ERP &amp; SAP</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">QA Testing</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">System &amp; Network Engineering</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">IT BA &amp; PM</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">ITSM &amp; ServiceNow</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">Data Science</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">Engineering</span></div>
   </div>
 </section>
 
@@ -315,47 +317,53 @@ html.lenis{height:auto}
   </svg></div>
   <div class="wrap">
     <p class="sec-label reveal">Why SwissPeak</p>
-    <h2 class="reveal" style="font-size:clamp(2rem,4vw,3.4rem);font-weight:800;color:var(--ink);letter-spacing:-.02em;margin:0 0 8px">What makes us <span style="color:var(--flag)">different</span>.</h2>
-    <p class="reveal" style="color:var(--granite);font-size:1.05rem;max-width:56ch;margin:0 0 48px">Anyone can send you CVs. Fewer can tell you which ones actually matter, and why. Here is what sets us apart:</p>
+    <h2 class="reveal" style="font-size:clamp(2rem,4vw,3.4rem);font-weight:800;color:var(--ink);letter-spacing:-.02em;margin:0 0 8px">What makes us different.</h2>
+    <p class="reveal" style="color:var(--granite);font-size:1.05rem;max-width:56ch;margin:0 0 48px">Anyone can send you CVs. Fewer can tell you which ones actually matter, and why. Hover a card to read more.</p>
 
-    <div class="detail-row reveal">
-      <div class="detail-head"><span class="n">01</span><h4>Global reach, local roots</h4></div>
-      <div class="detail-body"><p>We are based in Zug, with a network that spans Switzerland and Europe, so your business benefits from both international perspective and local expertise.</p></div>
-    </div>
-    <div class="detail-row reveal">
-      <div class="detail-head"><span class="n">02</span><h4>Quality over quantity</h4></div>
-      <div class="detail-body"><p>We would rather put forward three exceptional profiles than thirty adequate ones. From our perspective, our team screens the candidates, so your team can focus on hiring the best.</p></div>
-    </div>
-    <div class="detail-row reveal">
-      <div class="detail-head"><span class="n">03</span><h4>Built for a shifting market</h4></div>
-      <div class="detail-body"><p>The talent landscape is moving faster than ever. We track it closely, so your search never starts from zero. Our consultants are constantly on the lookout for the best tools, the hottest technologies, the latest market trends. You get access to the most up-to-date market intel, and the top talent.</p></div>
-    </div>
-    <div class="detail-row reveal">
-      <div class="detail-head"><span class="n">04</span><h4>Fast, without cutting corners</h4></div>
-      <div class="detail-body"><p>Combining a large and live database with an active network mean speed never comes at the cost of precision.</p></div>
+    <div class="diff-grid">
+      <div class="diff-card reveal">
+        <span class="diff-n">01</span>
+        <h4>Global reach, local roots</h4>
+        <div class="diff-reveal"><p>We are based in Zug, with a network that spans Switzerland and Europe, so your business benefits from both international perspective and local expertise.</p></div>
+      </div>
+      <div class="diff-card reveal">
+        <span class="diff-n">02</span>
+        <h4>Quality over quantity</h4>
+        <div class="diff-reveal"><p>We would rather put forward three exceptional profiles than thirty adequate ones. From our perspective, our team screens the candidates, so your team can focus on hiring the best.</p></div>
+      </div>
+      <div class="diff-card reveal">
+        <span class="diff-n">03</span>
+        <h4>Built for a shifting market</h4>
+        <div class="diff-reveal"><p>The talent landscape is moving faster than ever. We track it closely, so your search never starts from zero. Our consultants are constantly on the lookout for the best tools, the hottest technologies, the latest market trends. You get access to the most up-to-date market intel, and the top talent.</p></div>
+      </div>
+      <div class="diff-card reveal">
+        <span class="diff-n">04</span>
+        <h4>Fast, without cutting corners</h4>
+        <div class="diff-reveal"><p>Combining a large and live database with an active network mean speed never comes at the cost of precision.</p></div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ══ 5. SERVICES ══ -->
-<section class="sec bg-paper" id="services">
-  <div class="dots dots-light" aria-hidden="true"><svg viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice">
+<section class="sec bg-stone" id="services">
+  <div class="dots dots-dark" aria-hidden="true"><svg viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice">
     <circle cx="1282" cy="451" r="1.68"/><circle cx="1096" cy="96" r="2.05"/><circle cx="154" cy="397" r="2.00"/><circle cx="1347" cy="530" r="2.05"/><circle cx="518" cy="440" r="1.90"/><circle cx="620" cy="521" r="2.23"/><circle cx="1039" cy="596" r="2.40"/><circle cx="401" cy="161" r="2.30"/><circle cx="417" cy="172" r="2.45"/><circle cx="353" cy="480" r="1.33"/><circle cx="621" cy="414" r="2.27"/><circle cx="1109" cy="271" r="2.48"/><circle cx="600" cy="336" r="2.05"/><circle cx="14" cy="297" r="1.90"/><circle cx="940" cy="513" r="1.57"/><circle cx="248" cy="172" r="1.40"/><circle cx="1359" cy="5" r="1.40"/><circle cx="1255" cy="172" r="1.72"/><circle cx="1027" cy="347" r="2.10"/><circle cx="968" cy="494" r="1.85"/><circle cx="1057" cy="153" r="1.45"/><circle cx="790" cy="15" r="2.03"/><circle cx="755" cy="265" r="1.47"/><circle cx="234" cy="272" r="2.10"/><circle cx="987" cy="64" r="1.93"/><circle cx="1358" cy="167" r="2.27"/><circle cx="99" cy="133" r="2.30"/><circle cx="272" cy="56" r="1.40"/><circle cx="831" cy="485" r="2.12"/><circle cx="365" cy="288" r="1.90"/><circle cx="1052" cy="129" r="2.23"/><circle cx="1295" cy="458" r="2.25"/><circle cx="750" cy="173" r="1.55"/><circle cx="1012" cy="271" r="2.12"/><circle cx="550" cy="82" r="2.25"/><circle cx="1320" cy="48" r="1.35"/><circle cx="1066" cy="89" r="1.62"/><circle cx="824" cy="203" r="1.75"/><circle cx="998" cy="549" r="1.52"/><circle cx="565" cy="102" r="2.12"/><circle cx="1318" cy="540" r="2.40"/><circle cx="998" cy="480" r="2.10"/><circle cx="717" cy="193" r="2.45"/><circle cx="1074" cy="15" r="1.77"/><circle cx="644" cy="244" r="1.95"/><circle cx="367" cy="195" r="2.05"/><circle cx="492" cy="39" r="2.23"/><circle cx="938" cy="382" r="1.40"/><circle class="acc" cx="300" cy="520" r="3"/>
   </svg></div>
   <div class="wrap">
-    <p class="sec-label reveal">What we do</p>
-    <h2 class="reveal" style="font-size:clamp(2rem,4vw,3.4rem);font-weight:800;color:var(--ink);letter-spacing:-.02em;margin:0 0 8px">We know one size does NOT fit all.</h2>
-    <p class="reveal" style="color:var(--granite);font-size:1.05rem;max-width:60ch;line-height:1.75;margin:0 0 48px;font-weight:700">Whether your team is dealing with a permanent role, a contract engagement, a nearshore team or an RPO programme, we adjust the approach to your business. Never the other way around.</p>
+    <p class="sec-label light reveal">What we do</p>
+    <h2 class="reveal" style="font-size:clamp(2rem,4vw,3.4rem);font-weight:800;color:var(--paper);letter-spacing:-.02em;margin:0 0 8px">We know one size does NOT fit all.</h2>
+    <p class="reveal" style="color:rgba(255,255,255,.55);font-size:1.05rem;max-width:60ch;line-height:1.75;margin:0 0 48px;font-weight:700">Whether your team is dealing with a permanent role, a contract engagement, a nearshore team or an RPO programme, we adjust the approach to your business. Never the other way around.</p>
 
-    <a href="permanent-placement.html" class="link-row reveal"><h3>Permanent Hiring</h3><span class="arrow">→</span></a>
-    <a href="project-staffing.html" class="link-row reveal"><h3>Project Solutions</h3><span class="arrow">→</span></a>
-    <a href="nearshoring.html" class="link-row reveal"><h3>Nearshoring &amp; Outsourcing</h3><span class="arrow">→</span></a>
-    <a href="interview-assessment.html" class="link-row reveal"><h3>Interview &amp; Assessment</h3><span class="arrow">→</span></a>
+    <a href="permanent-placement.html" class="link-row light reveal"><h3>Permanent Hiring</h3><span class="arrow">→</span></a>
+    <a href="project-staffing.html" class="link-row light reveal"><h3>Project Solutions</h3><span class="arrow">→</span></a>
+    <a href="nearshoring.html" class="link-row light reveal"><h3>Nearshoring &amp; Outsourcing</h3><span class="arrow">→</span></a>
+    <a href="interview-assessment.html" class="link-row light reveal"><h3>Interview &amp; Assessment</h3><span class="arrow">→</span></a>
   </div>
 </section>
 
 <!-- ══ 6. CONTACT ══ -->
-<section class="sec bg-stone" id="contact">
+<section class="sec bg-stone" id="contact" style="border-top:1px solid rgba(255,255,255,.08)">
   <div class="dots dots-dark" aria-hidden="true"><svg viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice">
     <circle cx="1106" cy="495" r="2.48"/><circle cx="528" cy="411" r="1.82"/><circle cx="181" cy="109" r="1.98"/><circle cx="874" cy="509" r="1.30"/><circle cx="249" cy="5" r="2.05"/><circle cx="112" cy="593" r="1.33"/><circle cx="0" cy="220" r="1.65"/><circle cx="884" cy="84" r="1.88"/><circle cx="768" cy="105" r="2.20"/><circle cx="1337" cy="561" r="1.80"/><circle cx="237" cy="421" r="1.57"/><circle cx="215" cy="42" r="2.42"/><circle cx="889" cy="117" r="1.42"/><circle cx="293" cy="482" r="2.48"/><circle cx="361" cy="586" r="2.48"/><circle cx="1278" cy="32" r="2.48"/><circle cx="1362" cy="33" r="1.68"/><circle cx="376" cy="401" r="1.85"/><circle cx="1086" cy="121" r="2.07"/><circle cx="741" cy="79" r="2.00"/><circle cx="1371" cy="178" r="1.62"/><circle cx="309" cy="268" r="1.72"/><circle cx="236" cy="38" r="1.95"/><circle cx="425" cy="161" r="1.72"/><circle cx="397" cy="311" r="1.68"/><circle cx="382" cy="244" r="1.75"/><circle cx="351" cy="212" r="1.82"/><circle cx="849" cy="369" r="1.40"/><circle cx="110" cy="222" r="1.68"/><circle cx="1064" cy="530" r="1.82"/><circle cx="485" cy="502" r="2.20"/><circle cx="919" cy="31" r="1.50"/><circle cx="14" cy="129" r="1.60"/><circle cx="832" cy="307" r="1.93"/><circle cx="1367" cy="472" r="1.33"/><circle cx="428" cy="32" r="1.82"/><circle cx="1009" cy="178" r="2.27"/><circle cx="230" cy="532" r="1.80"/><circle cx="415" cy="578" r="2.25"/><circle cx="892" cy="422" r="2.12"/><circle cx="120" cy="24" r="1.90"/><circle cx="1215" cy="407" r="1.98"/><circle cx="73" cy="413" r="2.25"/><circle cx="464" cy="159" r="1.65"/><circle cx="1242" cy="129" r="1.38"/><circle cx="1328" cy="308" r="1.45"/><circle cx="561" cy="129" r="1.82"/><circle cx="305" cy="225" r="1.68"/><circle class="acc" cx="950" cy="250" r="3"/>
   </svg></div>
@@ -437,7 +445,7 @@ document.getElementById('burger').addEventListener('click',()=>{
 const cur=document.getElementById('cur');
 let mx=0,my=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
-(function loop(){cur.style.left=mx+'px';cur.style.top=my+'px';requestAnimationFrame(loop);})();
+(function loop(){cur.style.transform=`translate3d(${mx}px,${my}px,0) translate(-50%,-50%)`;requestAnimationFrame(loop);})();
 document.querySelectorAll('a,button').forEach(el=>{
   el.addEventListener('mouseenter',()=>cur.classList.add('big'));
   el.addEventListener('mouseleave',()=>cur.classList.remove('big'));
