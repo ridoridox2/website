@@ -574,7 +574,7 @@ html.lenis{height:auto}
             <span style="font-weight:650;color:var(--ink)">deep roots in IT</span>
             and proven expertise across several industries. We shine in
             <span style="font-weight:650;color:var(--ink)">highly regulated sectors</span>,
-            where the right fit matters most. We focus on tech, but we never forget recruitment is a people business. We handle the full cycle, from sourcing and interviewing to delivering complete project teams, and we keep the whole process
+            where identifying the right fit matters most. We focus on tech, but we never forget recruitment is a people business. We handle the full cycle, from sourcing and interviewing to delivering complete project teams, and we keep the whole process
             <span style="font-weight:650;color:var(--ink)">clear, fast and transparent</span>.
           </p>
         </div>
@@ -1225,9 +1225,21 @@ if(introParaEl){
     if(introRetyped < introNewSentence.length){
       setTimeout(retypeIntroPara, typeDelay(introNewSentence[introRetyped-1]));
     } else {
-      introParaEl.style.minHeight = '';
+      const oldMinHeight = introParaEl.style.minHeight;
       introParaEl.innerHTML = introFinalHTML;
       wrapWordsForHover(introParaEl);
+      introParaEl.style.minHeight = '';
+      const naturalHeight = introParaEl.offsetHeight;
+      introParaEl.style.minHeight = oldMinHeight;
+      const forceReflow = introParaEl.offsetHeight;
+      requestAnimationFrame(()=>{
+        introParaEl.style.transition = 'min-height .4s ease';
+        introParaEl.style.minHeight = naturalHeight + 'px';
+        setTimeout(()=>{
+          introParaEl.style.transition = '';
+          introParaEl.style.minHeight = '';
+        }, 420);
+      });
     }
   }
   const introTypeObs = new IntersectionObserver(es=>{
