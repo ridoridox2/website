@@ -130,7 +130,7 @@ nav>a:not(.btn-nav):hover{color:#fff}
 .hero-name{
   font-size:clamp(2.6rem,24cqw,7.5rem);font-weight:800;
   color:var(--paper);line-height:.95;letter-spacing:-.03em;
-  ;margin-bottom:16px;
+  white-space:normal;margin-bottom:16px;
 }
 .hero-sub{
   font-size:clamp(1.4rem,15cqw,3.8rem);font-weight:800;
@@ -369,6 +369,15 @@ html.lenis{height:auto}
 
     .hero-inner{
         justify-content:center;
+        padding:0 24px;
+    }
+
+    .hero-name{
+        font-size:clamp(2rem,13cqw,3.1rem);
+    }
+
+    .hero-sub{
+        font-size:clamp(1.1rem,7cqw,1.9rem);
     }
 }
 </style>
@@ -464,7 +473,7 @@ html.lenis{height:auto}
   <div class="hero-inner">
     <div class="hero-text">
       <div class="hero-greeting reveal"><span id="greeting-word">Hello.</span></div>
-      <div class="hero-name reveal">We are SwissPeak Partners</div>
+      <div class="hero-name reveal">We are<br><span style="white-space:nowrap">SwissPeak</span><br>Partners</div>
       <div class="hero-sub reveal">Technology Recruitment Experts</div>
       <div class="hero-sub reveal">in <span class="industry"><span id="industry-word">Banking</span></span></div>
     </div>
