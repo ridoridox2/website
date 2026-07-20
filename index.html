@@ -60,7 +60,7 @@ nav{display:flex;align-items:center;gap:36px}
 .has-drop{position:relative}
 .has-drop>a{font-size:.85rem;font-weight:600;letter-spacing:.04em;color:rgba(255,255,255,.7);transition:color .2s}
 .has-drop>a:hover{color:#fff}
-.drop{position:absolute;top:calc(100%+16px);left:0;background:var(--alpine);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:8px;min-width:220px;opacity:0;pointer-events:none;transform:translateY(-6px);transition:.2s}
+.drop{position:absolute;top:calc(100%+16px);left:0;background:var(--stone);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:8px;min-width:220px;opacity:0;pointer-events:none;transform:translateY(-6px);transition:.2s}
 .has-drop:hover .drop{opacity:1;pointer-events:all;transform:translateY(0)}
 .drop a{display:block;padding:9px 14px;font-size:.82rem;color:rgba(255,255,255,.65);border-radius:4px;transition:.15s}
 .drop a:hover{background:rgba(255,255,255,.08);color:#fff}
@@ -811,14 +811,14 @@ html.lenis{height:auto}
       </div>
       <form onsubmit="event.preventDefault();this.querySelector('.btn-submit').textContent='Thank you!';">
         <div class="f-row">
-          <div><label>Name*</label><input required placeholder="Your name"></div>
-          <div><label>Email*</label><input type="email" required placeholder="you@company.com"></div>
+          <div><input required placeholder="Your name"></div>
+          <div><input type="email" required placeholder="you@company.com"></div>
         </div>
         <div class="f-row">
-          <div><label>Company*</label><input required placeholder="Company"></div>
-          <div><label>Country</label><input placeholder="Switzerland"></div>
+          <div><input required placeholder="Company"></div>
+          <div><input placeholder="Switzerland"></div>
         </div>
-        <div><label>Message</label><textarea placeholder="Tell us what you're working on..."></textarea></div>
+        <div><textarea placeholder="Tell us what you're working on..."></textarea></div>
         <label class="consent"><input type="checkbox" required> I agree to the processing of my data.</label>
         <button type="submit" class="btn-submit">Send message</button>
       </form>
@@ -1243,7 +1243,6 @@ document.getElementById('waFab').href="https://wa.me/"+WA_NUMBER+"?text="+encode
     }
 
     html+='<div class="cfg-nav">'
-      +'<button type="button" class="cfg-back" id="cfgBack"'+(step===0?' disabled':'')+'>← Back</button>'
       +(s.form
         ? '<button type="button" class="btn wa-btn" id="cfgSend">'+WA_ICON+' Send my request</button>'
         : '')
@@ -1260,8 +1259,6 @@ document.getElementById('waFab').href="https://wa.me/"+WA_NUMBER+"?text="+encode
     } else {
       document.getElementById('cfgSend').addEventListener('click',send);
     }
-    const back=document.getElementById('cfgBack');
-    if(back) back.addEventListener('click',()=>{ if(step>0){step--;render();} });
   }
 
   function flash(el){
