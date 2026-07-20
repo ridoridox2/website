@@ -41,7 +41,7 @@ input,textarea,button{font-family:inherit}
 @media(pointer:fine){*{cursor:none}}
 
 /* ── CURSOR ── */
-#cur{position:fixed;top:0;left:0;width:22px;height:22px;border-radius:50%;background:var(--flag);pointer-events:none;z-index:9999;transform:translate3d(-50%,-50%,0);transition:width .2s,height .2s;will-change:transform}
+#cur{position:fixed;top:0;left:0;width:22px;height:22px;border-radius:50%;background:var(--ice);pointer-events:none;z-index:9999;transform:translate3d(-50%,-50%,0);transition:width .2s,height .2s;will-change:transform}
 #cur::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:9px;height:2px;background:#fff;border-radius:1px}
 #cur::after{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:2px;height:9px;background:#fff;border-radius:1px}
 #cur.big{width:36px;height:36px}
@@ -67,8 +67,8 @@ nav{display:flex;align-items:center;gap:36px}
 .drop-divider{height:1px;background:rgba(255,255,255,.08);margin:6px 0}
 nav>a{font-size:.85rem;font-weight:600;letter-spacing:.04em;color:rgba(255,255,255,.7);transition:color .2s}
 nav>a:not(.btn-nav):hover{color:#fff}
-.btn-nav{background:var(--flag);color:#fff !important;padding:10px 22px;border-radius:4px;font-weight:700;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;transition:background .2s}
-.btn-nav:hover{background:#a93226}
+.btn-nav{background:var(--ice-deep);color:#fff !important;padding:10px 22px;border-radius:4px;font-weight:700;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;transition:background .2s}
+.btn-nav:hover{background:#2f6a9c}
 .burger{display:none;flex-direction:column;gap:5px;padding:4px}
 .burger span{width:22px;height:1.5px;background:#fff;display:block}
 @media(max-width:900px){
@@ -81,9 +81,9 @@ nav>a:not(.btn-nav):hover{color:#fff}
 .dots{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
 .dots svg{position:absolute;inset:0;width:100%;height:100%}
 .dots-dark circle{fill:rgba(255,255,255,.2)}
-.dots-dark .acc{fill:var(--flag);opacity:.4}
+.dots-dark .acc{fill:var(--ice);opacity:.4}
 .dots-light circle{fill:rgba(105,115,126,.55)}
-.dots-light .acc{fill:var(--flag);opacity:.4}
+.dots-light .acc{fill:var(--ice-deep);opacity:.4}
 .dots circle{animation:dotDrift 14s ease-in-out infinite}
 .dots circle:nth-child(2n){animation-duration:17s;animation-delay:-4s}
 .dots circle:nth-child(3n){animation-duration:20s;animation-delay:-9s}
@@ -99,9 +99,9 @@ nav>a:not(.btn-nav):hover{color:#fff}
 
 /* ── SECTION LABEL ── */
 .sec-label{font-family:var(--mono);font-size:1rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mist);display:flex;align-items:center;gap:12px;margin-bottom:40px}
-.sec-label::before{content:"";width:28px;height:1.5px;background:var(--flag)}
+.sec-label::before{content:"";width:28px;height:1.5px;background:var(--ice-deep)}
 .sec-label.light{color:rgba(255,255,255,.4)}
-.sec-label.light::before{background:var(--flag)}
+.sec-label.light::before{background:var(--ice)}
 
 /* ── REVEAL ── */
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s ease}
@@ -117,17 +117,17 @@ nav>a:not(.btn-nav):hover{color:#fff}
 .hero{min-height:92svh;background:var(--stone);display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden}
 .hero-inner{position:relative;z-index:1;padding:130px 48px 90px;max-width:var(--maxw);margin:0 auto;width:100%}
 .hero-eyebrow{font-family:var(--mono);font-size:1rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.45);display:flex;align-items:center;gap:12px;margin-bottom:32px}
-.hero-eyebrow::before{content:"";width:28px;height:1.5px;background:var(--flag);display:inline-block}
+.hero-eyebrow::before{content:"";width:28px;height:1.5px;background:var(--ice);display:inline-block}
 .hero h1{font-size:clamp(2.8rem,7vw,7rem);font-weight:800;color:var(--paper);line-height:.97;letter-spacing:-.03em;margin:0 0 28px}
 .type-target::after{content:"";display:inline-block;width:.05em;height:.85em;background:var(--paper);margin-left:.06em;vertical-align:-0.08em;animation:blinkCursor .9s step-end infinite}
 @keyframes blinkCursor{0%,100%{opacity:1}50%{opacity:0}}
 .hero-lead{font-size:clamp(1.1rem,1.6vw,1.4rem);color:rgba(255,255,255,.6);max-width:600px;line-height:1.75;margin:0 0 40px;font-weight:400}
 .hero-cta{display:flex;gap:16px;flex-wrap:wrap}
-.hero-divider{position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent 0%,var(--flag) 20%,var(--flag) 80%,transparent 100%)}
+.hero-divider{position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent 0%,var(--ice) 20%,var(--ice) 80%,transparent 100%)}
 
 /* ── BUTTONS ── */
-.btn{display:inline-flex;align-items:center;background:var(--flag);color:#fff;padding:16px 30px;border-radius:4px;font-weight:700;font-size:.82rem;letter-spacing:.07em;text-transform:uppercase;transition:background .2s}
-.btn:hover{background:#a93226}
+.btn{display:inline-flex;align-items:center;background:var(--ice-deep);color:#fff;padding:16px 30px;border-radius:4px;font-weight:700;font-size:.82rem;letter-spacing:.07em;text-transform:uppercase;transition:background .2s}
+.btn:hover{background:#2f6a9c}
 .btn-outline{display:inline-flex;align-items:center;border:1px solid rgba(255,255,255,.35);color:#fff;padding:16px 30px;border-radius:4px;font-weight:700;font-size:.82rem;letter-spacing:.07em;text-transform:uppercase;transition:border-color .2s}
 .btn-outline:hover{border-color:#fff}
 .btn-outline-dark{display:inline-flex;align-items:center;border:1px solid var(--fog);color:var(--ink);padding:16px 30px;border-radius:4px;font-weight:700;font-size:.82rem;letter-spacing:.07em;text-transform:uppercase;transition:border-color .2s}
@@ -139,10 +139,10 @@ nav>a:not(.btn-nav):hover{color:#fff}
 .trust-stats-row{display:flex;justify-content:center;flex-wrap:wrap}
 .stat-col{padding:0 56px;border-right:1px solid rgba(255,255,255,.15);position:relative;overflow:hidden}
 .stat-col:last-child{border-right:none}
-.stat-col::after{content:"";position:absolute;bottom:-16px;left:0;width:0;height:3px;background:var(--flag);transition:width .8s ease}
+.stat-col::after{content:"";position:absolute;bottom:-16px;left:0;width:0;height:3px;background:var(--ice-deep);transition:width .8s ease}
 .stat-col.counted::after{width:100%}
 .stat-n{font-size:clamp(2.8rem,5vw,4.5rem);font-weight:800;color:var(--paper);line-height:1;letter-spacing:-.03em}
-.stat-u{color:var(--flag)}
+.stat-u{color:var(--ice-deep)}
 .stat-t{font-size:.7rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:10px}
 @media(max-width:560px){.trust-stats-row{flex-direction:column;gap:32px}.stat-col{padding:0;border-right:none}}
 
@@ -151,7 +151,7 @@ nav>a:not(.btn-nav):hover{color:#fff}
 .flip-card:hover{background:var(--stone);border-color:var(--stone-2)}
 .flip-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--ice);transform:scaleX(0);transform-origin:left;transition:transform .4s ease}
 .flip-card:hover::before{transform:scaleX(1)}
-.flip-num{font-family:var(--mono);font-size:1rem;color:var(--flag);letter-spacing:.1em;margin-bottom:14px;display:block;transition:color .25s ease}
+.flip-num{font-family:var(--mono);font-size:1rem;color:var(--ice-deep);letter-spacing:.1em;margin-bottom:14px;display:block;transition:color .25s ease}
 .flip-card h4{font-size:1.25rem;font-weight:800;color:var(--ink);margin:0 0 12px;line-height:1.25;transition:color .25s ease}
 .flip-card:hover h4{color:#fff}
 .flip-card p{font-size:.92rem;color:var(--granite);line-height:1.7;margin:0;transition:color .25s ease}
@@ -161,7 +161,7 @@ nav>a:not(.btn-nav):hover{color:#fff}
 .link-row{display:flex;justify-content:space-between;align-items:center;padding:28px 0;border-top:1px solid var(--fog)}
 .link-row:last-child{border-bottom:1px solid var(--fog)}
 .link-row h3{font-size:clamp(1.3rem,2.4vw,1.9rem);font-weight:800;color:var(--ink);margin:0}
-.link-row .arrow{color:var(--flag);font-size:1.5rem;transition:transform .2s ease}
+.link-row .arrow{color:var(--ice-deep);font-size:1.5rem;transition:transform .2s ease}
 .link-row:hover .arrow{transform:translateX(6px)}
 .link-row.light{border-top-color:rgba(255,255,255,.15)}
 .link-row.light:last-child{border-bottom-color:rgba(255,255,255,.15)}
@@ -171,9 +171,9 @@ nav>a:not(.btn-nav):hover{color:#fff}
 .diff-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(0,0,0,.06);border-radius:8px;overflow:hidden;margin-top:8px}
 .diff-card{background:var(--paper);border:1px solid var(--fog);padding:44px 40px;position:relative;overflow:hidden;transition:background .3s ease,border-color .3s ease}
 .diff-card:hover{background:var(--stone);border-color:var(--stone-2)}
-.diff-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--flag);transform:scaleX(0);transform-origin:left;transition:transform .4s ease}
+.diff-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--ice);transform:scaleX(0);transform-origin:left;transition:transform .4s ease}
 .diff-card:hover::before{transform:scaleX(1)}
-.diff-n{font-family:var(--mono);font-size:1rem;color:var(--flag);letter-spacing:.1em;margin-bottom:14px;display:block}
+.diff-n{font-family:var(--mono);font-size:1rem;color:var(--ice-deep);letter-spacing:.1em;margin-bottom:14px;display:block}
 .diff-card h4{font-size:clamp(1.25rem,2vw,1.55rem);font-weight:800;color:var(--ink);margin:0;line-height:1.3;transition:color .3s ease}
 .diff-card:hover h4{color:#fff}
 .diff-reveal{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s ease}
@@ -192,7 +192,7 @@ nav>a:not(.btn-nav):hover{color:#fff}
 /* ── CTA / CONTACT SECTION ── */
 .cta-section{text-align:center}
 .cta-section h2{font-size:clamp(2rem,4.5vw,3.8rem);font-weight:800;color:#fff;letter-spacing:-.02em;line-height:1.1;margin:0 0 20px}
-.cta-section h2 em{color:var(--flag);font-style:italic}
+.cta-section h2 em{color:var(--ice);font-style:italic}
 .cta-section p{color:rgba(255,255,255,.5);font-size:1.1rem;max-width:60ch;margin:0 auto 40px;line-height:1.7}
 .cta-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
 
@@ -303,7 +303,7 @@ html.lenis{height:auto}
   <div class="wrap">
     <p class="sec-label reveal">.</p>
     <h2 class="reveal" style="font-size:clamp(2rem,4vw,3.4rem);font-weight:800;color:var(--ink);letter-spacing:-.02em;line-height:1.05;margin:0 0 12px">We recruit IT, because we understand it.</h2>
-    <p class="reveal" style="font-family:var(--mono);font-size:clamp(1rem,1.6vw,1.2rem);color:var(--swiss);font-weight:500;margin:0 0 56px">We place <b id="ticker-text" style="color:var(--flag);font-weight:600">software engineers.</b></p>
+    <p class="reveal" style="font-family:var(--mono);font-size:clamp(1rem,1.6vw,1.2rem);color:var(--swiss);font-weight:500;margin:0 0 56px">We place <b id="ticker-text" style="color:var(--ice-deep);font-weight:600">software engineers.</b></p>
   </div>
   <div class="marquee-wrap">
     <div class="marquee"><span class="disc-item">Software Engineering</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">IT Architecture</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">ERP &amp; SAP</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">QA Testing</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">System &amp; Network Engineering</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">IT BA &amp; PM</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">ITSM &amp; ServiceNow</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">Data Science</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">Engineering</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">Software Engineering</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">IT Architecture</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">ERP &amp; SAP</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">QA Testing</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">System &amp; Network Engineering</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">IT BA &amp; PM</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">ITSM &amp; ServiceNow</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">Data Science</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">Engineering</span></div>

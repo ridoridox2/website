@@ -41,7 +41,7 @@ input,textarea,button{font-family:inherit}
 @media(pointer:fine){*{cursor:none}}
 
 /* ── CURSOR ── */
-#cur{position:fixed;top:0;left:0;width:22px;height:22px;border-radius:50%;background:var(--flag);pointer-events:none;z-index:9999;transform:translate3d(-50%,-50%,0);transition:width .2s,height .2s;will-change:transform}
+#cur{position:fixed;top:0;left:0;width:22px;height:22px;border-radius:50%;background:var(--ice);pointer-events:none;z-index:9999;transform:translate3d(-50%,-50%,0);transition:width .2s,height .2s;will-change:transform}
 #cur::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:9px;height:2px;background:#fff;border-radius:1px}
 #cur::after{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:2px;height:9px;background:#fff;border-radius:1px}
 #cur.big{width:36px;height:36px}
@@ -67,8 +67,8 @@ nav{display:flex;align-items:center;gap:36px}
 .drop-divider{height:1px;background:rgba(255,255,255,.08);margin:6px 0}
 nav>a{font-size:.85rem;font-weight:600;letter-spacing:.04em;color:rgba(255,255,255,.7);transition:color .2s}
 nav>a:not(.btn-nav):hover{color:#fff}
-.btn-nav{background:var(--flag);color:#fff !important;padding:10px 22px;border-radius:4px;font-weight:700;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;transition:background .2s}
-.btn-nav:hover{background:#a93226}
+.btn-nav{background:var(--ice-deep);color:#fff !important;padding:10px 22px;border-radius:4px;font-weight:700;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;transition:background .2s}
+.btn-nav:hover{background:#2f6a9c}
 .burger{display:none;flex-direction:column;gap:5px;padding:4px}
 .burger span{width:22px;height:1.5px;background:#fff;display:block}
 @media(max-width:900px){
@@ -81,9 +81,9 @@ nav>a:not(.btn-nav):hover{color:#fff}
 .dots{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
 .dots svg{position:absolute;inset:0;width:100%;height:100%}
 .dots-dark circle{fill:rgba(255,255,255,.2)}
-.dots-dark .acc{fill:var(--flag);opacity:.4}
+.dots-dark .acc{fill:var(--ice);opacity:.4}
 .dots-light circle{fill:rgba(105,115,126,.55)}
-.dots-light .acc{fill:var(--flag);opacity:.4}
+.dots-light .acc{fill:var(--ice-deep);opacity:.4}
 .dots circle{animation:dotDrift 14s ease-in-out infinite}
 .dots circle:nth-child(2n){animation-duration:17s;animation-delay:-4s}
 .dots circle:nth-child(3n){animation-duration:20s;animation-delay:-9s}
@@ -99,9 +99,9 @@ nav>a:not(.btn-nav):hover{color:#fff}
 
 /* ── SECTION LABEL ── */
 .sec-label{font-family:var(--mono);font-size:1rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mist);display:flex;align-items:center;gap:12px;margin-bottom:40px}
-.sec-label::before{content:"";width:28px;height:1.5px;background:var(--flag)}
+.sec-label::before{content:"";width:28px;height:1.5px;background:var(--ice-deep)}
 .sec-label.light{color:rgba(255,255,255,.4)}
-.sec-label.light::before{background:var(--flag)}
+.sec-label.light::before{background:var(--ice)}
 
 /* ── REVEAL ── */
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s ease}
@@ -117,16 +117,16 @@ nav>a:not(.btn-nav):hover{color:#fff}
 .hero{min-height:92svh;background:var(--stone);display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden}
 .hero-inner{position:relative;z-index:1;padding:130px 48px 90px;max-width:var(--maxw);margin:0 auto;width:100%}
 .hero-eyebrow{font-family:var(--mono);font-size:1rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.45);display:flex;align-items:center;gap:12px;margin-bottom:32px}
-.hero-eyebrow::before{content:"";width:28px;height:1.5px;background:var(--flag);display:inline-block}
+.hero-eyebrow::before{content:"";width:28px;height:1.5px;background:var(--ice);display:inline-block}
 .hero h1{font-size:clamp(2.8rem,7vw,7rem);font-weight:800;color:var(--paper);line-height:.97;letter-spacing:-.03em;margin:0 0 28px}
-.hero h1 em{color:var(--flag);font-style:normal}
+.hero h1 em{color:var(--ice);font-style:normal}
 .hero-lead{font-size:clamp(1.1rem,1.6vw,1.4rem);color:rgba(255,255,255,.6);max-width:600px;line-height:1.75;margin:0 0 40px;font-weight:400}
 .hero-cta{display:flex;gap:16px;flex-wrap:wrap}
-.hero-divider{position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent 0%,var(--flag) 20%,var(--flag) 80%,transparent 100%)}
+.hero-divider{position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent 0%,var(--ice) 20%,var(--ice) 80%,transparent 100%)}
 
 /* ── BUTTONS ── */
-.btn{display:inline-flex;align-items:center;background:var(--flag);color:#fff;padding:16px 30px;border-radius:4px;font-weight:700;font-size:.82rem;letter-spacing:.07em;text-transform:uppercase;transition:background .2s}
-.btn:hover{background:#a93226}
+.btn{display:inline-flex;align-items:center;background:var(--ice-deep);color:#fff;padding:16px 30px;border-radius:4px;font-weight:700;font-size:.82rem;letter-spacing:.07em;text-transform:uppercase;transition:background .2s}
+.btn:hover{background:#2f6a9c}
 .btn-outline{display:inline-flex;align-items:center;border:1px solid rgba(255,255,255,.35);color:#fff;padding:16px 30px;border-radius:4px;font-weight:700;font-size:.82rem;letter-spacing:.07em;text-transform:uppercase;transition:border-color .2s}
 .btn-outline:hover{border-color:#fff}
 .btn-outline-dark{display:inline-flex;align-items:center;border:1px solid var(--fog);color:var(--ink);padding:16px 30px;border-radius:4px;font-weight:700;font-size:.82rem;letter-spacing:.07em;text-transform:uppercase;transition:border-color .2s}
@@ -137,7 +137,7 @@ nav>a:not(.btn-nav):hover{color:#fff}
 .flip-card:hover{background:var(--stone);border-color:var(--stone-2)}
 .flip-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--ice);transform:scaleX(0);transform-origin:left;transition:transform .4s ease}
 .flip-card:hover::before{transform:scaleX(1)}
-.flip-num{font-family:var(--mono);font-size:1rem;color:var(--flag);letter-spacing:.1em;margin-bottom:14px;display:block;transition:color .25s ease}
+.flip-num{font-family:var(--mono);font-size:1rem;color:var(--ice-deep);letter-spacing:.1em;margin-bottom:14px;display:block;transition:color .25s ease}
 .flip-card h4{font-size:1.25rem;font-weight:800;color:var(--ink);margin:0 0 12px;line-height:1.25;transition:color .25s ease}
 .flip-card:hover h4{color:#fff}
 .flip-card p{font-size:.92rem;color:var(--granite);line-height:1.7;margin:0;transition:color .25s ease}
@@ -152,7 +152,7 @@ nav>a:not(.btn-nav):hover{color:#fff}
 /* ── STAGGER ROW (what you get) ── */
 .stagger-row{display:flex;gap:40px;align-items:baseline;padding:36px 0;border-top:1px solid var(--fog)}
 .stagger-row:last-child{border-bottom:1px solid var(--fog)}
-.stagger-row .n{font-family:var(--mono);font-size:18px;color:var(--flag);flex:0 0 auto}
+.stagger-row .n{font-family:var(--mono);font-size:18px;color:var(--ice-deep);flex:0 0 auto}
 .stagger-row h4{font-size:clamp(1.4rem,2.4vw,2rem);font-weight:800;color:var(--ink);margin:0 0 12px}
 .stagger-row p{font-size:1.05rem;color:var(--granite);line-height:1.75;margin:0;max-width:640px}
 @media(max-width:760px){.stagger-row{margin-left:0 !important}}
@@ -286,9 +286,9 @@ html.lenis{height:auto}
   </svg></div>
   <div class="wrap">
     <p class="sec-label reveal">How it works</p>
-    <h2 class="reveal" style="font-size:clamp(2rem,4vw,3.4rem);font-weight:800;color:var(--ink);letter-spacing:-.02em;margin:0 0 16px">Our permanent hiring <span style="color:var(--flag)">process</span>.</h2>
+    <h2 class="reveal" style="font-size:clamp(2rem,4vw,3.4rem);font-weight:800;color:var(--ink);letter-spacing:-.02em;margin:0 0 16px">Our permanent hiring <span style="color:var(--ice-deep)">process</span>.</h2>
     <p class="reveal" style="color:var(--granite);font-size:1.05rem;max-width:60ch;line-height:1.7;margin:0 0 20px">From the initial consultation to successful onboarding, we manage every stage with professionalism, transparency, and attention to detail.</p>
-    <p class="reveal" style="font-family:var(--mono);font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--flag);margin:0 0 40px">Scroll to explore →</p>
+    <p class="reveal" style="font-family:var(--mono);font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ice-deep);margin:0 0 40px">Scroll to explore →</p>
   </div>
   <div class="step-scroll">
     <div class="step-card reveal"><div class="flip-card"><span class="flip-num">STEP 01</span><h4>Discovery and Alignment</h4><p>We take the time to understand your organisation, hiring objectives, technical requirements, and team culture. This forms the foundation for a focused and effective search.</p></div></div>
