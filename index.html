@@ -309,6 +309,8 @@ html.lenis{height:auto}
     #hero-mountain{
         display:block;
         opacity:.45;
+        transform:scale(.5);
+        transform-origin:center center;
     }
 
     .hero-text{
@@ -969,8 +971,9 @@ function createMountain(containerId, opts){
     if(!spacerEl) return;
     const canvasRect = container.getBoundingClientRect();
     const spacerRect = spacerEl.getBoundingClientRect();
-    const fracX = (spacerRect.left + spacerRect.width/2 - canvasRect.left) / canvasRect.width;
-    const fracY = (spacerRect.top + spacerRect.height/2 - canvasRect.top) / canvasRect.height;
+    const spacerVisible = spacerRect.width > 0 && spacerRect.height > 0;
+    const fracX = spacerVisible ? (spacerRect.left + spacerRect.width/2 - canvasRect.left) / canvasRect.width : 0.5;
+    const fracY = spacerVisible ? (spacerRect.top + spacerRect.height/2 - canvasRect.top) / canvasRect.height : 0.5;
 
     const dist = camera.position.z;
     const vFov = camera.fov * Math.PI/180;
