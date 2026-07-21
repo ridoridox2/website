@@ -65,7 +65,7 @@ nav{display:flex;align-items:center;gap:36px}
 .drop a{display:block;padding:9px 14px;font-size:.82rem;color:rgba(255,255,255,.65);border-radius:4px;transition:.15s}
 .drop a:hover{background:rgba(255,255,255,.08);color:#fff}
 .drop-divider{height:1px;background:rgba(255,255,255,.08);margin:6px 0}
-nav>a{font-size:.85rem;font-weight:600;letter-spacing:.04em;color:rgba(255,255,255,.7);transition:color .2s}
+nav>a{font-size:.85rem;font-weight:600;letter-spacing:.04em;color:rgba(255,255,255,.7) !important;transition:color .2s}
 nav>a:not(.btn-nav):hover{color:#fff}
 .btn-nav{background:var(--ice-deep);color:#fff !important;padding:10px 22px;border-radius:4px;font-weight:700;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;transition:background .2s}
 .btn-nav:hover{background:#2f6a9c}
@@ -194,7 +194,7 @@ nav>a:not(.btn-nav):hover{color:#fff}
 .audience{background:var(--snow);padding:120px 0;position:relative;overflow:hidden}
 .audience h2{font-size:clamp(2rem,4vw,3.5rem);font-weight:800;letter-spacing:-.02em;color:var(--ink);margin-top:16px}
 .aud-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(255,255,255,.07);border-radius:8px;overflow:hidden;margin-top:64px}
-.aud-card{background:var(--paper);border:1px solid var(--fog);padding:60px 56px;position:relative;overflow:hidden;transition:background .25s ease,border-color .25s ease}
+.aud-card{display:block;background:var(--paper);border:1px solid var(--fog);padding:60px 56px;position:relative;overflow:hidden;transition:background .25s ease,border-color .25s ease}
 .aud-card:hover{background:var(--stone);border-color:var(--stone-2)}
 .aud-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--ice);transform:scaleX(0);transform-origin:left;transition:transform .4s ease}
 .aud-card:hover::before{transform:scaleX(1)}
@@ -308,10 +308,12 @@ html.lenis{height:auto}
 
     #hero-mountain{
         display:block;
-        opacity:.45;
+        opacity:.2;
         transform:scale(.5);
         transform-origin:center center;
     }
+    #hero-mountain.ready{opacity:.2}
+    #hero-mountain.hidden{opacity:0}
 
     .hero-text{
         position:relative;
@@ -325,11 +327,11 @@ html.lenis{height:auto}
     }
 
     .hero-name{
-        font-size:clamp(2rem,13cqw,3.1rem);
+        font-size:clamp(2.2rem,9vw,4rem);
     }
 
     .hero-sub{
-        font-size:clamp(1.1rem,7cqw,1.9rem);
+        font-size:clamp(1.15rem,4.6vw,2.2rem);
     }
 }
 </style>
@@ -599,18 +601,18 @@ html.lenis{height:auto}
     <p class="sec-label reveal">Get started</p>
     <h2 class="reveal">How can we help you today?</h2>
     <div class="aud-grid">
-      <div class="aud-card reveal">
+      <a href="for_companies.html" class="aud-card reveal">
         <span class="aud-tag">For companies</span>
         <h3>Hire smarter,<br>hire faster.</h3>
         <p>From a single specialist to a full team. We handle the search, the assessment and the process end to end.</p>
-        <a href="for_companies.html" class="aud-btn">Let's collaborate</a>
-      </div>
-      <div class="aud-card reveal">
+        <span class="aud-btn">Let's collaborate</span>
+      </a>
+      <a href="career-consulting.html" class="aud-card reveal">
         <span class="aud-tag">For candidates</span>
         <h3>Find your<br>next role.</h3>
         <p>We work with you directly, respect your time and only present you with roles that genuinely fit your goals.</p>
-        <a href="career-consulting.html" class="aud-btn">Explore opportunities</a>
-      </div>
+        <span class="aud-btn">Explore opportunities</span>
+      </a>
     </div>
   </div>
 </section>
@@ -874,7 +876,7 @@ html.lenis{height:auto}
       </div>
     </div>
     <div class="foot-bot">
-      <span>SwissPeak Partners&#174; &middot; Made in Switzerland</span>
+      <span>SwissPeak Partners&#174; &middot; <span style="color:var(--flag)">Made in Switzerland</span></span>
       <div class="foot-links"><a href="#">Imprint</a><a href="#">Privacy</a><a href="#">Terms</a></div>
     </div>
   </div>
@@ -1127,10 +1129,13 @@ if(introParaEl){
   const introStopMarker = 'project team';
   const introStopIdx = introFullText.indexOf(introStopMarker) + introStopMarker.length;
   const introNewSentence = ": we take care of the people, so companies can focus on the business.";
-  const introFinalHTML = introOriginalHTML.slice(0, introOriginalHTML.indexOf(introBizMarker) + introBizMarker.length) + '<span style="color:var(--flag)">' + introNewSentence + '</span>';
+  const introFinalHTML = introOriginalHTML.slice(0, introOriginalHTML.indexOf(introBizMarker) + introBizMarker.length) + '<span style="color:var(--ice-deep)">' + introNewSentence + '</span>';
 
   function typeDelay(lastChar){
-    return lastChar === '.' ? 75 + 240 : 75;
+    return lastChar === '.' ? 32 + 240 : 32;
+  }
+  function retypeDelay(lastChar){
+    return lastChar === '.' ? 60 + 240 : 60;
   }
   const introDeleteRange = introStopIdx - introPrefixText.length;
 
@@ -1154,19 +1159,19 @@ if(introParaEl){
     if(introTyped > introPrefixText.length){
       const progress = (introStopIdx - introTyped) / introDeleteRange;
       const accel = Math.min(1, progress*3);
-      const delay = (95 - accel*75) + Math.random()*15;
+      const delay = (75 - accel*60) + Math.random()*12;
       setTimeout(backspaceIntroPara, delay);
     } else {
-      setTimeout(retypeIntroPara, 250);
+      setTimeout(retypeIntroPara, 200);
     }
   }
   let introRetyped = 0;
   function retypeIntroPara(){
     introRetyped++;
-    const typedSoFar = introPrefixText + '<span style="color:var(--flag)">' + introNewSentence.slice(0, introRetyped) + '</span>';
+    const typedSoFar = introPrefixText + '<span style="color:var(--ice-deep)">' + introNewSentence.slice(0, introRetyped) + '</span>';
     introParaEl.innerHTML = typedSoFar + '<span class="type-cursor"></span>';
     if(introRetyped < introNewSentence.length){
-      setTimeout(retypeIntroPara, typeDelay(introNewSentence[introRetyped-1]));
+      setTimeout(retypeIntroPara, retypeDelay(introNewSentence[introRetyped-1]));
     } else {
       const oldMinHeight = introParaEl.style.minHeight;
       introParaEl.innerHTML = introFinalHTML;
