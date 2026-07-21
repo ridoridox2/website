@@ -65,7 +65,7 @@ nav{display:flex;align-items:center;gap:36px}
 .drop a{display:block;padding:9px 14px;font-size:.82rem;color:rgba(255,255,255,.65);border-radius:4px;transition:.15s}
 .drop a:hover{background:rgba(255,255,255,.08);color:#fff}
 .drop-divider{height:1px;background:rgba(255,255,255,.08);margin:6px 0}
-nav>a{font-size:.85rem;font-weight:600;letter-spacing:.04em;color:rgba(255,255,255,.7);transition:color .2s}
+nav>a{font-size:.85rem;font-weight:600;letter-spacing:.04em;color:rgba(255,255,255,.7) !important;transition:color .2s}
 nav>a:not(.btn-nav):hover{color:#fff}
 .btn-nav{background:var(--ice-deep);color:#fff !important;padding:10px 22px;border-radius:4px;font-weight:700;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;transition:background .2s}
 .btn-nav:hover{background:#2f6a9c}
@@ -126,9 +126,9 @@ nav>a:not(.btn-nav):hover{color:#fff}
 .hero-divider{position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent 0%,var(--ice) 20%,var(--ice) 80%,transparent 100%)}
 
 /* ── BUTTONS ── */
-.btn{display:inline-flex;align-items:center;background:var(--ice-deep);color:#fff;padding:16px 30px;border-radius:4px;font-weight:700;font-size:.82rem;letter-spacing:.07em;text-transform:uppercase;transition:background .2s}
+.btn{display:inline-flex;align-items:center;background:var(--ice-deep);color:#fff !important;padding:16px 30px;border-radius:4px;font-weight:700;font-size:.82rem;letter-spacing:.07em;text-transform:uppercase;transition:background .2s}
 .btn:hover{background:#2f6a9c}
-.btn-outline{display:inline-flex;align-items:center;border:1px solid rgba(255,255,255,.35);color:#fff;padding:16px 30px;border-radius:4px;font-weight:700;font-size:.82rem;letter-spacing:.07em;text-transform:uppercase;transition:border-color .2s}
+.btn-outline{display:inline-flex;align-items:center;border:1px solid rgba(255,255,255,.35);color:var(--ice) !important;padding:16px 30px;border-radius:4px;font-weight:700;font-size:.82rem;letter-spacing:.07em;text-transform:uppercase;transition:border-color .2s}
 .btn-outline:hover{border-color:#fff}
 .btn-outline-dark{display:inline-flex;align-items:center;border:1px solid var(--fog);color:var(--ink);padding:16px 30px;border-radius:4px;font-weight:700;font-size:.82rem;letter-spacing:.07em;text-transform:uppercase;transition:border-color .2s}
 .btn-outline-dark:hover{border-color:var(--granite)}

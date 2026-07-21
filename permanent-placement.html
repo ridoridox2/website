@@ -65,7 +65,7 @@ nav{display:flex;align-items:center;gap:36px}
 .drop a{display:block;padding:9px 14px;font-size:.82rem;color:rgba(255,255,255,.65);border-radius:4px;transition:.15s}
 .drop a:hover{background:rgba(255,255,255,.08);color:#fff}
 .drop-divider{height:1px;background:rgba(255,255,255,.08);margin:6px 0}
-nav>a{font-size:.85rem;font-weight:600;letter-spacing:.04em;color:rgba(255,255,255,.7);transition:color .2s}
+nav>a{font-size:.85rem;font-weight:600;letter-spacing:.04em;color:rgba(255,255,255,.7) !important;transition:color .2s}
 nav>a:not(.btn-nav):hover{color:#fff}
 .btn-nav{background:var(--ice-deep);color:#fff !important;padding:10px 22px;border-radius:4px;font-weight:700;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;transition:background .2s}
 .btn-nav:hover{background:#2f6a9c}
@@ -125,9 +125,9 @@ nav>a:not(.btn-nav):hover{color:#fff}
 .hero-divider{position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent 0%,var(--ice) 20%,var(--ice) 80%,transparent 100%)}
 
 /* ── BUTTONS ── */
-.btn{display:inline-flex;align-items:center;background:var(--ice-deep);color:#fff;padding:16px 30px;border-radius:4px;font-weight:700;font-size:.82rem;letter-spacing:.07em;text-transform:uppercase;transition:background .2s}
+.btn{display:inline-flex;align-items:center;background:var(--ice-deep);color:#fff !important;padding:16px 30px;border-radius:4px;font-weight:700;font-size:.82rem;letter-spacing:.07em;text-transform:uppercase;transition:background .2s}
 .btn:hover{background:#2f6a9c}
-.btn-outline{display:inline-flex;align-items:center;border:1px solid rgba(255,255,255,.35);color:#fff;padding:16px 30px;border-radius:4px;font-weight:700;font-size:.82rem;letter-spacing:.07em;text-transform:uppercase;transition:border-color .2s}
+.btn-outline{display:inline-flex;align-items:center;border:1px solid rgba(255,255,255,.35);color:var(--ice) !important;padding:16px 30px;border-radius:4px;font-weight:700;font-size:.82rem;letter-spacing:.07em;text-transform:uppercase;transition:border-color .2s}
 .btn-outline:hover{border-color:#fff}
 .btn-outline-dark{display:inline-flex;align-items:center;border:1px solid var(--fog);color:var(--ink);padding:16px 30px;border-radius:4px;font-weight:700;font-size:.82rem;letter-spacing:.07em;text-transform:uppercase;transition:border-color .2s}
 .btn-outline-dark:hover{border-color:var(--granite)}
@@ -148,6 +148,10 @@ nav>a:not(.btn-nav):hover{color:#fff}
 .step-scroll::-webkit-scrollbar{height:6px}
 .step-scroll::-webkit-scrollbar-thumb{background:var(--fog);border-radius:99px}
 .step-card{flex:0 0 300px;scroll-snap-align:start}
+
+/* ── WHY IT MATTERS GRID ── */
+.why-grid{display:grid;grid-template-columns:1fr 460px;gap:80px;align-items:start}
+@media(max-width:900px){.why-grid{grid-template-columns:1fr;gap:32px}}
 
 /* ── STAGGER ROW (what you get) ── */
 .stagger-row{display:flex;gap:40px;align-items:baseline;padding:36px 0;border-top:1px solid var(--fog)}
@@ -244,7 +248,7 @@ html.lenis{height:auto}
   <div class="dots dots-light" aria-hidden="true"><svg viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice">
     <circle cx="906" cy="359" r="1.30"/><circle cx="63" cy="61" r="2.50"/><circle cx="92" cy="67" r="2.00"/><circle cx="843" cy="265" r="1.65"/><circle cx="1042" cy="401" r="2.23"/><circle cx="902" cy="65" r="1.47"/><circle cx="938" cy="435" r="2.05"/><circle cx="853" cy="0" r="1.90"/><circle cx="1131" cy="288" r="1.65"/><circle cx="1234" cy="299" r="1.60"/><circle cx="633" cy="77" r="2.35"/><circle cx="693" cy="103" r="2.48"/><circle cx="687" cy="142" r="1.35"/><circle cx="110" cy="493" r="1.93"/><circle cx="578" cy="327" r="1.50"/><circle cx="247" cy="104" r="1.62"/><circle cx="509" cy="495" r="1.30"/><circle cx="1423" cy="250" r="1.30"/><circle cx="724" cy="122" r="1.90"/><circle cx="1196" cy="36" r="1.27"/><circle cx="150" cy="300" r="1.42"/><circle cx="1407" cy="589" r="1.65"/><circle cx="1373" cy="276" r="1.95"/><circle cx="58" cy="322" r="1.72"/><circle cx="822" cy="563" r="2.40"/><circle cx="1110" cy="66" r="1.38"/><circle cx="114" cy="278" r="2.40"/><circle cx="164" cy="272" r="1.68"/><circle cx="215" cy="574" r="1.93"/><circle cx="957" cy="472" r="2.00"/><circle cx="979" cy="535" r="1.38"/><circle cx="1186" cy="522" r="1.35"/><circle cx="202" cy="494" r="1.93"/><circle cx="1000" cy="518" r="1.35"/><circle cx="102" cy="261" r="1.27"/><circle cx="1431" cy="124" r="1.42"/><circle cx="129" cy="171" r="2.00"/><circle cx="16" cy="240" r="1.33"/><circle cx="506" cy="330" r="1.27"/><circle cx="1289" cy="129" r="2.25"/><circle cx="720" cy="537" r="2.12"/><circle cx="872" cy="431" r="1.95"/><circle cx="1000" cy="516" r="1.72"/><circle cx="351" cy="333" r="1.55"/><circle cx="475" cy="375" r="2.10"/><circle cx="512" cy="371" r="2.38"/><circle cx="707" cy="425" r="1.47"/><circle cx="132" cy="433" r="1.98"/><circle class="acc" cx="1100" cy="480" r="3"/>
   </svg></div>
-  <div class="wrap" style="display:grid;grid-template-columns:1fr 460px;gap:80px;align-items:start">
+  <div class="wrap why-grid">
     <div>
       <p class="sec-label reveal">Why it matters</p>
       <h2 class="reveal" style="font-size:clamp(1.9rem,3.6vw,3rem);font-weight:800;color:var(--ink);letter-spacing:-.02em;line-height:1.1;margin:0">Finding the people who move your business forward.</h2>
