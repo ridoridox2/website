@@ -974,6 +974,16 @@ function createMountain(containerId, opts){
 
   const spacerEl = document.querySelector('.hero-mountain-spacer');
 
+  const baseDist = camera.position.z;
+  function fitCameraDistance(){
+    const vFov = camera.fov * Math.PI/180;
+    const requiredWidth = baseRadius * 2.15;
+    const neededDist = requiredWidth / (camera.aspect * 2*Math.tan(vFov/2));
+    camera.position.z = Math.max(baseDist, neededDist);
+    camera.updateProjectionMatrix();
+  }
+  fitCameraDistance();
+
   function positionMountain(){
     if(!spacerEl) return;
     const canvasRect = container.getBoundingClientRect();
@@ -1052,7 +1062,7 @@ function createMountain(containerId, opts){
   window.addEventListener('resize', ()=>{
     width = container.clientWidth; height = container.clientHeight;
     if(!width||!height) return;
-    camera.aspect = width/height; camera.updateProjectionMatrix();
+    camera.aspect = width/height; fitCameraDistance();
     renderer.setSize(width, height);
     positionMountain();
   });
