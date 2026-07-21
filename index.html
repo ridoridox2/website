@@ -302,17 +302,21 @@ html.lenis{height:auto}
 #hero-mountain.hidden{opacity:0}
 #hero-mountain canvas{display:block}
 @media(max-width:1180px){
+    .hero{
+        justify-content:flex-end;
+    }
+
     .hero-mountain-spacer{
         display:none;
     }
 
     #hero-mountain{
         display:block;
-        opacity:.2;
-        transform:scale(.5);
+        opacity:.3;
+        transform:translateY(-25%) scale(.6);
         transform-origin:center center;
     }
-    #hero-mountain.ready{opacity:.2}
+    #hero-mountain.ready{opacity:.3}
     #hero-mountain.hidden{opacity:0}
 
     .hero-text{
@@ -323,15 +327,15 @@ html.lenis{height:auto}
 
     .hero-inner{
         justify-content:center;
-        padding:0 24px;
+        padding:0 24px 72px;
     }
 
     .hero-name{
-        font-size:clamp(2.2rem,9vw,4rem);
+        font-size:clamp(2.6rem,11vw,4.8rem);
     }
 
     .hero-sub{
-        font-size:clamp(1.15rem,4.6vw,2.2rem);
+        font-size:clamp(1.3rem,5.5vw,2.6rem);
     }
 }
 </style>
@@ -530,13 +534,13 @@ html.lenis{height:auto}
       </div>
       <div class="wrap">
         <div class="intro-textcard">
-          <p id="intro-para" style="font-size:clamp(1.4rem,3vw,2.4rem);font-weight:600;color:var(--ink);line-height:1.5;letter-spacing:-.01em">
+          <p id="intro-para" style="font-size:clamp(1.5rem,3.3vw,2.6rem);font-weight:700;color:var(--ink);line-height:1.5;letter-spacing:-.01em">
             We are a Swiss recruitment and staffing partner with
-            <span style="font-weight:650;color:var(--ink)">deep roots in IT</span>
+            <span style="font-weight:800;color:var(--ink)">deep roots in IT</span>
             and proven expertise across several industries. We shine in
-            <span style="font-weight:650;color:var(--ink)">highly regulated sectors</span>,
+            <span style="font-weight:800;color:var(--ink)">highly regulated sectors</span>,
             where identifying the right fit matters most. We focus on tech, but we never forget recruitment is a people business. We handle the full cycle, from sourcing and interviewing to delivering complete project teams, and we keep the whole process
-            <span style="font-weight:650;color:var(--ink)">clear, fast and transparent</span>.
+            <span style="font-weight:800;color:var(--ink)">clear, fast and transparent</span>.
           </p>
         </div>
       </div>
