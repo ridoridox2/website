@@ -922,6 +922,7 @@ function createMountain(containerId, opts){
   camera.position.set(0, 0.4, 11);
 
   const renderer = new THREE.WebGLRenderer({antialias:true, alpha:true});
+  renderer.setClearColor(0x000000, 0);
   renderer.setSize(width, height);
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
   container.appendChild(renderer.domElement);
