@@ -41,10 +41,16 @@ input,textarea,button{font-family:inherit}
 @media(pointer:fine){*{cursor:none}}
 
 /* ── CURSOR ── */
-#cur{position:fixed;top:0;left:0;width:22px;height:22px;border-radius:50%;background:var(--ice);pointer-events:none;z-index:9999;transform:translate3d(-50%,-50%,0);transition:width .2s,height .2s;will-change:transform}
-#cur::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:9px;height:2px;background:#fff;border-radius:1px}
-#cur::after{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:2px;height:9px;background:#fff;border-radius:1px}
-#cur.big{width:36px;height:36px}
+#cur{position:fixed;top:0;left:0;width:1px;height:1px;pointer-events:none;z-index:9999;transform:translate3d(-50%,-50%,0);will-change:transform}
+.cur-mark{position:absolute;top:0;left:0;width:28px;height:28px;transform:translate(-50%,-50%)}
+.cur-mark::before,.cur-mark::after{content:"";position:absolute;top:50%;left:50%;background:var(--flag);mix-blend-mode:difference}
+.cur-mark::before{width:26px;height:3px;transform:translate(-50%,-50%)}
+.cur-mark::after{width:3px;height:26px;transform:translate(-50%,-50%)}
+#cur.big .cur-mark,#cur.scrolling .cur-mark{animation:curSpin .9s linear infinite}
+@keyframes curSpin{from{transform:translate(-50%,-50%) rotate(0deg)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+.cur-particle{position:fixed;top:0;left:0;width:4.5px;height:4.5px;border-radius:50%;background:var(--flag);pointer-events:none;z-index:9998;transform:translate(-50%,-50%);animation:curParticleFade .7s ease-out forwards}
+@keyframes curParticleFade{0%{opacity:.7;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-50%) scale(.2)}}
+@media(pointer:coarse){.cur-particle{display:none}}
 @media(pointer:coarse){#cur{display:none}}
 
 /* ── WRAP ── */
@@ -133,7 +139,7 @@ nav>a:not(.btn-nav):hover{color:#fff}
 .btn-outline-dark:hover{border-color:var(--granite)}
 
 /* ── FLIP CARD (process steps / engagement models) ── */
-.flip-card{background:var(--paper);border:1px solid var(--fog);padding:40px 36px;position:relative;overflow:hidden;transition:background .25s ease,border-color .25s ease}
+.flip-card{background:var(--paper);border:1px solid var(--fog);padding:40px 36px;position:relative;overflow:hidden;height:100%;box-sizing:border-box;transition:background .25s ease,border-color .25s ease}
 .flip-card:hover{background:var(--stone);border-color:var(--stone-2)}
 .flip-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--ice);transform:scaleX(0);transform-origin:left;transition:transform .4s ease}
 .flip-card:hover::before{transform:scaleX(1)}
@@ -148,17 +154,28 @@ nav>a:not(.btn-nav):hover{color:#fff}
 .step-scroll::-webkit-scrollbar{height:6px}
 .step-scroll::-webkit-scrollbar-thumb{background:var(--fog);border-radius:99px}
 .step-card{flex:0 0 300px;scroll-snap-align:start}
+.steps-nav{display:flex;gap:12px}
+.steps-arrow{width:44px;height:44px;border-radius:50%;border:1px solid var(--fog);background:var(--paper);display:grid;place-items:center;cursor:pointer;transition:.2s;color:var(--ink);flex:0 0 auto}
+.steps-arrow:hover{background:var(--ice-deep);border-color:var(--ice-deep);color:#fff}
+.steps-arrow:disabled{opacity:.35;cursor:default;pointer-events:none}
+.steps-arrow svg{width:18px;height:18px}
 
 /* ── WHY IT MATTERS GRID ── */
 .why-grid{display:grid;grid-template-columns:1fr 460px;gap:80px;align-items:start}
 @media(max-width:900px){.why-grid{grid-template-columns:1fr;gap:32px}}
 
 /* ── STAGGER ROW (what you get) ── */
-.stagger-row{display:flex;gap:40px;align-items:baseline;padding:36px 0;border-top:1px solid var(--fog)}
+.stagger-row{display:flex;gap:40px;align-items:baseline;padding:36px 24px;border-top:1px solid var(--fog);border-radius:8px;transition:background .25s ease}
+.stagger-reveal{opacity:0;transform:translateX(-70px);transition:opacity .7s ease,transform .7s cubic-bezier(.16,1,.3,1)}
+.stagger-reveal.in{opacity:1;transform:none}
 .stagger-row:last-child{border-bottom:1px solid var(--fog)}
-.stagger-row .n{font-family:var(--mono);font-size:18px;color:var(--ice-deep);flex:0 0 auto}
-.stagger-row h4{font-size:clamp(1.4rem,2.4vw,2rem);font-weight:800;color:var(--ink);margin:0 0 12px}
-.stagger-row p{font-size:1.05rem;color:var(--granite);line-height:1.75;margin:0;max-width:640px}
+.stagger-row:hover{background:var(--stone)}
+.stagger-row .n{font-family:var(--mono);font-size:18px;color:var(--ice-deep);flex:0 0 auto;transition:color .25s ease}
+.stagger-row:hover .n{color:var(--ice)}
+.stagger-row h4{font-size:clamp(1.4rem,2.4vw,2rem);font-weight:800;color:var(--ink);margin:0 0 12px;transition:color .25s ease}
+.stagger-row:hover h4{color:var(--paper)}
+.stagger-row p{font-size:1.05rem;color:var(--granite);line-height:1.75;margin:0;max-width:640px;transition:color .25s ease}
+.stagger-row:hover p{color:rgba(255,255,255,.6)}
 @media(max-width:760px){.stagger-row{margin-left:0 !important}}
 
 /* ── CTA / CONTACT SECTION ── */
@@ -193,7 +210,7 @@ html.lenis{height:auto}
 </head>
 <body>
 
-<div id="cur"></div>
+<div id="cur"><span class="cur-mark"></span></div>
 
 <header id="hdr">
   <div class="nav-wrap">
@@ -268,15 +285,15 @@ html.lenis{height:auto}
   <div class="wrap">
     <p class="sec-label reveal">What you get</p>
 
-    <div class="stagger-row reveal" style="margin-left:0">
+    <div class="stagger-row stagger-reveal" style="margin-left:0">
       <span class="n">01</span>
       <div><h4>Fast Access to Top Talent</h4><p>Our recruiters combine industry expertise, data driven market insights, and proactive search strategies to identify outstanding professionals quickly. We connect you with both active and passive candidates, ensuring access to talent that is often unavailable through traditional recruitment channels.</p></div>
     </div>
-    <div class="stagger-row reveal" style="margin-left:80px">
+    <div class="stagger-row stagger-reveal" style="margin-left:80px">
       <span class="n">02</span>
       <div><h4>Strategic Hiring Advisory</h4><p>We work as trusted hiring partners rather than transactional recruiters. From defining role requirements to advising on market conditions, salary expectations, and hiring strategy, we help you make informed decisions that strengthen your organisation for the future.</p></div>
     </div>
-    <div class="stagger-row reveal" style="margin-left:160px">
+    <div class="stagger-row stagger-reveal" style="margin-left:160px">
       <span class="n">03</span>
       <div><h4>Long Term Hiring Success</h4><p>Every candidate goes through a structured evaluation process that includes in depth interviews, technical and professional assessments, and cultural fit discussions. Our objective is simple: to present candidates who are capable of delivering long term impact from day one.</p></div>
     </div>
@@ -292,7 +309,13 @@ html.lenis{height:auto}
     <p class="sec-label reveal">How it works</p>
     <h2 class="reveal" style="font-size:clamp(2rem,4vw,3.4rem);font-weight:800;color:var(--ink);letter-spacing:-.02em;margin:0 0 16px">Our permanent hiring <span style="color:var(--ice-deep)">process</span>.</h2>
     <p class="reveal" style="color:var(--granite);font-size:1.05rem;max-width:60ch;line-height:1.7;margin:0 0 20px">From the initial consultation to successful onboarding, we manage every stage with professionalism, transparency, and attention to detail.</p>
-    <p class="reveal" style="font-family:var(--mono);font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ice-deep);margin:0 0 40px">Scroll to explore →</p>
+    <div class="reveal" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin:0 0 40px">
+      <p style="font-family:var(--mono);font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ice-deep);margin:0">Scroll to explore →</p>
+      <div class="steps-nav">
+        <button class="steps-arrow" id="stepsPrev" aria-label="Previous step"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+        <button class="steps-arrow" id="stepsNext" aria-label="Next step"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+      </div>
+    </div>
   </div>
   <div class="step-scroll">
     <div class="step-card reveal"><div class="flip-card"><span class="flip-num">STEP 01</span><h4>Discovery and Alignment</h4><p>We take the time to understand your organisation, hiring objectives, technical requirements, and team culture. This forms the foundation for a focused and effective search.</p></div></div>
@@ -379,14 +402,52 @@ document.getElementById('burger').addEventListener('click',()=>{
   document.getElementById('mainNav').classList.toggle('open');
 });
 
+const stepScroll=document.querySelector('.step-scroll');
+const stepsPrev=document.getElementById('stepsPrev');
+const stepsNext=document.getElementById('stepsNext');
+if(stepScroll && stepsPrev && stepsNext){
+  const stepScrollAmount=324;
+  stepsPrev.addEventListener('click',()=>stepScroll.scrollBy({left:-stepScrollAmount,behavior:'smooth'}));
+  stepsNext.addEventListener('click',()=>stepScroll.scrollBy({left:stepScrollAmount,behavior:'smooth'}));
+  function updateStepsNav(){
+    stepsPrev.disabled=stepScroll.scrollLeft<=4;
+    stepsNext.disabled=stepScroll.scrollLeft+stepScroll.clientWidth>=stepScroll.scrollWidth-4;
+  }
+  stepScroll.addEventListener('scroll',updateStepsNav,{passive:true});
+  updateStepsNav();
+}
+
 const cur=document.getElementById('cur');
-let mx=0,my=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
-(function loop(){cur.style.transform=`translate3d(${mx}px,${my}px,0) translate(-50%,-50%)`;requestAnimationFrame(loop);})();
+let mx=0,my=0,dx=0,dy=0,lastParticle=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  const now=performance.now();
+  if(now-lastParticle>50){
+    lastParticle=now;
+    const p=document.createElement('span');
+    p.className='cur-particle';
+    p.style.left=mx+'px';
+    p.style.top=my+'px';
+    document.body.appendChild(p);
+    p.addEventListener('animationend',()=>p.remove());
+  }
+});
+(function loop(){
+  dx+=(mx-dx)*0.4;
+  dy+=(my-dy)*0.4;
+  cur.style.transform=`translate3d(${dx}px,${dy}px,0) translate(-50%,-50%)`;
+  requestAnimationFrame(loop);
+})();
 document.querySelectorAll('a,button').forEach(el=>{
   el.addEventListener('mouseenter',()=>cur.classList.add('big'));
   el.addEventListener('mouseleave',()=>cur.classList.remove('big'));
 });
+let scrollSpinTimeout;
+window.addEventListener('scroll',()=>{
+  cur.classList.add('scrolling');
+  clearTimeout(scrollSpinTimeout);
+  scrollSpinTimeout=setTimeout(()=>cur.classList.remove('scrolling'),200);
+},{passive:true});
 
 const io=new IntersectionObserver(es=>{
   es.forEach(e=>{if(e.isIntersecting){
@@ -396,6 +457,16 @@ const io=new IntersectionObserver(es=>{
   }});
 },{threshold:.1,rootMargin:'0px 0px -6% 0px'});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+const stagRevealEls=[...document.querySelectorAll('.stagger-reveal')];
+const stagIo=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){
+    const idx=stagRevealEls.indexOf(e.target);
+    e.target.style.transitionDelay=(Math.max(0,idx)*180)+'ms';
+    e.target.classList.add('in');stagIo.unobserve(e.target);
+  }});
+},{threshold:.15,rootMargin:'0px 0px -6% 0px'});
+stagRevealEls.forEach(el=>stagIo.observe(el));
 
 const WA_NUMBER="41764691295";
 document.getElementById('waFab').href="https://wa.me/"+WA_NUMBER+"?text="+encodeURIComponent("Hello SwissPeak Partners 👋  I'd like some information.");

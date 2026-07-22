@@ -41,10 +41,16 @@ input,textarea,button{font-family:inherit}
 @media(pointer:fine){*{cursor:none}}
 
 /* ── CURSOR ── */
-#cur{position:fixed;top:0;left:0;width:22px;height:22px;border-radius:50%;background:var(--ice);pointer-events:none;z-index:9999;transform:translate3d(-50%,-50%,0);transition:width .2s,height .2s;will-change:transform}
-#cur::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:9px;height:2px;background:#fff;border-radius:1px}
-#cur::after{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:2px;height:9px;background:#fff;border-radius:1px}
-#cur.big{width:36px;height:36px}
+#cur{position:fixed;top:0;left:0;width:1px;height:1px;pointer-events:none;z-index:9999;transform:translate3d(-50%,-50%,0);will-change:transform}
+.cur-mark{position:absolute;top:0;left:0;width:28px;height:28px;transform:translate(-50%,-50%)}
+.cur-mark::before,.cur-mark::after{content:"";position:absolute;top:50%;left:50%;background:var(--flag);mix-blend-mode:difference}
+.cur-mark::before{width:26px;height:3px;transform:translate(-50%,-50%)}
+.cur-mark::after{width:3px;height:26px;transform:translate(-50%,-50%)}
+#cur.big .cur-mark,#cur.scrolling .cur-mark{animation:curSpin .9s linear infinite}
+@keyframes curSpin{from{transform:translate(-50%,-50%) rotate(0deg)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+.cur-particle{position:fixed;top:0;left:0;width:4.5px;height:4.5px;border-radius:50%;background:var(--flag);pointer-events:none;z-index:9998;transform:translate(-50%,-50%);animation:curParticleFade .7s ease-out forwards}
+@keyframes curParticleFade{0%{opacity:.7;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-50%) scale(.2)}}
+@media(pointer:coarse){.cur-particle{display:none}}
 @media(pointer:coarse){#cur{display:none}}
 
 /* ── WRAP ── */
@@ -177,7 +183,7 @@ nav>a:not(.btn-nav):hover{color:#fff}
 .ishape-cross::before{width:var(--s);height:1.5px;transform:translate(-50%,-50%)}
 .ishape-cross::after{width:1.5px;height:var(--s);transform:translate(-50%,-50%)}
 .ishape-square{width:var(--s);height:var(--s);border:1.5px solid currentColor;box-sizing:border-box}
-.intro-stage .wrap{position:relative;z-index:2;max-width:1100px;text-align:left}
+.intro-stage .wrap{position:relative;z-index:2;max-width:1400px;text-align:left}
 .intro-textcard{background:transparent;padding:48px 56px}
 @media(max-width:760px){.intro-textcard{padding:32px 28px}}
 @media(max-width:900px){
@@ -342,7 +348,7 @@ html.lenis{height:auto}
 </head>
 <body>
 
-<div id="cur"></div>
+<div id="cur"><span class="cur-mark"></span></div>
 
 <header id="hdr">
   <div class="nav-wrap">
@@ -534,12 +540,10 @@ html.lenis{height:auto}
       </div>
       <div class="wrap">
         <div class="intro-textcard">
-          <p id="intro-para" style="font-size:clamp(1.5rem,3.3vw,2.6rem);font-weight:700;color:var(--ink);line-height:1.5;letter-spacing:-.01em">
-            We are a Swiss recruitment and staffing partner with
-            <span style="font-weight:800;color:var(--ink)">deep roots in IT</span>
-            and proven expertise across several industries. We shine in
-            <span style="font-weight:800;color:var(--ink)">highly regulated sectors</span>,
-            where identifying the right fit matters most. We focus on tech, but we never forget recruitment is a people business. We handle the full cycle, from sourcing and interviewing to delivering complete project teams, and we keep the whole process
+          <p id="intro-para" style="font-size:clamp(1.8rem,5.5vw,4.4rem);font-weight:700;color:var(--ink);line-height:1.3;letter-spacing:-.02em">
+            We're a Swiss recruitment and staffing partner with
+            <span style="font-weight:800;color:var(--ink)">deep roots in IT</span>,
+            strong across highly regulated sectors where the right fit matters most. We talk tech, and we never forget it's a people business. We handle the full cycle, from sourcing and interviewing to delivering complete project teams, and we keep the whole process
             <span style="font-weight:800;color:var(--ink)">clear, fast and transparent</span>.
           </p>
         </div>
@@ -1141,7 +1145,7 @@ if(introParaEl){
   const introFullText = introParaEl.textContent.replace(/\s+/g, ' ').trim();
   const introBizMarker = 'a people business';
   const introPrefixText = introFullText.slice(0, introFullText.indexOf(introBizMarker) + introBizMarker.length);
-  const introStopMarker = 'project team';
+  const introStopMarker = 'project tea';
   const introStopIdx = introFullText.indexOf(introStopMarker) + introStopMarker.length;
   const introNewSentence = ": we take care of the people, so companies can focus on the business.";
   const introFinalHTML = introOriginalHTML.slice(0, introOriginalHTML.indexOf(introBizMarker) + introBizMarker.length) + '<span style="color:var(--ice-deep)">' + introNewSentence + '</span>';
@@ -1269,13 +1273,36 @@ document.getElementById('burger').addEventListener('click',()=>{
 
 // Cursor
 const cur=document.getElementById('cur');
-let mx=0,my=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
-(function loop(){cur.style.transform=`translate3d(${mx}px,${my}px,0) translate(-50%,-50%)`;requestAnimationFrame(loop);})();
+let mx=0,my=0,dx=0,dy=0,lastParticle=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  const now=performance.now();
+  if(now-lastParticle>50){
+    lastParticle=now;
+    const p=document.createElement('span');
+    p.className='cur-particle';
+    p.style.left=mx+'px';
+    p.style.top=my+'px';
+    document.body.appendChild(p);
+    p.addEventListener('animationend',()=>p.remove());
+  }
+});
+(function loop(){
+  dx+=(mx-dx)*0.4;
+  dy+=(my-dy)*0.4;
+  cur.style.transform=`translate3d(${dx}px,${dy}px,0) translate(-50%,-50%)`;
+  requestAnimationFrame(loop);
+})();
 document.querySelectorAll('a,button').forEach(el=>{
   el.addEventListener('mouseenter',()=>cur.classList.add('big'));
   el.addEventListener('mouseleave',()=>cur.classList.remove('big'));
 });
+let scrollSpinTimeout;
+window.addEventListener('scroll',()=>{
+  cur.classList.add('scrolling');
+  clearTimeout(scrollSpinTimeout);
+  scrollSpinTimeout=setTimeout(()=>cur.classList.remove('scrolling'),200);
+},{passive:true});
 
 // Reveal
 const io=new IntersectionObserver(es=>{

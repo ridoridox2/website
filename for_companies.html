@@ -41,10 +41,16 @@ input,textarea,button{font-family:inherit}
 @media(pointer:fine){*{cursor:none}}
 
 /* ── CURSOR ── */
-#cur{position:fixed;top:0;left:0;width:22px;height:22px;border-radius:50%;background:var(--ice);pointer-events:none;z-index:9999;transform:translate3d(-50%,-50%,0);transition:width .2s,height .2s;will-change:transform}
-#cur::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:9px;height:2px;background:#fff;border-radius:1px}
-#cur::after{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:2px;height:9px;background:#fff;border-radius:1px}
-#cur.big{width:36px;height:36px}
+#cur{position:fixed;top:0;left:0;width:1px;height:1px;pointer-events:none;z-index:9999;transform:translate3d(-50%,-50%,0);will-change:transform}
+.cur-mark{position:absolute;top:0;left:0;width:28px;height:28px;transform:translate(-50%,-50%)}
+.cur-mark::before,.cur-mark::after{content:"";position:absolute;top:50%;left:50%;background:var(--flag);mix-blend-mode:difference}
+.cur-mark::before{width:26px;height:3px;transform:translate(-50%,-50%)}
+.cur-mark::after{width:3px;height:26px;transform:translate(-50%,-50%)}
+#cur.big .cur-mark,#cur.scrolling .cur-mark{animation:curSpin .9s linear infinite}
+@keyframes curSpin{from{transform:translate(-50%,-50%) rotate(0deg)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+.cur-particle{position:fixed;top:0;left:0;width:4.5px;height:4.5px;border-radius:50%;background:var(--flag);pointer-events:none;z-index:9998;transform:translate(-50%,-50%);animation:curParticleFade .7s ease-out forwards}
+@keyframes curParticleFade{0%{opacity:.7;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-50%) scale(.2)}}
+@media(pointer:coarse){.cur-particle{display:none}}
 @media(pointer:coarse){#cur{display:none}}
 
 /* ── WRAP ── */
@@ -221,7 +227,7 @@ html.lenis{height:auto}
 </head>
 <body>
 
-<div id="cur"></div>
+<div id="cur"><span class="cur-mark"></span></div>
 
 <header id="hdr">
   <div class="nav-wrap">
@@ -302,8 +308,8 @@ html.lenis{height:auto}
   </svg></div>
   <div class="wrap">
     <p class="sec-label reveal">.</p>
-    <h2 class="reveal" style="font-size:clamp(2rem,4vw,3.4rem);font-weight:800;color:var(--ink);letter-spacing:-.02em;line-height:1.05;margin:0 0 12px">We recruit IT, because we understand it.</h2>
-    <p class="reveal" style="font-family:var(--mono);font-size:clamp(1rem,1.6vw,1.2rem);color:var(--swiss);font-weight:500;margin:0 0 56px">We place <b id="ticker-text" style="color:var(--ice-deep);font-weight:600">software engineers.</b></p>
+    <h2 class="reveal" style="font-size:clamp(2rem,4vw,3.4rem);font-weight:800;color:var(--ink);letter-spacing:-.02em;line-height:1.05;margin:0 0 12px">We recruit <span style="color:var(--ice-deep)">IT</span>, because we understand <span style="color:var(--ice-deep)">it</span>.</h2>
+    <p class="reveal" style="font-size:clamp(1rem,1.6vw,1.2rem);color:var(--swiss);font-weight:500;margin:0 0 56px">We place <b id="ticker-text" style="color:var(--ice-deep);font-weight:600">software engineers.</b></p>
   </div>
   <div class="marquee-wrap">
     <div class="marquee"><span class="disc-item">Software Engineering</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">IT Architecture</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">ERP &amp; SAP</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">QA Testing</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">System &amp; Network Engineering</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">IT BA &amp; PM</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">ITSM &amp; ServiceNow</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">Data Science</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">Engineering</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">Software Engineering</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">IT Architecture</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">ERP &amp; SAP</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">QA Testing</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">System &amp; Network Engineering</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">IT BA &amp; PM</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">ITSM &amp; ServiceNow</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">Data Science</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="disc-item">Engineering</span></div>
@@ -352,8 +358,8 @@ html.lenis{height:auto}
   </svg></div>
   <div class="wrap">
     <p class="sec-label light reveal">What we do</p>
-    <h2 class="reveal" style="font-size:clamp(2rem,4vw,3.4rem);font-weight:800;color:var(--paper);letter-spacing:-.02em;margin:0 0 8px">We know one size does NOT fit all.</h2>
-    <p class="reveal" style="color:rgba(255,255,255,.55);font-size:1.05rem;max-width:60ch;line-height:1.75;margin:0 0 48px;font-weight:700">Whether your team is dealing with a permanent role, a contract engagement, a nearshore team or an RPO programme, we adjust the approach to your business. Never the other way around.</p>
+    <h2 class="reveal" style="font-size:clamp(2rem,4vw,3.4rem);font-weight:800;color:var(--paper);letter-spacing:-.02em;margin:0 0 8px">We know, one size DOES NOT fit all.</h2>
+    <p class="reveal" style="color:rgba(255,255,255,.55);font-size:1.05rem;max-width:60ch;line-height:1.75;margin:0 0 48px;font-weight:700">That's why we will always adjust our approach to your business. Never the other way around. Whether your team is dealing with a permanent role, a contract engagement, a nearshore team or an RPO programme, we are here for you.</p>
 
     <a href="permanent-placement.html" class="link-row light reveal"><h3>Permanent Hiring</h3><span class="arrow">→</span></a>
     <a href="project-staffing.html" class="link-row light reveal"><h3>Project Solutions</h3><span class="arrow">→</span></a>
@@ -443,13 +449,36 @@ document.getElementById('burger').addEventListener('click',()=>{
 
 // Cursor
 const cur=document.getElementById('cur');
-let mx=0,my=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
-(function loop(){cur.style.transform=`translate3d(${mx}px,${my}px,0) translate(-50%,-50%)`;requestAnimationFrame(loop);})();
+let mx=0,my=0,dx=0,dy=0,lastParticle=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  const now=performance.now();
+  if(now-lastParticle>50){
+    lastParticle=now;
+    const p=document.createElement('span');
+    p.className='cur-particle';
+    p.style.left=mx+'px';
+    p.style.top=my+'px';
+    document.body.appendChild(p);
+    p.addEventListener('animationend',()=>p.remove());
+  }
+});
+(function loop(){
+  dx+=(mx-dx)*0.4;
+  dy+=(my-dy)*0.4;
+  cur.style.transform=`translate3d(${dx}px,${dy}px,0) translate(-50%,-50%)`;
+  requestAnimationFrame(loop);
+})();
 document.querySelectorAll('a,button').forEach(el=>{
   el.addEventListener('mouseenter',()=>cur.classList.add('big'));
   el.addEventListener('mouseleave',()=>cur.classList.remove('big'));
 });
+let scrollSpinTimeout;
+window.addEventListener('scroll',()=>{
+  cur.classList.add('scrolling');
+  clearTimeout(scrollSpinTimeout);
+  scrollSpinTimeout=setTimeout(()=>cur.classList.remove('scrolling'),200);
+},{passive:true});
 
 // Reveal
 const io=new IntersectionObserver(es=>{
