@@ -1,7 +1,13 @@
 {
   "permissions": {
     "allow": [
-      "Bash(python3 -c ' *)"
+      "Bash(python3 -c ' *)",
+      "Bash(node -e \"require.resolve\\('playwright'\\)\")",
+      "Bash(npm ls *)",
+      "Bash(grep -n \"#[0-9a-fA-F]\\\\{3,6\\\\}\" for_candidates.html)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:8934/for_candidates.html)",
+      "Bash(grep -n 'CAREER CONSULTING SERVICES\\\\|</section>\\\\s*$' /Users/lorenzo/SPP_Website/website/for_candidates.html)",
+      "Bash(grep -n \"// WA$\" /Users/lorenzo/SPP_Website/website/for_candidates.html)"
     ]
   }
 }

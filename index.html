@@ -178,11 +178,7 @@ nav>a:not(.btn-nav):hover{color:#fff}
 .intro-bg{position:absolute;inset:0;background:#f4f4f5;border-radius:24px;transform-origin:center center;will-change:transform;z-index:0}
 .intro-shapes{position:absolute;inset:0;pointer-events:none;z-index:1}
 .ishape{position:absolute;will-change:transform,opacity}
-.ishape-cross{width:1px;height:1px}
-.ishape-cross::before,.ishape-cross::after{content:"";position:absolute;top:50%;left:50%;background:currentColor}
-.ishape-cross::before{width:var(--s);height:1.5px;transform:translate(-50%,-50%)}
-.ishape-cross::after{width:1.5px;height:var(--s);transform:translate(-50%,-50%)}
-.ishape-square{width:var(--s);height:var(--s);border:1.5px solid currentColor;box-sizing:border-box}
+.ishape-dot{width:var(--s);height:var(--s);border-radius:50%;background:currentColor}
 .intro-stage .wrap{position:relative;z-index:2;max-width:1400px;text-align:left}
 .intro-textcard{background:transparent;padding:48px 56px}
 @media(max-width:760px){.intro-textcard{padding:32px 28px}}
@@ -198,24 +194,32 @@ nav>a:not(.btn-nav):hover{color:#fff}
    3. AUDIENCE
 ══════════════════════════════════════ */
 .audience{background:var(--snow);padding:120px 0;position:relative;overflow:hidden}
+.ridge{position:absolute;left:0;right:0;bottom:-1px;z-index:2;line-height:0;pointer-events:none}
+.ridge svg{width:100%;height:56px;display:block}
+.straight-sep{position:absolute;left:0;right:0;bottom:-1px;z-index:2;height:2px;background:linear-gradient(90deg,transparent 0%,var(--ice) 20%,var(--ice) 80%,transparent 100%);pointer-events:none}
 .audience h2{font-size:clamp(2rem,4vw,3.5rem);font-weight:800;letter-spacing:-.02em;color:var(--ink);margin-top:16px}
-.aud-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(255,255,255,.07);border-radius:8px;overflow:hidden;margin-top:64px}
-.aud-card{display:block;background:var(--paper);border:1px solid var(--fog);padding:60px 56px;position:relative;overflow:hidden;transition:background .25s ease,border-color .25s ease}
-.aud-card:hover{background:var(--stone);border-color:var(--stone-2)}
-.aud-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--ice);transform:scaleX(0);transform-origin:left;transition:transform .4s ease}
+.aud-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:64px}
+.aud-card{display:block;background:var(--ink);padding:90px 70px;position:relative;overflow:hidden;transition:background .3s ease}
+.aud-card:hover{background:var(--stone)}
+.aud-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--ice);transform:scaleX(0);transform-origin:left;transition:transform .4s ease}
 .aud-card:hover::before{transform:scaleX(1)}
-.aud-tag{font-family:var(--mono);font-size:1rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ice-deep);margin-bottom:28px;display:block;transition:color .25s ease}
-.aud-card h3{font-size:clamp(2rem,3.5vw,3rem);font-weight:800;color:var(--ink);margin-bottom:20px;line-height:1.05;letter-spacing:-.02em;transition:color .25s ease}
-.aud-card p{font-size:1rem;color:var(--granite);line-height:1.75;max-width:36ch;margin-bottom:40px;transition:color .25s ease}
-.aud-btn{display:inline-flex;align-items:center;gap:10px;font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--granite);transition:.25s}
-.aud-btn::after{content:"→";color:var(--ice-deep);transition:color .25s ease}
-.aud-btn:hover{color:var(--ink);gap:16px}
-.aud-card:hover h3{color:#fff}
-.aud-card:hover p{color:rgba(255,255,255,.6)}
+.aud-icon{display:inline-flex;color:rgba(255,255,255,.15);margin-bottom:34px;opacity:0;transform:scale(.8);transition:opacity .4s ease,transform .4s ease,color .4s ease}
+.aud-card:hover .aud-icon{opacity:1;transform:scale(1);color:var(--ice)}
+.aud-icon svg{width:64px;height:64px}
+.aud-tag{font-family:var(--mono);font-size:1rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:20px;display:block;transition:color .3s ease}
 .aud-card:hover .aud-tag{color:var(--ice)}
-.aud-card:hover .aud-btn{color:rgba(255,255,255,.7)}
-.aud-card:hover .aud-btn::after{color:var(--ice)}
-@media(max-width:760px){.aud-grid{grid-template-columns:1fr}.aud-card{padding:44px 32px}}
+.aud-card h3{font-size:clamp(2.3rem,4.2vw,3.6rem);font-weight:800;color:#fff;margin-bottom:22px;line-height:1.05;letter-spacing:-.02em}
+.aud-card p{font-size:1.08rem;color:rgba(255,255,255,.55);line-height:1.75;max-width:38ch;margin-bottom:46px}
+.aud-btn{display:inline-flex;align-items:center;gap:10px;font-size:.85rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);transition:.25s}
+.aud-btn::after{content:"→";color:var(--ice-deep);transition:color .3s ease,transform .3s ease}
+.aud-btn:hover{color:#fff;gap:16px}
+.aud-card:hover .aud-btn::after{color:#fff;transform:translateX(4px)}
+.aud-card.amber .aud-btn::after{color:#d99248}
+.aud-card.amber:hover{background:#2b2320}
+.aud-card.amber:hover .aud-icon{color:#d99248}
+.aud-card.amber:hover .aud-tag{color:#d99248}
+.aud-card.amber::before{background:#d99248}
+@media(max-width:760px){.aud-grid{grid-template-columns:1fr}.aud-card{padding:48px 36px}}
 
 /* ══════════════════════════════════════
    4. MAP
@@ -358,23 +362,27 @@ html.lenis{height:auto}
   <path d="m 39.045049,68.231007 v 7.104023 h 1.450672 v -2.773342 h 1.22667 c 1.173337,0 2.06934,-0.928003 2.06934,-2.165341 0,-1.237337 -0.90667,-2.16534 -2.080007,-2.16534 z m 1.450672,1.301338 h 1.034669 c 0.501335,0 0.864003,0.352001 0.864003,0.864002 0,0.512002 -0.362668,0.864003 -0.864003,0.864003 h -1.034669 z m 7.536703,-1.301338 -2.624008,7.104023 h 1.632005 l 0.533335,-1.546672 h 2.453341 l 0.533335,1.546672 h 1.632005 l -2.624008,-7.104023 z m 0.768003,1.994673 0.789336,2.304007 h -1.589339 z m 6.19267,-1.994673 v 7.104023 h 1.450671 v -2.773342 h 0.629335 l 1.514672,2.773342 h 1.642672 l -1.696006,-2.933343 c 0.757336,-0.309334 1.269338,-1.06667 1.269338,-2.00534 0,-1.237337 -0.90667,-2.16534 -2.080007,-2.16534 z m 1.450671,1.301338 h 1.09867 c 0.501335,0 0.864003,0.352001 0.864003,0.864002 0,0.512002 -0.362668,0.864003 -0.864003,0.864003 h -1.09867 z m 6.160677,-1.301338 v 1.365338 h 1.792005 v 5.738685 h 1.450672 v -5.738685 h 1.792005 v -1.365338 z m 7.931342,0 v 7.104023 h 1.450671 v -4.586682 l 3.10401,4.586682 h 1.344004 v -7.104023 h -1.450671 v 4.565348 l -3.093343,-4.565348 z m 9.264687,0 v 7.104023 h 4.33068 v -1.365338 h -2.880009 v -1.514671 h 2.762675 v -1.344005 h -2.762675 v -1.514671 h 2.880009 v -1.365338 z m 7.600681,0 v 7.104023 h 1.450671 v -2.773342 h 0.629336 l 1.514671,2.773342 h 1.642672 L 90.9425,72.401687 c 0.757335,-0.309334 1.269337,-1.06667 1.269337,-2.00534 0,-1.237337 -0.90667,-2.16534 -2.080007,-2.16534 z m 1.450671,1.301338 h 1.09867 c 0.501335,0 0.864003,0.352001 0.864003,0.864002 0,0.512002 -0.362668,0.864003 -0.864003,0.864003 h -1.09867 z m 8.74202,-1.408005 c -1.22667,0 -2.13334,0.810669 -2.13334,1.877339 0,0.981337 0.426668,1.557339 1.557339,2.186674 0.704002,0.394668 1.312004,0.586669 1.312004,1.16267 0,0.437335 -0.394668,0.746669 -0.960003,0.746669 -0.458668,0 -1.06667,-0.309334 -1.440005,-0.757335 l -0.874669,1.002669 c 0.661335,0.704003 1.514671,1.088004 2.421341,1.088004 1.344004,0 2.32534,-0.885336 2.32534,-2.10134 0,-0.960003 -0.480001,-1.504005 -1.728005,-2.16534 -0.672002,-0.362668 -1.205337,-0.597335 -1.205337,-1.09867 0,-0.362668 0.320001,-0.618669 0.725335,-0.618669 0.480002,0 0.992004,0.213334 1.386671,0.608002 l 0.768003,-1.03467 C 99.161851,68.455008 98.351182,68.12434 97.593846,68.12434 Z" fill="currentColor"/>
 </svg></a>
     <nav id="mainNav">
-      <div class="has-drop"><a href="#audience">Services</a>
+      <div class="has-drop"><a href="for_companies.html">For companies</a>
         <div class="drop">
           <a href="permanent-placement.html">Permanent Hiring</a>
           <a href="project-staffing.html">Project Solutions</a>
           <a href="nearshoring.html">Nearshoring &amp; Outsourcing</a>
           <a href="interview-assessment.html">Interview &amp; Assessment</a>
-          <div class="drop-divider"></div>
-          <a href="career-consulting.html">Career Consulting</a>
         </div>
       </div>
+      <div class="has-drop"><a href="for_candidates.html">For candidates</a>
+        <div class="drop">
+          <a href="for_candidates.html#career-consulting">Career Consulting</a>
+          <a href="salary-calculator.html">Salary Calculator</a>
+        </div>
+      </div>
+      <a href="careers.html">Careers</a>
       <div class="has-drop"><a href="about.html">Company</a>
         <div class="drop">
           <a href="about.html">About Us</a>
           <a href="team.html">Partners</a>
         </div>
       </div>
-      <a href="career-consulting.html">Career</a>
       <a href="#contact" class="btn-nav">Let's talk</a>
     </nav>
     <div class="burger" id="burger"><span></span><span></span><span></span></div>
@@ -529,14 +537,14 @@ html.lenis{height:auto}
     <div class="intro-stage">
       <div class="intro-bg" id="introBg" aria-hidden="true"></div>
       <div class="intro-shapes" aria-hidden="true">
-        <span class="ishape ishape-cross" id="shape1" style="--s:22px;top:18%;left:14%;color:var(--granite)"></span>
-        <span class="ishape ishape-square" id="shape2" style="--s:14px;bottom:16%;right:12%;color:var(--mist)"></span>
-        <span class="ishape ishape-cross" id="shape3" style="--s:12px;top:22%;right:18%;color:var(--mist)"></span>
-        <span class="ishape ishape-square" id="shape4" style="--s:24px;bottom:20%;left:20%;color:var(--granite)"></span>
-        <span class="ishape ishape-square" id="shape7" style="--s:18px;top:32%;left:7%;color:var(--swiss)"></span>
-        <span class="ishape ishape-square" id="shape8" style="--s:20px;bottom:30%;right:7%;color:var(--swiss-deep)"></span>
-        <span class="ishape ishape-cross" id="shape9" style="--s:14px;top:8%;right:34%;color:var(--ice-deep)"></span>
-        <span class="ishape ishape-square" id="shape12" style="--s:10px;bottom:6%;left:8%;color:var(--ice)"></span>
+        <span class="ishape ishape-dot" id="shape1" style="--s:10px;top:18%;left:14%;color:var(--granite)"></span>
+        <span class="ishape ishape-dot" id="shape2" style="--s:7px;bottom:16%;right:12%;color:var(--mist)"></span>
+        <span class="ishape ishape-dot" id="shape3" style="--s:6px;top:22%;right:18%;color:var(--mist)"></span>
+        <span class="ishape ishape-dot" id="shape4" style="--s:11px;bottom:20%;left:20%;color:var(--granite)"></span>
+        <span class="ishape ishape-dot" id="shape7" style="--s:8px;top:32%;left:7%;color:var(--swiss)"></span>
+        <span class="ishape ishape-dot" id="shape8" style="--s:9px;bottom:30%;right:7%;color:var(--swiss-deep)"></span>
+        <span class="ishape ishape-dot" id="shape9" style="--s:6px;top:8%;right:34%;color:var(--ice-deep)"></span>
+        <span class="ishape ishape-dot" id="shape12" style="--s:5px;bottom:6%;left:8%;color:var(--ice)"></span>
       </div>
       <div class="wrap">
         <div class="intro-textcard">
@@ -610,12 +618,14 @@ html.lenis{height:auto}
     <h2 class="reveal">How can we help you today?</h2>
     <div class="aud-grid">
       <a href="for_companies.html" class="aud-card reveal">
+        <span class="aud-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 12h18"/></svg></span>
         <span class="aud-tag">For companies</span>
         <h3>Hire smarter,<br>hire faster.</h3>
         <p>From a single specialist to a full team. We handle the search, the assessment and the process end to end.</p>
         <span class="aud-btn">Let's collaborate</span>
       </a>
-      <a href="career-consulting.html" class="aud-card reveal">
+      <a href="for_candidates.html" class="aud-card amber reveal">
+        <span class="aud-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/></svg></span>
         <span class="aud-tag">For candidates</span>
         <h3>Find your<br>next role.</h3>
         <p>We work with you directly, respect your time and only present you with roles that genuinely fit your goals.</p>
@@ -623,6 +633,7 @@ html.lenis{height:auto}
       </a>
     </div>
   </div>
+  <div class="ridge" aria-hidden="true"><svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path fill="#ffffff" d="M0,120 L0,99 L180,80 L320,102 L470,69 L620,95 L760,75 L880,96 L1010,71 L1160,93 L1300,78 L1440,97 L1440,120 Z"></path></svg></div>
 </section>
 
 <!-- ══ 4. MAP ══ -->
@@ -772,6 +783,7 @@ html.lenis{height:auto}
       </div>
     </div>
   </div>
+  <div class="straight-sep" aria-hidden="true"></div>
 </section>
 
 <!-- ══ CONTACT ══ -->
@@ -1249,12 +1261,12 @@ function updateIntroZoom(){
   introBgEl.style.transform = `scale(${sx}, ${sy})`;
   introBgEl.style.borderRadius = `${24 * (1-progress)}px`;
 
-  // Shapes: each spins at its own speed/direction, then fades out over the second half of the scroll
+  // Shapes: each blows sideways like a wind gust at its own speed/direction, then fades out over the second half of the scroll
   const fadeStart = 0.5;
   const shapeOpacity = progress < fadeStart ? 1 : Math.max(0, 1 - (progress-fadeStart)/(1-fadeStart));
   introShapes.forEach(s=>{
     if(!s.el) return;
-    s.el.style.transform = `rotate(${(s.base||0) + progress * s.speed}deg)`;
+    s.el.style.transform = `translateX(${progress * s.speed}px) translateY(${progress * s.speed * 0.08}px)`;
     s.el.style.opacity = shapeOpacity;
   });
 }
