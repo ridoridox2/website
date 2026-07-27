@@ -32,8 +32,8 @@
   --maxw:1280px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;overflow-x:hidden;overscroll-behavior-y:none;background:var(--stone)}
-body{font-family:var(--sans);background:var(--stone);color:var(--ink);-webkit-font-smoothing:antialiased;overscroll-behavior-y:none}
+html{scroll-behavior:smooth;overflow-x:hidden;overscroll-behavior-x:none}
+body{font-family:var(--sans);background:#f4f4f5;color:var(--ink);-webkit-font-smoothing:antialiased;overscroll-behavior-x:none}
 a{text-decoration:none;color:inherit}
 a:link,a:visited{color:inherit}
 img{display:block;max-width:100%}
@@ -173,7 +173,7 @@ nav>a:not(.btn-nav):hover{color:#fff}
 /* ══════════════════════════════════════
    2b. INTRO ZOOM REVEAL
 ══════════════════════════════════════ */
-.intro-pin{position:relative;height:220vh}
+.intro-pin{position:relative;height:220vh;overflow:hidden}
 .intro-stage{position:sticky;top:0;height:100svh;display:flex;align-items:center;z-index:1}
 .intro-bg{position:absolute;inset:0;background:#f4f4f5;border-radius:24px;transform-origin:center center;will-change:transform;z-index:0}
 .intro-shapes{position:absolute;inset:0;pointer-events:none;z-index:1}
