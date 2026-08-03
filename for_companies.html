@@ -125,6 +125,7 @@ nav>a:not(.btn-nav):hover{color:#fff}
 .hero-eyebrow{font-family:var(--mono);font-size:1rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.45);display:flex;align-items:center;gap:12px;margin-bottom:32px}
 .hero-eyebrow::before{content:"";width:28px;height:1.5px;background:var(--ice);display:inline-block}
 .hero h1{font-size:clamp(2.8rem,7vw,7rem);font-weight:800;color:var(--paper);line-height:.97;letter-spacing:-.03em;margin:0 0 28px}
+.type-target{color:var(--ice)}
 .type-target::after{content:"";display:inline-block;width:.05em;height:.85em;background:var(--paper);margin-left:.06em;vertical-align:-0.08em;animation:blinkCursor .9s step-end infinite}
 @keyframes blinkCursor{0%,100%{opacity:1}50%{opacity:0}}
 .hero-lead{font-size:clamp(1.1rem,1.6vw,1.4rem);color:rgba(255,255,255,.6);max-width:600px;line-height:1.75;margin:0 0 40px;font-weight:400}
@@ -514,11 +515,21 @@ document.querySelectorAll('.stat-col').forEach(el=>statObs.observe(el));
 const typeTarget=document.getElementById('typeTarget');
 if(typeTarget){
   const typeText='They are built.';
+  const typeHeroH1=typeTarget.closest('h1');
+  function reserveTypeHeight(){
+    const prev=typeTarget.textContent;
+    typeTarget.textContent=typeText;
+    typeHeroH1.style.minHeight=typeHeroH1.offsetHeight+'px';
+    typeTarget.textContent=prev;
+  }
+  reserveTypeHeight();
+  addEventListener('resize',reserveTypeHeight);
   let tci=0;
   function typeChar(){
     typeTarget.textContent=typeText.slice(0,tci);
     tci++;
     if(tci<=typeText.length) setTimeout(typeChar,65);
+    else typeHeroH1.style.minHeight='';
   }
   setTimeout(typeChar,900);
 }

@@ -32,8 +32,8 @@
   --maxw:1280px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;overflow-x:hidden;overscroll-behavior-x:none}
-body{font-family:var(--sans);background:#f4f4f5;color:var(--ink);-webkit-font-smoothing:antialiased;overscroll-behavior-x:none}
+html{scroll-behavior:smooth;overflow-x:hidden;touch-action:pan-y pinch-zoom}
+body{font-family:var(--sans);background:#f4f4f5;color:var(--ink);-webkit-font-smoothing:antialiased;touch-action:pan-y pinch-zoom}
 a{text-decoration:none;color:inherit}
 a:link,a:visited{color:inherit}
 img{display:block;max-width:100%}
@@ -943,20 +943,15 @@ function createMountain(containerId, opts){
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
   container.appendChild(renderer.domElement);
 
-  function noise(x,y,z,t){
-    return (
-      Math.sin(x*1.3+t*0.6)*Math.cos(y*1.7-t*0.4) +
-      Math.sin(y*0.9-t*0.35)*Math.cos(z*1.2+t*0.5) +
-      Math.sin(z*1.4+t*0.7)*Math.cos(x*0.8-t*0.25)
-    )/3;
-  }
 
   const basePositions=[];
+  const ringRanges=[];
   for(let r=0; r<=rings; r++){
     const t=r/rings;
     const y=t*mHeight - mHeight*0.45;
     const ringCount=Math.max(7,Math.round(ringMult*(1-t)+ringBase));
     const radius=baseRadius*Math.pow(1-t,0.85);
+    const ringStart=basePositions.length/3;
     for(let i=0;i<ringCount;i++){
       const theta=(i/ringCount)*Math.PI*2 + thetaOffset;
       let ridge=1;
@@ -967,6 +962,7 @@ function createMountain(containerId, opts){
       const rad=radius*ridge;
       basePositions.push(Math.cos(theta)*rad, y, Math.sin(theta)*rad);
     }
+    ringRanges.push({start:ringStart, count:ringCount});
   }
   const count=basePositions.length/3;
   const positions=new Float32Array(basePositions);
@@ -978,12 +974,45 @@ function createMountain(containerId, opts){
     if(Math.random()<flagChance){ c.copy(flagCol); }
     colors[i*3]=c.r;colors[i*3+1]=c.g;colors[i*3+2]=c.b;
   }
+  const baseColorArr=colors.slice();
+  const phases=new Float32Array(count);
+  const phases2=new Float32Array(count);
+  const freqs=new Float32Array(count);
+  const amps=new Float32Array(count);
+  for(let i=0;i<count;i++){
+    phases[i]=Math.random()*Math.PI*2;
+    phases2[i]=Math.random()*Math.PI*2;
+    freqs[i]=0.5+Math.random()*2.2;
+    amps[i]=0.4+Math.random()*1.2;
+  }
+  const accentCol=new THREE.Color(opts.accentColor!=null ? opts.accentColor : 0x5b9bd1);
+  const posBufferAttr=new THREE.BufferAttribute(positions,3);
+  const colBufferAttr=new THREE.BufferAttribute(colors,3);
   const geo=new THREE.BufferGeometry();
-  geo.setAttribute('position', new THREE.BufferAttribute(positions,3));
-  geo.setAttribute('color', new THREE.BufferAttribute(colors,3));
+  geo.setAttribute('position', posBufferAttr);
+  geo.setAttribute('color', colBufferAttr);
   const blendMode = opts.blending!=null ? opts.blending : THREE.AdditiveBlending;
-  const mat=new THREE.PointsMaterial({size:pointSize,vertexColors:true,transparent:true,opacity:0.92,blending:blendMode,depthWrite:false,sizeAttenuation:true});
+
+  // Soft round glow sprite (radial-gradient canvas) instead of hard-edged square dots,
+  // so dense overlapping points blend into a smooth glow like the reference.
+  function makeGlowTexture(){
+    const s=64;
+    const cnv=document.createElement('canvas');
+    cnv.width=cnv.height=s;
+    const ctx=cnv.getContext('2d');
+    const g=ctx.createRadialGradient(s/2,s/2,0,s/2,s/2,s/2);
+    g.addColorStop(0,'rgba(255,255,255,1)');
+    g.addColorStop(0.4,'rgba(255,255,255,0.55)');
+    g.addColorStop(1,'rgba(255,255,255,0)');
+    ctx.fillStyle=g;
+    ctx.fillRect(0,0,s,s);
+    return new THREE.CanvasTexture(cnv);
+  }
+  const glowTex=makeGlowTexture();
+
+  const mat=new THREE.PointsMaterial({size:pointSize,map:glowTex,vertexColors:true,transparent:true,opacity:0.95,blending:blendMode,depthWrite:false,sizeAttenuation:true});
   const mountain=new THREE.Points(geo,mat);
+
   const mountainGroup = new THREE.Group();
   mountainGroup.add(mountain);
   scene.add(mountainGroup);
@@ -1027,6 +1056,7 @@ function createMountain(containerId, opts){
   function frame(now){
     requestAnimationFrame(frame);
     const posAttr=geo.attributes.position;
+    const colAttr=geo.attributes.color;
     if(exploding){
       let t=(now-explodeStartTime)/explodeDuration;
       if(t>=1){ t=1; exploding=false; }
@@ -1042,12 +1072,28 @@ function createMountain(containerId, opts){
       clock+=0.006;
       for(let i=0;i<count;i++){
         const bx=basePosArr[i*3], by=basePosArr[i*3+1], bz=basePosArr[i*3+2];
-        const n=noise(bx*0.5,by*0.5,bz*0.5,clock);
-        const scale=1+n*0.06;
-        posAttr.array[i*3]=bx*scale;
-        posAttr.array[i*3+1]=by+n*0.18;
-        posAttr.array[i*3+2]=bz*scale;
+
+        // Each point jitters on its own random phase/frequency/amplitude, fully
+        // independent of its neighbors — no shared grouping by ring or height, so it
+        // never reads as a coordinated wave or band moving through the shape.
+        const rlen=Math.sqrt(bx*bx+bz*bz)||1;
+        const dirx=bx/rlen, dirz=bz/rlen;
+        const f=freqs[i];
+        const radial=Math.sin(clock*f+phases[i])*amps[i]*0.055;
+        const vert=Math.sin(clock*f*1.7+phases2[i])*amps[i]*0.05;
+        const px=bx+dirx*radial, py=by+vert, pz=bz+dirz*radial;
+
+        posAttr.array[i*3]=px;
+        posAttr.array[i*3+1]=py;
+        posAttr.array[i*3+2]=pz;
+
+        const flicker=0.5+0.5*Math.sin(clock*f*1.3+phases[i]);
+        const amt=flicker*flicker*0.4;
+        colAttr.array[i*3]  =baseColorArr[i*3]  +(accentCol.r-baseColorArr[i*3])  *amt;
+        colAttr.array[i*3+1]=baseColorArr[i*3+1]+(accentCol.g-baseColorArr[i*3+1])*amt;
+        colAttr.array[i*3+2]=baseColorArr[i*3+2]+(accentCol.b-baseColorArr[i*3+2])*amt;
       }
+      colAttr.needsUpdate=true;
       mountain.rotation.y += rotationSpeed;
     }
     posAttr.needsUpdate=true;
@@ -1089,9 +1135,9 @@ function createMountain(containerId, opts){
 
 (function(){
   const heroMountain = createMountain('hero-mountain', {
-    rings:52, ringMult:96, ringBase:11,
+    rings:85, ringMult:170, ringBase:20,
     baseRadius:3.7, mHeight:4.5,
-    pointSize:0.065,
+    pointSize:0.08,
     colorA:0x8a5a52, colorB:0xe8eef4, flagColor:0xc0392b, flagChance:0.015,
     rotationSpeed:0.0018,
     fixed:true

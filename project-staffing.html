@@ -126,6 +126,8 @@ nav>a:not(.btn-nav):hover{color:#fff}
 .hero-eyebrow::before{content:"";width:28px;height:1.5px;background:var(--ice);display:inline-block}
 .hero h1{font-size:clamp(2.8rem,7vw,7rem);font-weight:800;color:var(--paper);line-height:.97;letter-spacing:-.03em;margin:0 0 28px}
 .hero h1 em{color:var(--ice);font-style:normal}
+.type-target::after{content:"";display:inline-block;width:.05em;height:.85em;background:var(--paper);margin-left:.06em;vertical-align:-0.08em;animation:blinkCursor .9s step-end infinite}
+@keyframes blinkCursor{0%,100%{opacity:1}50%{opacity:0}}
 .hero-lead{font-size:clamp(1.1rem,1.6vw,1.4rem);color:rgba(255,255,255,.6);max-width:640px;line-height:1.75;margin:0 0 40px;font-weight:400}
 .hero-cta{display:flex;gap:16px;flex-wrap:wrap}
 .hero-divider{position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent 0%,var(--ice) 20%,var(--ice) 80%,transparent 100%)}
@@ -278,8 +280,8 @@ html.lenis{height:auto}
   </svg></div>
   <div class="hero-inner">
     <p class="hero-eyebrow reveal">Project Solutions</p>
-    <h1 class="reveal">The specialists your project needs.<br><em>On board in days.</em></h1>
-    <p class="hero-lead reveal">Project staffing across Switzerland and Europe. We source the right skills, handle contracts and compliance, and scale your team up or down as the project moves.</p>
+    <h1 class="reveal">The talent you need.<br><em><span id="typeTarget" class="type-target"></span></em></h1>
+    <p class="hero-lead reveal">Vetted specialists across Switzerland and Europe, on board fast, fully compliant.</p>
     <div class="hero-cta reveal">
       <a href="#contact" class="btn">Let's talk</a>
       <a href="#models" class="btn-outline">Engagement models</a>
@@ -507,6 +509,29 @@ addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>60));
 document.getElementById('burger').addEventListener('click',()=>{
   document.getElementById('mainNav').classList.toggle('open');
 });
+
+// Hero typewriter
+const typeTarget=document.getElementById('typeTarget');
+if(typeTarget){
+  const typeText="The moment you need it.";
+  const typeHeroH1=typeTarget.closest('h1');
+  function reserveTypeHeight(){
+    const prev=typeTarget.textContent;
+    typeTarget.textContent=typeText;
+    typeHeroH1.style.minHeight=typeHeroH1.offsetHeight+'px';
+    typeTarget.textContent=prev;
+  }
+  reserveTypeHeight();
+  addEventListener('resize',reserveTypeHeight);
+  let tci=0;
+  function typeChar(){
+    typeTarget.textContent=typeText.slice(0,tci);
+    tci++;
+    if(tci<=typeText.length) setTimeout(typeChar,65);
+    else typeHeroH1.style.minHeight='';
+  }
+  setTimeout(typeChar,900);
+}
 
 const cur=document.getElementById('cur');
 let mx=0,my=0,dx=0,dy=0,lastParticle=0;

@@ -254,12 +254,21 @@ details .price-grid{margin-top:44px}
 .module-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--ice-deep);flex:0 0 auto;animation:moduleDotPulse 2s ease-in-out infinite}
 .module-badge span:last-child{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--graphite);font-weight:600}
 @keyframes moduleDotPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.75)}}
-.consult-hero{display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:center;margin-bottom:64px}
-.video-frame{position:relative;aspect-ratio:16/10;border-radius:16px;background:linear-gradient(135deg,var(--stone),var(--stone-2));border:1px solid var(--stone-2);overflow:hidden;display:grid;place-items:center;box-shadow:0 40px 80px -40px rgba(36,31,26,.4)}
+.consult-hero{display:grid;grid-template-columns:.85fr 1.25fr;gap:64px;align-items:center;margin-bottom:64px}
+.video-frame{position:relative;aspect-ratio:16/9;border-radius:16px;background:linear-gradient(135deg,var(--stone),var(--stone-2));border:1px solid var(--stone-2);overflow:hidden;display:grid;place-items:center;box-shadow:0 40px 80px -40px rgba(36,31,26,.4)}
 .video-play{width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,.1);backdrop-filter:blur(4px);display:grid;place-items:center;border:1px solid rgba(255,255,255,.25);transition:background .25s ease,transform .25s ease}
 .video-frame:hover .video-play{background:var(--ice-deep);border-color:var(--ice-deep);transform:scale(1.08)}
 .video-play svg{width:24px;height:24px;color:#fff;margin-left:3px}
 @media(max-width:900px){.consult-hero{grid-template-columns:1fr;gap:36px}}
+.video-lightbox{position:fixed;inset:0;background:rgba(10,9,8,.94);z-index:999;display:flex;align-items:center;justify-content:center;padding:64px 24px;opacity:0;visibility:hidden;transition:opacity .35s ease,visibility 0s linear .35s}
+.video-lightbox.open{opacity:1;visibility:visible;transition:opacity .35s ease}
+.video-lightbox-stage{position:relative;width:100%;max-width:1120px;transform:scale(.96);transition:transform .35s ease}
+.video-lightbox.open .video-lightbox-stage{transform:scale(1)}
+.video-lightbox-inner{aspect-ratio:16/9;border-radius:16px;overflow:hidden;box-shadow:0 60px 120px -40px rgba(0,0,0,.7)}
+.video-lightbox-inner video{width:100%;height:100%;object-fit:contain;background:#000;display:block}
+.video-lightbox-close{position:absolute;top:-52px;right:0;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);display:grid;place-items:center;cursor:pointer;color:#fff;transition:background .2s ease}
+.video-lightbox-close:hover{background:var(--ice-deep)}
+@media(max-width:640px){.video-lightbox{padding:56px 16px 24px}.video-lightbox-close{top:-40px;width:36px;height:36px}}
 
 /* ── RESOURCE GRID ── */
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
@@ -461,8 +470,10 @@ html.lenis{height:auto}
         <h2 class="reveal" style="font-size:clamp(2rem,4vw,3rem);font-weight:800;color:var(--ink);letter-spacing:-.02em;line-height:1.15;margin:0 0 20px">Need more than recruitment?<br>We also offer <span style="color:var(--ice-deep)">personal career support</span>.</h2>
         <p class="reveal" style="color:var(--granite);font-size:1.05rem;line-height:1.75;margin:0">Our consulting services help you stand out in Switzerland's competitive job market. No matter if you are exploring new opportunities, planning a transition or preparing for a leadership role: we combine deep market insights, with practical knowledge, CV optimisation, salary benchmarking, interview preparation and career strategy. This way, you always walk away with clarity, confidence and a clear next step.</p>
       </div>
-      <div class="video-frame reveal">
-        <span class="video-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+      <div class="video-frame reveal" id="candidatesVideoFrame">
+        <video id="candidatesVideo" controls playsinline preload="metadata" style="width:100%;height:100%;object-fit:cover">
+          <source src="candidates-video.mp4" type="video/mp4">
+        </video>
       </div>
     </div>
 
@@ -515,7 +526,7 @@ html.lenis{height:auto}
     <div class="price-grid">
       <div class="price-card reveal">
         <div class="price-name">Essential</div>
-        <div class="price-amt">CHF 89</div>
+        <div class="price-amt">CHF 119</div>
         <div class="price-sub">45-minute individual consulting session</div>
         <ul class="price-feats">
           <li>Career positioning and goals review with application guidance</li>
@@ -528,7 +539,7 @@ html.lenis{height:auto}
       <div class="price-card featured reveal">
         <span class="price-tag">Most popular</span>
         <div class="price-name">Premium</div>
-        <div class="price-amt">CHF 149</div>
+        <div class="price-amt">CHF 229</div>
         <div class="price-sub">60-minute consulting session, with training materials</div>
         <ul class="price-feats">
           <li>Career guidance, interview training, and application support</li>
@@ -541,7 +552,7 @@ html.lenis{height:auto}
       </div>
       <div class="price-card reveal">
         <div class="price-name">Executive</div>
-        <div class="price-amt">CHF 499</div>
+        <div class="price-amt">CHF 799</div>
         <div class="price-sub">2-hour consulting session, with training materials</div>
         <ul class="price-feats">
           <li>Extended strategic consultation with tailored materials</li>
@@ -700,6 +711,13 @@ html.lenis{height:auto}
 
 <a class="wa-fab" id="waFab" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.004c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 18.15h-.003a8.23 8.23 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.24 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.12-.14.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28z"/></svg></a>
 
+<div class="video-lightbox" id="videoLightbox" role="dialog" aria-modal="true" aria-label="Video player" aria-hidden="true">
+  <div class="video-lightbox-stage">
+    <button class="video-lightbox-close" id="videoLightboxClose" aria-label="Close video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    <div class="video-lightbox-inner" id="videoLightboxInner"></div>
+  </div>
+</div>
+
 <script>
 // Lenis
 const lenis=new Lenis({duration:1.2,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t))});
@@ -794,11 +812,21 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 const typeTarget=document.getElementById('typeTarget');
 if(typeTarget){
   const typeText="Let's go find it.";
+  const typeHeroH1=typeTarget.closest('h1');
+  function reserveTypeHeight(){
+    const prev=typeTarget.textContent;
+    typeTarget.textContent=typeText;
+    typeHeroH1.style.minHeight=typeHeroH1.offsetHeight+'px';
+    typeTarget.textContent=prev;
+  }
+  reserveTypeHeight();
+  addEventListener('resize',reserveTypeHeight);
   let tci=0;
   function typeChar(){
     typeTarget.textContent=typeText.slice(0,tci);
     tci++;
     if(tci<=typeText.length) setTimeout(typeChar,65);
+    else typeHeroH1.style.minHeight='';
   }
   setTimeout(typeChar,900);
 }
@@ -849,6 +877,36 @@ if(tickEl){
       });
     },320);
   },2200);
+}
+
+// Video lightbox (dims the page and enlarges the video when played)
+const clbVideo=document.getElementById('candidatesVideo');
+const clbFrame=document.getElementById('candidatesVideoFrame');
+const clbBox=document.getElementById('videoLightbox');
+const clbInner=document.getElementById('videoLightboxInner');
+const clbClose=document.getElementById('videoLightboxClose');
+if(clbVideo && clbBox){
+  let clbUsed=false;
+  function openClb(){
+    clbInner.appendChild(clbVideo);
+    clbBox.classList.add('open');
+    clbBox.setAttribute('aria-hidden','false');
+    document.body.style.overflow='hidden';
+    lenis.stop();
+  }
+  function closeClb(){
+    clbUsed=true;
+    clbBox.classList.remove('open');
+    clbBox.setAttribute('aria-hidden','true');
+    clbFrame.appendChild(clbVideo);
+    document.body.style.overflow='';
+    lenis.start();
+    // video keeps playing inline after closing; cinema mode won't retrigger
+  }
+  clbVideo.addEventListener('play',()=>{ if(!clbUsed && !clbBox.contains(clbVideo)) openClb(); });
+  clbClose.addEventListener('click',closeClb);
+  clbBox.addEventListener('click',e=>{ if(e.target===clbBox) closeClb(); });
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape' && clbBox.classList.contains('open')) closeClb(); });
 }
 
 // WA
