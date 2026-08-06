@@ -171,7 +171,13 @@ nav>a:not(.btn-nav):hover{color:#fff}
 .step-scroll{display:flex;gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;padding:8px 48px 28px;max-width:var(--maxw);margin:0 auto;scrollbar-width:thin}
 .step-scroll::-webkit-scrollbar{height:6px}
 .step-scroll::-webkit-scrollbar-thumb{background:var(--fog);border-radius:99px}
-.step-card{flex:0 0 280px;scroll-snap-align:start}
+.steps-nav{display:flex;gap:12px}
+.steps-arrow{width:44px;height:44px;border-radius:50%;border:1px solid var(--fog);background:var(--paper);display:grid;place-items:center;cursor:pointer;transition:.2s;color:var(--ink);flex:0 0 auto}
+.steps-arrow:hover{background:var(--ice-deep);border-color:var(--ice-deep);color:#fff}
+.steps-arrow:disabled{opacity:.35;cursor:default;pointer-events:none}
+.steps-arrow svg{width:18px;height:18px}
+.step-card{flex:0 0 280px;scroll-snap-align:start;display:flex}
+.step-card .flip-card{flex:1}
 
 /* ── MODEL ROW ── */
 .model-row{display:flex;gap:20px;flex-wrap:wrap}
@@ -207,7 +213,7 @@ nav>a:not(.btn-nav):hover{color:#fff}
 /* ── CTA / CONTACT SECTION ── */
 .cta-section{text-align:center}
 .cta-section h2{font-size:clamp(2rem,4.5vw,3.8rem);font-weight:800;color:#fff;letter-spacing:-.02em;line-height:1.1;margin:0 0 20px}
-.cta-section h2 em{color:var(--swiss);font-style:italic}
+.cta-section h2 em{color:var(--swiss);font-style:normal}
 .cta-section p{color:rgba(255,255,255,.5);font-size:1.1rem;max-width:60ch;margin:0 auto 40px;line-height:1.7}
 .cta-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
 
@@ -303,12 +309,12 @@ html.lenis{height:auto}
       <div class="trust-divider"></div>
       <div class="trust-stats">
         <div class="stat-col reveal">
-          <div class="stat-n">5<span class="stat-u">d</span></div>
+          <div class="stat-n">2<span class="stat-u">d</span></div>
           <div class="stat-t">Avg. days to shortlist</div>
         </div>
         <div class="stat-col reveal">
-          <div class="stat-n">3</div>
-          <div class="stat-t">Nearshore countries</div>
+          <div class="stat-n">100<span class="stat-u">+</span></div>
+          <div class="stat-t">Vetted contractors ready to go</div>
         </div>
         <div class="stat-col reveal">
           <div class="stat-n">4</div>
@@ -326,7 +332,7 @@ html.lenis{height:auto}
   </svg></div>
   <div class="wrap">
     <p class="sec-label reveal">What we do</p>
-    <div class="num-row reveal" style="margin-left:0"><h3>Contractor sourcing</h3><p>IT, engineering, finance and regulated environments — active and passive candidates, reached through our network and direct search.</p></div>
+    <div class="num-row reveal" style="margin-left:0"><h3>Contractor sourcing</h3><p>IT, engineering, finance and regulated environments. Active and passive candidates, reached through our network and direct search.</p></div>
     <div class="num-row reveal" style="margin-left:60px"><h3>Team scaling</h3><p>Ramp up for a project, scale back when it's done. We build the team around the skills you need.</p></div>
     <div class="num-row reveal" style="margin-left:120px"><h3>Contracts &amp; compliance</h3><p>Contracts, worker classification and payroll, all organized by us. You start without the administrative load.</p></div>
     <div class="num-row reveal" style="margin-left:180px"><h3>Fast turnaround</h3><p>Most roles filled within days, not weeks. When a project can't wait, we move at project speed.</p></div>
@@ -341,7 +347,13 @@ html.lenis{height:auto}
   <div class="wrap">
     <p class="sec-label reveal">How it works</p>
     <h2 class="reveal" style="font-size:clamp(2rem,4vw,3.2rem);font-weight:800;color:var(--ink);letter-spacing:-.02em;margin:0 0 20px">Five steps, no wasted time.</h2>
-    <p class="reveal" style="font-family:var(--mono);font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ice-deep);margin:0 0 40px">Scroll to explore →</p>
+    <div class="reveal" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin:0 0 40px">
+      <p style="font-family:var(--mono);font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ice-deep);margin:0">Scroll to explore →</p>
+      <div class="steps-nav">
+        <button class="steps-arrow" id="stepsPrev" aria-label="Previous step"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+        <button class="steps-arrow" id="stepsNext" aria-label="Next step"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+      </div>
+    </div>
   </div>
   <div class="step-scroll">
     <div class="step-card reveal"><div class="flip-card"><span class="flip-num">STEP 01</span><h4>We listen</h4><p>You tell us the skills gap, the seniority and the deadline. We turn that into a focused search brief.</p></div></div>
@@ -359,14 +371,14 @@ html.lenis{height:auto}
   </svg></div>
   <div class="wrap">
     <p class="sec-label reveal">Engagement models</p>
-    <h2 class="reveal" style="font-size:clamp(2rem,4vw,3.2rem);font-weight:800;color:var(--ink);letter-spacing:-.02em;margin:0 0 44px">Hiring rarely fits <span style="color:var(--swiss);font-style:italic">one shape</span>.</h2>
+    <h2 class="reveal" style="font-size:clamp(2rem,4vw,3.2rem);font-weight:800;color:var(--ink);letter-spacing:-.02em;margin:0 0 44px">Hiring rarely fits <span style="color:var(--swiss)">one shape</span>.</h2>
     <div class="model-row">
       <div class="model-card flip-card reveal"><span class="flip-num">01</span><h4>Single contractor</h4><p>One specialist to close a specific skills gap.</p></div>
       <div class="model-card flip-card reveal"><span class="flip-num">02</span><h4>Project team</h4><p>A built-for-purpose team of contractors, coordinated end to end.</p></div>
       <div class="model-card flip-card reveal"><span class="flip-num">03</span><h4>Interim expertise</h4><p>Senior capacity for a defined period, without a permanent commitment.</p></div>
       <div class="model-card flip-card reveal"><span class="flip-num">04</span><h4>Nearshore capacity</h4><p>Contractor teams from our German, Italian and Serbian network, run to Swiss quality standards.</p></div>
     </div>
-    <p class="reveal" style="font-size:clamp(1.1rem,1.8vw,1.35rem);color:var(--ink);font-weight:600;line-height:1.75;margin:48px 0 0;max-width:70ch">Rates and terms are transparent from the start — you see the rate, the availability and the terms before you commit. Time and material or fixed duration, your call. No hidden margins, no surprises on the invoice.</p>
+    <p class="reveal" style="font-size:clamp(1.1rem,1.8vw,1.35rem);color:var(--ink);font-weight:600;line-height:1.75;margin:48px 0 0;max-width:70ch">Rates and terms are transparent from the start. You see the rate, the availability and the terms before you commit. Time and material or fixed duration, your call. No hidden margins, no surprises on the invoice.</p>
   </div>
 </section>
 
@@ -421,7 +433,7 @@ html.lenis{height:auto}
       <div class="faq-body"><div><p>Yes. Contracts, worker classification, payroll and compliance are handled by us, including cross-border engagements.</p></div></div>
     </div>
     <div class="faq-item reveal">
-      <div class="faq-q"><h4>Contractor, freelancer or interim — what's the difference?</h4><span class="faq-plus">+</span></div>
+      <div class="faq-q"><h4>Contractor, freelancer or interim: what's the difference?</h4><span class="faq-plus">+</span></div>
       <div class="faq-body"><div><p>We place all three. The right setup depends on the role, the duration and the compliance picture, and we advise on which fits.</p></div></div>
     </div>
     <div class="faq-item reveal">
@@ -480,7 +492,7 @@ html.lenis{height:auto}
     </div>
     <div class="foot-bot">
       <span>SwissPeak Partners&#174; &middot; Made in Switzerland</span>
-      <div class="foot-links"><a href="#">Imprint</a><a href="#">Privacy</a><a href="#">Terms</a></div>
+      <div class="foot-links"><a href="imprint.html">Imprint</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
     </div>
   </div>
 </footer>
@@ -573,6 +585,21 @@ const io=new IntersectionObserver(es=>{
   }});
 },{threshold:.1,rootMargin:'0px 0px -6% 0px'});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+const stepScroll=document.querySelector('.step-scroll');
+const stepsPrev=document.getElementById('stepsPrev');
+const stepsNext=document.getElementById('stepsNext');
+if(stepScroll && stepsPrev && stepsNext){
+  const stepScrollAmount=324;
+  stepsPrev.addEventListener('click',()=>stepScroll.scrollBy({left:-stepScrollAmount,behavior:'smooth'}));
+  stepsNext.addEventListener('click',()=>stepScroll.scrollBy({left:stepScrollAmount,behavior:'smooth'}));
+  function updateStepsNav(){
+    stepsPrev.disabled=stepScroll.scrollLeft<=4;
+    stepsNext.disabled=stepScroll.scrollLeft+stepScroll.clientWidth>=stepScroll.scrollWidth-4;
+  }
+  stepScroll.addEventListener('scroll',updateStepsNav,{passive:true});
+  updateStepsNav();
+}
 
 const statObs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting){

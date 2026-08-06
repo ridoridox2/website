@@ -344,7 +344,7 @@ html.lenis{height:auto}
     </div>
     <div class="foot-bot">
       <span>SwissPeak Partners&#174; &middot; Made in Switzerland</span>
-      <div class="foot-links"><a href="#">Imprint</a><a href="#">Privacy</a><a href="#">Terms</a></div>
+      <div class="foot-links"><a href="imprint.html">Imprint</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
     </div>
   </div>
 </footer>
@@ -502,7 +502,7 @@ function calcAll(){
   document.getElementById('calcNetMonthly').textContent=fmt(netPerPayment,cur);
   document.getElementById('calcNetSub').textContent=isWithholding
     ? `Estimated net salary per payment (${months} payments/year)`
-    : `Estimated net salary per payment, before tax (${months} payments/year) — tax is billed separately`;
+    : `Estimated net salary per payment, before tax (${months} payments/year); tax is billed separately`;
   document.getElementById('lineGross').textContent=fmt(gross/months,cur);
   document.getElementById('lineAHV').textContent='– '+fmt(ahv/months,cur);
   document.getElementById('lineALV').textContent='– '+fmt(alv/months,cur);

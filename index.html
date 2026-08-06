@@ -226,7 +226,7 @@ nav>a:not(.btn-nav):hover{color:#fff}
 ══════════════════════════════════════ */
 .map-section{background:var(--paper);padding:120px 0;position:relative;overflow:hidden}
 .map-section h2{font-size:clamp(2.4rem,5.5vw,5.5rem);font-weight:800;color:var(--ink);letter-spacing:-.03em;line-height:1;margin-bottom:20px}
-.map-section h2 .em{color:var(--swiss);font-style:italic}
+.map-section h2 .em{color:var(--swiss);font-style:normal}
 .map-sub{font-size:1.4rem;color:var(--granite);max-width:50ch;line-height:1.75;margin-bottom:64px;font-weight:500}
 .map-wrap{width:100%;aspect-ratio:16/7;background:var(--snow);border:1px solid var(--fog);border-radius:6px;display:grid;place-items:center;position:relative;overflow:hidden}
 .map-wrap p{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mist)}
@@ -239,7 +239,7 @@ nav>a:not(.btn-nav):hover{color:#fff}
 .testi-card{background:var(--snow);border:1px solid var(--fog);padding:48px 44px;transition:.3s}
 .testi-card:hover{background:var(--paper)}
 .testi-q{font-size:4rem;font-weight:800;color:var(--ice);line-height:.7;margin-bottom:24px;opacity:.5}
-.testi-text{font-size:1.05rem;color:var(--ink);line-height:1.75;font-style:italic;margin-bottom:32px;font-weight:400}
+.testi-text{font-size:1.05rem;color:var(--ink);line-height:1.75;font-style:normal;margin-bottom:32px;font-weight:400}
 .testi-author{display:flex;align-items:center;gap:14px;border-top:1px solid var(--fog);padding-top:24px}
 .testi-av{width:36px;height:36px;border-radius:50%;background:var(--fog);flex:0 0 auto}
 .testi-name{font-size:.88rem;font-weight:700;color:var(--ink)}
@@ -516,7 +516,7 @@ html.lenis{height:auto}
       <div class="trust-divider"></div>
       <div class="trust-stats">
         <div class="stat-col reveal">
-          <div class="stat-n">50<span class="stat-u">+</span></div>
+          <div class="stat-n">100<span class="stat-u">+</span></div>
           <div class="stat-t">Clients who trusted us</div>
         </div>
         <div class="stat-col reveal">
@@ -524,8 +524,8 @@ html.lenis{height:auto}
           <div class="stat-t">Repeat business</div>
         </div>
         <div class="stat-col reveal">
-          <div class="stat-n">7<span class="stat-u">+</span></div>
-          <div class="stat-t">Countries we operate in</div>
+          <div class="stat-n">9<span class="stat-u">+</span></div>
+          <div class="stat-t">Disciplines covered</div>
         </div>
       </div>
     </div>
@@ -897,7 +897,7 @@ html.lenis{height:auto}
     </div>
     <div class="foot-bot">
       <span>SwissPeak Partners&#174; &middot; <span style="color:var(--flag)">Made in Switzerland</span></span>
-      <div class="foot-links"><a href="#">Imprint</a><a href="#">Privacy</a><a href="#">Terms</a></div>
+      <div class="foot-links"><a href="imprint.html">Imprint</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
     </div>
   </div>
 </footer>
@@ -1074,7 +1074,7 @@ function createMountain(containerId, opts){
         const bx=basePosArr[i*3], by=basePosArr[i*3+1], bz=basePosArr[i*3+2];
 
         // Each point jitters on its own random phase/frequency/amplitude, fully
-        // independent of its neighbors — no shared grouping by ring or height, so it
+        // independent of its neighbors, no shared grouping by ring or height, so it
         // never reads as a coordinated wave or band moving through the shape.
         const rlen=Math.sqrt(bx*bx+bz*bz)||1;
         const dirx=bx/rlen, dirz=bz/rlen;

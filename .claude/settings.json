@@ -11,7 +11,8 @@
       "Bash(npx --no-install playwright --version)",
       "Bash(python3 -c \"print\\('python ok'\\)\")",
       "Bash(brew --version)",
-      "Bash(pip3 --version)"
+      "Bash(pip3 --version)",
+      "Bash(python3)"
     ]
   }
 }
