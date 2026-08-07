@@ -175,7 +175,7 @@ nav>a:not(.btn-nav):hover{color:#fff}
 .shift-stage{position:relative;display:flex;flex-direction:column;align-items:center}
 .shift-mountain-3d{position:absolute;inset:-120px 0 0 0;z-index:0;pointer-events:none}
 .shift-mountain-3d canvas{display:block}
-.shift-btn-wrap{position:relative;margin-bottom:56px}
+.shift-btn-wrap{position:relative;margin-top:56px}
 .shift-shock{position:absolute;top:50%;left:50%;width:52px;height:52px;margin:-26px 0 0 -26px;border-radius:50%;border:2px solid var(--ice);opacity:0;transform:scale(0);pointer-events:none;z-index:1}
 .shift-shock.go{transition:transform .8s cubic-bezier(.15,.8,.2,1),opacity .8s ease;transform:scale(9);opacity:0}
 .shift-explode-btn{position:relative;z-index:2;background:var(--ice-deep);color:#fff;border:none;padding:15px 30px;border-radius:999px;font-weight:700;font-size:.82rem;letter-spacing:.05em;cursor:pointer;transition:background .2s,transform .2s;box-shadow:0 14px 34px -14px rgba(0,0,0,.6)}
@@ -395,10 +395,6 @@ html.lenis{height:auto}
 
     <div class="shift-stage reveal">
       <div class="shift-mountain-3d" id="shiftMountain3d" aria-hidden="true"></div>
-      <div class="shift-btn-wrap">
-        <div class="shift-shock" id="shiftShock" aria-hidden="true"></div>
-        <button type="button" class="shift-explode-btn" id="shiftExplodeBtn">Look at how we fix that</button>
-      </div>
       <div class="shift-list" id="shiftList">
         <div class="shift-row">
           <span class="shift-problem">Roles open for six months?</span>
@@ -416,6 +412,10 @@ html.lenis{height:auto}
           <span class="shift-problem">Growth plans you can't hire for?</span>
           <span class="shift-fix"><b>Not anymore.</b> Scale the team abroad as fast as the plan needs. We handle local HR and retention as it grows.</span>
         </div>
+      </div>
+      <div class="shift-btn-wrap">
+        <div class="shift-shock" id="shiftShock" aria-hidden="true"></div>
+        <button type="button" class="shift-explode-btn" id="shiftExplodeBtn">Look at how we fix that</button>
       </div>
     </div>
   </div>
