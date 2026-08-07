@@ -12,7 +12,23 @@
       "Bash(python3 -c \"print\\('python ok'\\)\")",
       "Bash(brew --version)",
       "Bash(pip3 --version)",
-      "Bash(python3)"
+      "Bash(python3)",
+      "Bash(git fetch *)",
+      "Bash(open /Users/lorenzo/SPP_Website/website/nearshoring.html)",
+      "Bash(find /tmp /private/tmp /Users/lorenzo/.claude -maxdepth 4 -type f '\\(' -iname *.png -o -iname *.jpg -o -iname *.jpeg '\\)' -newermt '-15 minutes')",
+      "Bash(sips --help)",
+      "Bash(sips -c 1472 2356 --cropOffset 702 -111 map_europe.png --out /tmp/map_test_crop.png)",
+      "Bash(sips -c 1472 2356 --cropOffset -702 111 map_europe.png --out /tmp/map_test_crop2.png)",
+      "Bash(python3 -c \"from PIL import Image; print\\('PIL available'\\)\")",
+      "Bash(pip3 install *)",
+      "Bash(brew list *)",
+      "Bash(qlmanage -t -s 1600 -o /tmp europe_blank.svg)",
+      "Bash(qlmanage -t -s 1600 -o /tmp /tmp/test_colored.svg)",
+      "Bash(qlmanage -t -s 1600 -o /tmp /tmp/test_colored2.svg)",
+      "Bash(qlmanage -t -s 1600 -o /tmp europe_map.svg)",
+      "Bash(open europe_map.svg)",
+      "Bash(open nearshoring.html)",
+      "Bash(pip install *)"
     ]
   }
 }

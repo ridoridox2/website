@@ -104,10 +104,10 @@ nav>a:not(.btn-nav):hover{color:#fff}
 }
 
 /* ── SECTION LABEL ── */
-.sec-label{font-family:var(--mono);font-size:1rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mist);display:flex;align-items:center;gap:12px;margin-bottom:40px}
-.sec-label::before{content:"";width:28px;height:1.5px;background:var(--ice-deep)}
+.sec-label{font-family:var(--sans);font-weight:600;font-size:1rem;letter-spacing:normal;text-transform:uppercase;color:var(--mist);display:flex;align-items:center;gap:12px;margin-bottom:40px}
+.sec-label::before{content:"|";color:var(--ice-deep);font-weight:700}
 .sec-label.light{color:rgba(255,255,255,.4)}
-.sec-label.light::before{background:var(--ice)}
+.sec-label.light::before{color:var(--ice)}
 
 /* ── REVEAL ── */
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s ease}
@@ -245,6 +245,12 @@ html.lenis{height:auto}
 .legal a{color:var(--ice-deep)}
 .legal a:hover{color:var(--ink)}
 </style>
+<!-- Privacy-friendly analytics by Plausible -->
+<script async src="https://plausible.io/js/pa-Ohr2wQPhkNPOkvpibHDJ3.js"></script>
+<script>
+  window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+  plausible.init()
+</script>
 </head>
 <body>
 
@@ -274,7 +280,6 @@ html.lenis{height:auto}
       <div class="has-drop"><a href="about.html">Company</a>
         <div class="drop">
           <a href="about.html">About Us</a>
-          <a href="team.html">Partners</a>
         </div>
       </div>
       <a href="for_companies.html#contact" class="btn-nav">Let's talk</a>
@@ -342,7 +347,6 @@ html.lenis{height:auto}
       </div>
       <div class="foot-col"><h5>Company</h5>
         <a href="about.html">About us</a>
-        <a href="team.html">Our partners</a>
         <a href="https://www.linkedin.com/company/swisspeak-partners/" target="_blank" rel="noopener">LinkedIn</a>
       </div>
       <div class="foot-col"><h5>Contact</h5>
